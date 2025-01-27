@@ -46,6 +46,8 @@ class CustomTextField extends StatelessWidget {
       style: style ,
       maxLines: maxLines,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: AppColors.babyBlackColor,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
