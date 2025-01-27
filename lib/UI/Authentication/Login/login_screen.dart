@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie_app/Utls/app_colors.dart';
 import 'package:movie_app/Utls/app_style.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import '../Utls/app_images.dart';
-import '../custom_widgets/custom_elevated_button.dart';
-import '../custom_widgets/custom_text_field.dart';
-
+import '../../../Utls/app_images.dart';
+import '../../../custom_widgets/custom_elevated_button.dart';
+import '../../../custom_widgets/custom_text_field.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 

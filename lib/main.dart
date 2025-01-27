@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/login_screen.dart';
+import 'package:movie_app/UI/Authentication/Login/login_screen.dart';
 import 'package:movie_app/UI/onBoarding.dart';
 import 'package:movie_app/Utls/app_routes.dart';
 import 'package:movie_app/Utls/app_theme.dart';
