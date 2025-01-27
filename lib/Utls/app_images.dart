@@ -1,0 +1,49 @@
+class AppImages{
+  static const String avatar1="assets/images/avatar_1.png";
+  static const String avatar2="assets/images/avatar_2.png";
+  static const String avatar3="assets/images/avatar_3.png";
+  static const String avatar4="assets/images/avatar_4.png";
+  static const String avatar5="assets/images/avatar_5.png";
+  static const String avatar6="assets/images/avatar_6.png";
+  static const String avatar7="assets/images/avatar_7.png";
+  static const String avatar8="assets/images/avatar_8.png";
+  static const String avatar9="assets/images/avatar_9.png";
+  static const String browseWhite="assets/images/browse_white.png";
+  static const String browseYellow="assets/images/browse_yellow.png";
+  static const String clockIcon="assets/images/clock_icon.png";
+  static const String egyptIcon="assets/images/egypt_icon.png";
+  static const String emailIcon="assets/images/email_icon.png";
+  static const String exitIcon="assets/images/exit_icon.png";
+  static const String eyeIcon="assets/images/eye_icon.png";
+  static const String forgetPassword="assets/images/forget_password.png";
+  static const String googleIcon="assets/images/google_icon.png";
+  static const String heartIcon="assets/images/heart_icon.png";
+  static const String historyIcon="assets/images/history_icon.png";
+  static const String homeWhite="assets/images/home_white.png";
+  static const String homeYellow="assets/images/home_yellow.png";
+  static const String logoDetailsScreen="assets/images/logo_details_screen.png";
+  static const String logo="assets/images/logo.png";
+  static const String onBoarding1="assets/images/onBoarding_1.png";
+  static const String onBoarding2="assets/images/onBoarding_2.png";
+  static const String onBoarding3="asset/images/onBoarding_3.png";
+  static const String onBoarding4="assets/images/onBoarding_4.png";
+  static const String onBoarding5="assets/images/onBoarding_5.png";
+  static const String onBoarding6="assets/images/onBoarding_6.png";
+  static const String passwordIcon="assets/images/password_icon.png";
+  static const String personIcon="assets/images/person_icon.png";
+  static const String phoneIcon="assets/images/phone_icon.png";
+  static const String profileWhite="assets/images/Profile_white.png";
+  static const String profileYellow="assets/images/Profile_yellow.png";
+  static const String route="assets/images/routeGold.png";
+  static const String saveIcon="assets/images/save_icon.png";
+  static const String searchWhite="assets/images/search_white.png";
+  static const String searchYellow="assets/images/search_yellow.png";
+  static const String splashScreen="assets/images/splash_screen.png";
+  static const String starIcon="assets/images/star_icon.png";
+  static const String searchImage="assets/images/surprise.png";
+  static const String americanIcon="assets/images/united_state_icon.png";
+  static const String userIcon="assets/images/user_icon.png";
+  static const String watchListIcon="assets/images/watch_list_icon.png";
+
+
+}
