@@ -7,12 +7,12 @@ class AppStyle{
       color:AppColors.whiteColor,
       fontWeight: FontWeight.bold,
   );
-  static  TextStyle white20Bold=GoogleFonts.roboto(
+  static TextStyle white20Bold=GoogleFonts.roboto(
       fontSize: 20,
       color:AppColors.whiteColor,
       fontWeight: FontWeight.bold,
   );
-   static  TextStyle white16Regular=GoogleFonts.roboto(
+   static TextStyle white16Regular=GoogleFonts.roboto(
       fontSize: 16,
       color:AppColors.whiteColor,
       fontWeight: FontWeight.normal,
@@ -32,6 +32,11 @@ class AppStyle{
       color:AppColors.yellowColor,
       fontWeight: FontWeight.normal,
   );
+  static  TextStyle yellow16Regular=GoogleFonts.roboto(
+    fontSize: 16,
+    color:AppColors.yellowColor,
+    fontWeight: FontWeight.normal,
+  );
   static  TextStyle white20Regular=GoogleFonts.roboto(
       fontSize: 20,
       color:AppColors.whiteColor,
@@ -41,6 +46,11 @@ class AppStyle{
       fontSize: 14,
       color:AppColors.yellowColor,
       fontWeight: FontWeight.normal,
+  );
+  static  TextStyle yellow14Black=GoogleFonts.roboto(
+    fontSize: 14,
+    color:AppColors.yellowColor,
+    fontWeight: FontWeight.w900,
   );
   static  TextStyle black20Regular=GoogleFonts.roboto(
       fontSize: 20,

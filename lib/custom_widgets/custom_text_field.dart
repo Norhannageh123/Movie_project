@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/Utls/app_colors.dart';
 import 'package:movie_app/Utls/app_style.dart';
 
-
-
-// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
+  Color? backgroundColor;
+
   Color? borderColor;
   String hintText;
   String? labelText;
@@ -35,7 +34,10 @@ class CustomTextField extends StatelessWidget {
     this.maxLines=1,
     this.validator,
     this.onchanged,
-    });
+    this.backgroundColor = AppColors.babyBlackColor,
+    }){
+    style ??= AppStyle.white16Regular;
+  }
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -43,22 +45,16 @@ class CustomTextField extends StatelessWidget {
       onChanged: onchanged,
       controller: controller,
       validator: validator,
-      style: style ,
+      style: style,
       maxLines: maxLines,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: backgroundColor,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: borderColor??AppColors.babyBlackColor,
-            width: 2,
-          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide(
-            color: borderColor??AppColors.babyBlackColor,
-            width: 2,
-          ),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
@@ -74,18 +70,16 @@ class CustomTextField extends StatelessWidget {
             width: 2,
           ),
         ),
-
         hintText: hintText,
         labelText: labelText,
         hintStyle: hintStyle??AppStyle.white16Regular,
         labelStyle: labelStyle??AppStyle.white16Regular,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        
       ),
       obscureText: obscureText??false,
       obscuringCharacter: "*",
-      cursorColor: AppColors.blackColor,
+      cursorColor: AppColors.whiteColor,
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movie_app/UI/auth/register.dart';
 import 'package:movie_app/UI/onBoarding.dart';
 import 'package:movie_app/Utls/app_routes.dart';
 import 'package:movie_app/Utls/app_theme.dart';
@@ -15,9 +16,9 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoarding,
+      initialRoute: AppRoutes.registerRoute,
       routes: {
-       AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
+       AppRoutes.registerRoute:(context)=> Register(),
       },
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
