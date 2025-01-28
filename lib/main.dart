@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/Authentication/Login/login_screen.dart';
 import 'package:movie_app/UI/onBoarding.dart';
 import 'package:movie_app/Utls/app_routes.dart';
 import 'package:movie_app/Utls/app_theme.dart';
+
+import 'UI/Authentication/Login/login_screen.dart';
+import 'UI/forget_password_screen.dart';
 
 void main(){
   runApp(const MovieApp());
@@ -16,10 +18,13 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginRoute,
+      initialRoute: AppRoutes.forgetPasswordRoute,
       routes: {
-       AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
-        AppRoutes.loginRoute:(context)=>const LoginScreen(),
+        AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
+        AppRoutes.forgetPasswordRoute: (context) => ForgetPasswordScreen(),
+        AppRoutes.loginRoute: (context) => LoginScreen(),
+
+
       },
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
