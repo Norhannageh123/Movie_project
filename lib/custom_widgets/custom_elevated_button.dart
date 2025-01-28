@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Utls/app_colors.dart';
+
+import '../utils/app_colors.dart';
+
 // ignore: must_be_immutable
 class CustomElevatedButton extends StatelessWidget {
   String text;
@@ -7,7 +9,8 @@ class CustomElevatedButton extends StatelessWidget {
   Widget? prefixIcon;
   TextStyle? textStyle;
   Function onClickedButton;
- CustomElevatedButton({super.key,required this.text,this.bgColor,this.prefixIcon,this.textStyle,required this.onClickedButton});
+  double?paddingVertical;
+ CustomElevatedButton({super.key,required this.text,this.bgColor,this.prefixIcon,this.textStyle,required this.onClickedButton,this.paddingVertical});
   
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class CustomElevatedButton extends StatelessWidget {
                 
                 padding: EdgeInsets.symmetric(
                   horizontal: width*0.04,
-                  vertical: height*0.02,
+                  vertical:paddingVertical?? height*0.02,
                 ),
                 backgroundColor:bgColor??AppColors.yellowColor,
                 shape: RoundedRectangleBorder(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Utls/app_colors.dart';
-import 'package:movie_app/Utls/app_style.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/app_style.dart';
+
 
 
 
