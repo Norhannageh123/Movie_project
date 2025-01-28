@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Utls/app_colors.dart';
-import 'package:movie_app/Utls/app_style.dart';
+import 'package:movie_app/UI/Authentication/ForgetPassword/forget_password_screen.dart';
+import 'package:movie_app/utils/app_colors.dart';
+import 'package:movie_app/utils/app_images.dart';
+import 'package:movie_app/utils/app_style.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import '../../../Utls/app_images.dart';
-import '../../../custom_widgets/custom_elevated_button.dart';
-import '../../../custom_widgets/custom_text_field.dart';
+import '../../../../../custom_widgets/custom_elevated_button.dart';
+import '../../../../../custom_widgets/custom_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -123,6 +125,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () {
                         // todo: navigate to forget password screen
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgetPasswordScreen()),
+                        );
                       },
                       child: Text(AppLocalizations.of(context)!.forget_password,
                           style: AppStyle.yellow14Regular),
@@ -158,7 +165,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text(AppLocalizations.of(context)!.do_not_have_account,
                         style: AppStyle.white16Regular),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        //todo: Navigator to Register Screen
+                      },
                       child: Text(AppLocalizations.of(context)!.create_one,
                           style: AppStyle.yellow14Bold),
                     ),

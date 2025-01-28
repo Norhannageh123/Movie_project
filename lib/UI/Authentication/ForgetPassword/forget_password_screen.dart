@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Utls/app_images.dart';
-import 'package:movie_app/Utls/app_style.dart';
 import 'package:movie_app/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/custom_widgets/custom_text_field.dart';
+import 'package:movie_app/utils/app_images.dart';
+import 'package:movie_app/utils/app_style.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   static const String forgetPasswordRoute = 'forget_password';
