@@ -4,6 +4,8 @@ import 'package:movie_app/UI/onBoarding.dart';
 import 'package:movie_app/Utls/app_routes.dart';
 import 'package:movie_app/Utls/app_theme.dart';
 
+import 'UI/update_profile_screen.dart';
+
 void main(){
   runApp(const MovieApp());
 }
@@ -15,9 +17,11 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoarding,
+      initialRoute: AppRoutes.updateProfileRoute,
       routes: {
-       AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
+        AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
+        AppRoutes.updateProfileRoute:(context)=> const UpdateProfileScreen(),
+
       },
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,

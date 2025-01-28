@@ -39,13 +39,15 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       keyboardType: keyboardTybe,
       onChanged: onchanged,
       controller: controller,
       validator: validator,
       style: style ,
       maxLines: maxLines,
-      decoration: InputDecoration(
+      decoration:
+      InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(

@@ -15,7 +15,6 @@ class CustomElevatedButton extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return ElevatedButton(
               style: ElevatedButton.styleFrom(
-                
                 padding: EdgeInsets.symmetric(
                   horizontal: width*0.04,
                   vertical: height*0.02,
@@ -24,7 +23,7 @@ class CustomElevatedButton extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: const BorderSide(
-                    color: AppColors.yellowColor,
+                    //color: AppColors.yellowColor,
                     width: 2,
                   )
                 ),
