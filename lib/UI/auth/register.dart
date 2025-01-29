@@ -1,8 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie_app/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/custom_widgets/custom_text_field.dart';
+
 import '../../Utls/app_colors.dart';
 import '../../Utls/app_images.dart';
 import '../../Utls/app_style.dart';
@@ -20,11 +22,23 @@ class _RegisterState extends State<Register> {
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
   bool isSelected = true;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    List<String> avatars = [
+      'assets/images/avatar_1.png',
+      'assets/images/avatar_2.png',
+      'assets/images/avatar_3.png',
+      'assets/images/avatar_4.png',
+      'assets/images/avatar_5.png',
+      'assets/images/avatar_6.png',
+      'assets/images/avatar_7.png',
+      'assets/images/avatar_8.png',
+      'assets/images/avatar_9.png',
+    ];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -36,22 +50,38 @@ class _RegisterState extends State<Register> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: width * 0.0372),
             child: Column(
+              spacing: height * 0.0128,
               children: [
+                CarouselSlider.builder(
+                  itemCount: avatars.length,
+                  itemBuilder: (BuildContext context, int itemIndex,
+                          int pageViewIndex) =>
+                      Image.asset(
+                    avatars[itemIndex],
+                    height: double.infinity,
+                    fit: BoxFit.contain,
+                  ),
+                  options: CarouselOptions(
+                    onPageChanged: (index, reason) {
+                      selectedIndex = index;
+                      setState(() {});
+                    },
+                    enableInfiniteScroll: false,
+                    height: height * 0.172,
+                    initialPage: 1,
+                    enlargeCenterPage: true,
+                    viewportFraction: .4,
+                    enlargeFactor: .5,
+                  ),
+                ),
+                Text(
+                  AppLocalizations.of(context)!.avatar,
+                  style: AppStyle.white16Regular,
+                ),
                 Column(
                   spacing: height * 0.0257,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: height * .044,
-                    ),
-                    Image.asset(
-                      AppImages.logo,
-                      width: width * 0.2813,
-                      height: height * 0.1266,
-                    ),
-                    SizedBox(
-                      height: height * 0.02,
-                    ),
                     CustomTextField(
                       hintText: AppLocalizations.of(context)!.name,
                       prefixIcon: Image.asset(AppImages.userIcon),
@@ -140,16 +170,17 @@ class _RegisterState extends State<Register> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           isSelected = true;
-                          setState(() {
-                          });
+                          setState(() {});
                         },
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(24),
                               border: Border.all(
-                                color: isSelected?AppColors.yellowColor: AppColors.transparentColor,
+                                color: isSelected
+                                    ? AppColors.yellowColor
+                                    : AppColors.transparentColor,
                                 width: 4,
                               )),
                           child: Image.asset(
@@ -158,16 +189,17 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       InkWell(
-                        onTap: (){
+                        onTap: () {
                           isSelected = false;
-                          setState(() {
-                          });
+                          setState(() {});
                         },
                         child: Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(24),
                               border: Border.all(
-                                color: isSelected?AppColors.transparentColor: AppColors.yellowColor,
+                                color: isSelected
+                                    ? AppColors.transparentColor
+                                    : AppColors.yellowColor,
                                 width: 4,
                               )),
                           child: Image.asset(
