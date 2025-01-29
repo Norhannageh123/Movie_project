@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movie_app/UI/Authentication/ForgetPassword/forget_password_screen.dart';
 import '../custom_widgets/custom_elevated_button.dart';
 import '../custom_widgets/custom_text_field.dart';
 import '../utils/app_colors.dart';
@@ -91,6 +92,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     InkWell(
                       onTap: () {
                         // todo: navigate to forget password screen
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ForgetPasswordScreen()),
+                        );
                       },
                       child: Text(AppLocalizations.of(context)!.reset_password,
                           style: AppStyle.white20Regular),

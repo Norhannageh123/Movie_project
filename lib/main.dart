@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movie_app/UI/Home/home_screen.dart';
 import 'package:movie_app/UI/onboarding_screen.dart';
 import 'package:movie_app/utils/app_routes.dart';
 import 'package:movie_app/utils/app_theme.dart';
@@ -19,13 +20,13 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.updateProfileRoute,
+      initialRoute: AppRoutes.homeRoute,
       routes: {
         AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
         AppRoutes.loginRoute:(context)=>const LoginScreen(),
         AppRoutes.registerRoute:(context)=>const Register(),
         AppRoutes.updateProfileRoute:(context)=>const UpdateProfileScreen(),
-
+        AppRoutes.homeRoute:(context)=> const HomeScreen(),
       },
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,

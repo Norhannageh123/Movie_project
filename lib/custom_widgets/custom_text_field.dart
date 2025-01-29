@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   Widget? prefixIcon;
   Widget? suffixIcon;
   bool? obscureText;
+  Color? bgColor;
   int?maxLines;
   String?Function(String?)?validator;
   TextEditingController? controller;
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.labelStyle,
     this.style,
+    this.bgColor,
     this.obscureText,
     this.maxLines=1,
     this.validator,

@@ -42,7 +42,7 @@ dependencies:
   flutter_native_splash: ^2.4.4
   fluttertoast: ^8.2.10
   toggle_switch: ^2.3.0
-
+  carousel_slider: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

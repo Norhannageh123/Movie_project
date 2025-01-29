@@ -55,8 +55,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   hintText: AppLocalizations.of(context)!.email,
                   hintStyle: AppStyle.white16Regular,
-                  borderColor: AppColors.transparentColor,
+                 // borderColor: AppColors.transparentColor,
                   style: AppStyle.white16Regular,
+                  bgColor:AppColors.babyBlackColor,
                   keyboardTybe: TextInputType.emailAddress,
                   controller: emailController,
                   validator: (text) {
@@ -82,9 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   prefixIcon: Image(
                     image: AssetImage(AppImages.passwordIcon),
                   ),
-                  hintStyle: AppStyle.white16Regular,
-                  borderColor: AppColors.transparentColor,
+                 hintStyle: AppStyle.white16Regular,
+                 // borderColor: AppColors.transparentColor,
                   style: AppStyle.white16Regular,
+                  bgColor:AppColors.babyBlackColor,
                   keyboardTybe: TextInputType.text,
                   suffixIcon: InkWell(
                     onTap: () {
@@ -223,6 +225,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: AppLocalizations.of(context)!.login_with_google,
                   prefixIcon: Image(image: AssetImage(AppImages.googleIcon)),
                   textStyle: AppStyle.black20SemiBoldInter,
+                  padding: EdgeInsets.symmetric(horizontal: 10),
                 ),
                 SizedBox(
                   height: height * .02,
