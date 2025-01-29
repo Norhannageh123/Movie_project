@@ -22,7 +22,6 @@ class _RegisterState extends State<Register> {
   bool obscurePassword = true;
   bool obscureConfirmPassword = true;
   bool isSelected = true;
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +61,6 @@ class _RegisterState extends State<Register> {
                     fit: BoxFit.contain,
                   ),
                   options: CarouselOptions(
-                    onPageChanged: (index, reason) {
-                      selectedIndex = index;
-                      setState(() {});
-                    },
                     enableInfiniteScroll: false,
                     height: height * 0.172,
                     initialPage: 1,
