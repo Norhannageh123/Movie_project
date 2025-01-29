@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/Authentication/ForgetPassword/forget_password_screen.dart';
-import 'package:movie_app/UI/Authentication/Register/register.dart';
+import 'package:movie_app/UI/onboarding_screen.dart';
 import 'package:movie_app/utils/app_routes.dart';
 import 'package:movie_app/utils/app_theme.dart';
 
 import 'UI/Authentication/Login/login_screen.dart';
-import 'UI/onboarding_screen.dart';
+import 'UI/Authentication/Register/register.dart';
+import 'UI/update_profile_screen.dart';
 
 void main(){
   runApp(const MovieApp());
@@ -19,12 +19,13 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoarding,
+      initialRoute: AppRoutes.updateProfileRoute,
       routes: {
-       AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
-       AppRoutes.loginRoute:(context)=>const LoginScreen(),
-       AppRoutes.registerRoute:(context)=>const Register(),
-       AppRoutes.forgetPasswordRoute:(context)=> ForgetPasswordScreen(),
+        AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
+        AppRoutes.loginRoute:(context)=>const LoginScreen(),
+        AppRoutes.registerRoute:(context)=>const Register(),
+        AppRoutes.updateProfileRoute:(context)=>const UpdateProfileScreen(),
+
       },
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
