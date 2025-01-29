@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/auth/register.dart';
-import 'package:movie_app/UI/onBoarding.dart';
+import 'package:movie_app/UI/tabs/search/search_tab.dart';
 import 'package:movie_app/Utls/app_routes.dart';
 import 'package:movie_app/Utls/app_theme.dart';
 
@@ -16,9 +15,9 @@ class MovieApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.registerRoute,
+      initialRoute: AppRoutes.searchRoute,
       routes: {
-       AppRoutes.registerRoute:(context)=> Register(),
+        AppRoutes.searchRoute: (context) => SearchTab(),
       },
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
