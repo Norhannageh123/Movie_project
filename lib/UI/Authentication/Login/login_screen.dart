@@ -8,6 +8,8 @@ import '../../../../../custom_widgets/custom_elevated_button.dart';
 import '../../../../../custom_widgets/custom_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../Register/register.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -167,6 +169,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () {
                         //todo: Navigator to Register Screen
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Register()),
+                        );
                       },
                       child: Text(AppLocalizations.of(context)!.create_one,
                           style: AppStyle.yellow14Bold),
