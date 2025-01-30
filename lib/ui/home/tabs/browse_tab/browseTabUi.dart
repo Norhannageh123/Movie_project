@@ -59,7 +59,7 @@ class _BrowseTabState extends State<BrowseTab> {
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2, // Number of columns
-                          crossAxisSpacing: 0, // Spacing between columns
+                          crossAxisSpacing: 1, // Spacing between columns
                           mainAxisSpacing: 10.0,
                           childAspectRatio: .5// Spacing between rows
                       ),
@@ -67,7 +67,7 @@ class _BrowseTabState extends State<BrowseTab> {
                       itemBuilder: (context, index) {
                         return Container(
                           height: height*.5,
-                          margin: EdgeInsets.all(2),
+                          margin: EdgeInsets.all(5),
                           child: Stack(
                               fit: StackFit.loose, children: [
                             Container(

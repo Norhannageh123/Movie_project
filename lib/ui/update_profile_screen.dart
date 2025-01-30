@@ -149,7 +149,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           return Align(
             alignment: Alignment.bottomCenter,
             child: GridView.builder(
-              shrinkWrap: true, // This is crucial for proper bottom alignment
+              shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, // Number of columns

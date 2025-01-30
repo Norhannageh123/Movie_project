@@ -20,7 +20,7 @@ class BrowseTabsWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 4),
       height: height * .05,
-      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 20),
       decoration: BoxDecoration(
           color: selectedTab == true ? AppColors.yellowColor : AppColors.transparentColor,
           borderRadius: BorderRadius.circular(16),
