@@ -3,13 +3,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/Authentication/Login/login_screen.dart';
 import 'package:movie_app/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/custom_widgets/custom_text_field.dart';
 import 'package:movie_app/utils/app_colors.dart';
 import 'package:movie_app/utils/app_images.dart';
 import 'package:movie_app/utils/app_style.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import '../Login/login_screen.dart';
 class Register extends StatefulWidget {
   static const String registerRoute = "register";
 

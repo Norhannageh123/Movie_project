@@ -43,6 +43,8 @@ class AppImages{
   static const String searchImage="assets/images/surprise.png";
   static const String americanIcon="assets/images/united_state_icon.png";
   static const String userIcon="assets/images/user_icon.png";
+  static const String availableNow="assets/images/available_now.png";
+  static const String watchNow="assets/images/watch_now.png";
   static const String watchListIcon="assets/images/watch_list_icon.png";
 
 

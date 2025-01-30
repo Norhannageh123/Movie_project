@@ -7,7 +7,7 @@ class BrowseTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child:Text("BrowseTab",style:AppStyle.yellow20Bold)),
+      body: Center(child:Text("browse_tab",style:AppStyle.yellow20Bold)),
     );
   }
 }

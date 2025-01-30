@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/UI/Home/Tabs/BrowseTab/browseTabUi.dart';
-import 'package:movie_app/UI/Home/Tabs/SearchTab/searchTabUi.dart';
-import 'package:movie_app/UI/Home/Tabs/homeTab/homeTabUi.dart';
-import 'package:movie_app/UI/Home/Tabs/profileTab/profileTabUi.dart';
+import 'package:movie_app/ui/home/tabs/browse_tab/browseTabUi.dart';
+import 'package:movie_app/ui/home/tabs/home_tab/home_tab_ui.dart';
+import 'package:movie_app/ui/home/tabs/profile_tab/profileTabUi.dart';
+import 'package:movie_app/ui/home/tabs/search_tab/searchTabUi.dart';
 import 'package:movie_app/utils/app_colors.dart';
 import 'package:movie_app/utils/app_images.dart';
 
@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(20), 
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.transparent, 
+            backgroundColor: Colors.transparent,
             elevation: 0, 
             selectedItemColor: Colors.transparent, 
             unselectedItemColor: Colors.transparent, 
@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BottomNavigationBarItem(
       icon: ImageIcon(
         AssetImage(selectedIndex == index ? fullImage : image),
-        color: selectedIndex == index ? Colors.yellow : Colors.white, 
+        color: selectedIndex == index ? Colors.yellow : Colors.white,
       ),
       label: "",
     );

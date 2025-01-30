@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/Authentication/Login/login_screen.dart';
 import 'package:movie_app/utils/app_colors.dart';
 import 'package:movie_app/utils/app_style.dart';
 
 import '../custom_widgets/custom_elevated_button.dart';
+import 'auth/Login/login_screen.dart';
 
 class OnboardingSlider extends StatefulWidget {
   String image;

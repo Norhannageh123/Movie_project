@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie_app/UI/Home/home_screen.dart';
 import 'package:movie_app/UI/onboarding_screen.dart';
+import 'package:movie_app/ui/auth/Register/register.dart';
+import 'package:movie_app/ui/update_profile_screen.dart';
 import 'package:movie_app/utils/app_routes.dart';
 import 'package:movie_app/utils/app_theme.dart';
+import 'ui/auth/Login/login_screen.dart';
 
-import 'UI/Authentication/Login/login_screen.dart';
-import 'UI/Authentication/Register/register.dart';
-import 'UI/update_profile_screen.dart';
+
 
 void main(){
   runApp(const MovieApp());
