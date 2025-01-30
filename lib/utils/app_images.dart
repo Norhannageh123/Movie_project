@@ -25,7 +25,7 @@ class AppImages{
   static const String logo="assets/images/logo.png";
   static const String onBoarding1="assets/images/onBoarding_1.png";
   static const String onBoarding2="assets/images/onBoarding_2.png";
-  static const String onBoarding3="asset/images/onBoarding_3.png";
+  static const String onBoarding3="assets/images/onBoarding_3.png";
   static const String onBoarding4="assets/images/onBoarding_4.png";
   static const String onBoarding5="assets/images/onBoarding_5.png";
   static const String onBoarding6="assets/images/onBoarding_6.png";
@@ -43,6 +43,8 @@ class AppImages{
   static const String searchImage="assets/images/surprise.png";
   static const String americanIcon="assets/images/united_state_icon.png";
   static const String userIcon="assets/images/user_icon.png";
+  static const String availableNow="assets/images/available_now.png";
+  static const String watchNow="assets/images/watch_now.png";
   static const String watchListIcon="assets/images/watch_list_icon.png";
 
 

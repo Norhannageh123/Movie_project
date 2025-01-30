@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/Utls/app_colors.dart';
-import 'package:movie_app/Utls/app_style.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_style.dart';
 
 
 
@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   Widget? prefixIcon;
   Widget? suffixIcon;
   bool? obscureText;
+  Color? bgColor;
   int?maxLines;
   String?Function(String?)?validator;
   TextEditingController? controller;
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.labelStyle,
     this.style,
+    this.bgColor,
     this.obscureText,
     this.maxLines=1,
     this.validator,
@@ -39,13 +41,15 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       keyboardType: keyboardTybe,
       onChanged: onchanged,
       controller: controller,
       validator: validator,
       style: style ,
       maxLines: maxLines,
-      decoration: InputDecoration(
+      decoration:
+      InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
