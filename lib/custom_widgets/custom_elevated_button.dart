@@ -33,8 +33,8 @@ class CustomElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         padding: padding ??
             EdgeInsets.symmetric(
-              horizontal: width * 0.25,
-              vertical: height * 0.0155,
+              //horizontal: width * 0.10,
+              vertical: height * 0.015,
             ),
         backgroundColor: bgColor ?? AppColors.yellowColor,
         shadowColor: AppColors.transparentColor,
@@ -42,6 +42,7 @@ class CustomElevatedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             side: borderSide ??
                 BorderSide(
+                  color: AppColors.yellowColor,
                   width: 2,
                 )),
       ),
