@@ -7,32 +7,31 @@ import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_images.dart';
 import '../../../../utils/app_style.dart';
 
-
 class Profiletab extends StatefulWidget {
-   Profiletab();
+  Profiletab();
 
   @override
   State<Profiletab> createState() => _ProfiletabState();
 }
-
 class _ProfiletabState extends State<Profiletab> {
-  int selectedIndex = 0;
-  List<String> wishList=[];
+  List<String> wishList = [];
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    int selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.transparentColor,
-
       ),
       body: DefaultTabController(
         initialIndex: 0,
         length: 2,
         child: Padding(
-          padding: const EdgeInsets.all( 8.0,),
+          padding: const EdgeInsets.all(
+            8.0,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,24 +41,28 @@ class _ProfiletabState extends State<Profiletab> {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-
                     children: [
-                        CircleAvatar(
-                          backgroundColor: AppColors.transparentColor,
-                          radius: width*.15,
-                          child: Image.asset(
-                            AppImages.avatar1,
-                            height: height*0.5,
-                            fit: BoxFit.fill,
-                          ),
+                      CircleAvatar(
+                        backgroundColor: AppColors.transparentColor,
+                        radius: width * .15,
+                        child: Image.asset(
+                          AppImages.avatar1,
+                          height: height * 0.5,
+                          fit: BoxFit.fill,
                         ),
-                        SizedBox(
-                          height: height * 0.02,
-                        ),
-                        Text('Mustafa Musa', style: AppStyle.white20Bold,),
-                      ],
-                    ),
-                  SizedBox(width: width*.05,),
+                      ),
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Text(
+                        'Mustafa Musa',
+                        style: AppStyle.white20Bold,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: width * .05,
+                  ),
                   Column(
                     children: [
                       Text('123', style: AppStyle.white30BoldInter),
@@ -70,7 +73,9 @@ class _ProfiletabState extends State<Profiletab> {
                           style: AppStyle.white24Bold),
                     ],
                   ),
-                  SizedBox(width: width*.05,),
+                  SizedBox(
+                    width: width * .05,
+                  ),
                   Column(
                     children: [
                       Text('321', style: AppStyle.white30BoldInter),
@@ -177,29 +182,32 @@ class _ProfiletabState extends State<Profiletab> {
                 child: selectedIndex == 0
                     ? Center(
                         child: wishList.isEmpty
-                            ? Image.asset(AppImages.searchImage,fit: BoxFit.cover,)
-                        :GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 2, //
-                            childAspectRatio: 0.5, // Number of columns
-                          ),
-                          itemBuilder: (context, index) {
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Center(
-                                  child: Text(
-                                    'data2',
-                                    style: AppStyle.white20Bold,
-                                  ),
+                            ? Image.asset(
+                                AppImages.searchImage,
+                                fit: BoxFit.cover,
+                              )
+                            : GridView.builder(
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 3,
+                                  crossAxisSpacing: 2, //
+                                  childAspectRatio: 0.5, // Number of columns
                                 ),
-                              ],
-                            );
-                          },
-                          itemCount: 30,
-                        ),
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          'data2',
+                                          style: AppStyle.white20Bold,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                                itemCount: 30,
+                              ),
                       )
                     : Center(
                         child: GridView.builder(
@@ -219,16 +227,17 @@ class _ProfiletabState extends State<Profiletab> {
                                       borderRadius: BorderRadius.circular(16),
                                     ),
                                     clipBehavior: Clip.antiAlias,
-                                    child: Image.asset(AppImages.onBoarding5,
-                                        fit: BoxFit.cover,
-                                       )),
+                                    child: Image.asset(
+                                      AppImages.onBoarding5,
+                                      fit: BoxFit.cover,
+                                    )),
                                 Container(
                                   margin: EdgeInsetsDirectional.symmetric(
                                       horizontal: width * .02,
                                       vertical: height * .01),
                                   padding: EdgeInsetsDirectional.symmetric(
-                                      horizontal: width * .01,
-                                      ),
+                                    horizontal: width * .01,
+                                  ),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color: AppColors.transparentBlackColor,
