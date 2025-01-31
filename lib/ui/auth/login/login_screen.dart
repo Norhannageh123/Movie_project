@@ -6,7 +6,6 @@ import 'package:toggle_switch/toggle_switch.dart';
 import '../../../../../custom_widgets/custom_elevated_button.dart';
 import '../../../../../custom_widgets/custom_text_field.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../Register/register.dart';
 import '../forget_password/forget_password_screen.dart';
 

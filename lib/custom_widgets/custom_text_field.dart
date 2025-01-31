@@ -32,7 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.labelStyle,
     this.style,
-    this.bgColor,
+    this.bgColor=AppColors.babyBlackColor,
     this.obscureText,
     this.maxLines=1,
     this.validator,
