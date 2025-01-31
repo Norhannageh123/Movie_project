@@ -97,16 +97,17 @@ class _HomeTabState extends State<HomeTab> {
                         ],
                       ),
                       SizedBox(
-                        height: height * .3,
+                        height: height * 0.25,
                         child: ListView.separated(
                             scrollDirection: Axis.horizontal,
+                            padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
                               return SizedBox(
-                                  width: width * .35,
+                                  width: width * 0.35,
                                   child: WatchNowSlider());
                             },
                             separatorBuilder: (context, index) {
-                              return SizedBox(width: width * .04);
+                              return SizedBox(width: width * 0.04);
                             },
                             itemCount: 20),
                       )

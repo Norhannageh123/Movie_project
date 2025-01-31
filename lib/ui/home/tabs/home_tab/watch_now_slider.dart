@@ -10,46 +10,44 @@ class WatchNowSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    return SafeArea(
-      child: Stack(fit: StackFit.loose,
-          children: [
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            clipBehavior: Clip.antiAlias,
-            child: Image.asset(AppImages.onBoarding6,
-                fit: BoxFit.fill, height: double.infinity ,
-            width: double.infinity,)),
-        Container(
-          margin: EdgeInsetsDirectional.symmetric(
-              horizontal: width * .02, vertical: height * .01),
-          padding: EdgeInsetsDirectional.symmetric(
-              horizontal: width * .02, vertical: height * .007),
+    return Stack(fit: StackFit.loose,
+        children: [
+      Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color: AppColors.transparentBlackColor,
           ),
-          child: IntrinsicWidth(
-            child: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.only(end: 5),
-                  child: Text(
-                    "7.7",
-                    style: AppStyle.white16Regular,
-                  ),
+          clipBehavior: Clip.antiAlias,
+          child: Image.asset(AppImages.onBoarding6,
+              fit: BoxFit.fill, height: double.infinity ,
+          width: double.infinity,)),
+      Container(
+        margin: EdgeInsetsDirectional.symmetric(
+            horizontal: width * .02, vertical: height * .01),
+        padding: EdgeInsetsDirectional.symmetric(
+            horizontal: width * .02, vertical: height * .007),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: AppColors.transparentBlackColor,
+        ),
+        child: IntrinsicWidth(
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.only(end: 5),
+                child: Text(
+                  "7.7",
+                  style: AppStyle.white16Regular,
                 ),
-                Icon(
-                  CupertinoIcons.star_fill,
-                  color: AppColors.yellowColor,
-                  size: 18,
-                )
-              ],
-            ),
+              ),
+              Icon(
+                CupertinoIcons.star_fill,
+                color: AppColors.yellowColor,
+                size: 18,
+              )
+            ],
           ),
-        )
-      ]),
-    );
+        ),
+      )
+    ]);
   }
 }
