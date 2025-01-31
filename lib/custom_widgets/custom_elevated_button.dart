@@ -5,7 +5,9 @@ import '../utils/app_style.dart';
 class CustomElevatedButton extends StatelessWidget {
   String text;
   Color? bgColor;
+  Color? borderColor;
   Widget? prefixIcon;
+  Widget? suffixIcon;
   TextStyle? textStyle;
   Function onClickedButton;
   BorderSide? borderSide;
@@ -15,7 +17,9 @@ class CustomElevatedButton extends StatelessWidget {
       {super.key,
         required this.text,
         this.bgColor,
+        this.borderColor,
         this.prefixIcon,
+        this.suffixIcon,
         this.textStyle,
         this.borderSide,
         this.padding,
@@ -42,7 +46,7 @@ class CustomElevatedButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             side: borderSide ??
                 BorderSide(
-                  color: AppColors.yellowColor,
+                  color: borderColor??AppColors.yellowColor,
                   width: 2,
                 )),
       ),
@@ -57,6 +61,8 @@ class CustomElevatedButton extends StatelessWidget {
             text,
             style: textStyle,
           ),
+          SizedBox(width: width*0.015,),
+          suffixIcon ?? const SizedBox(),
         ],
       ),
     );
