@@ -46,10 +46,13 @@ class CustomTextField extends StatelessWidget {
       onChanged: onchanged,
       controller: controller,
       validator: validator,
-      style: style ,
+      style: style ?? AppStyle.white16Regular ,
       maxLines: maxLines,
       decoration:
+
       InputDecoration(
+        filled: true,
+        fillColor: AppColors.babyBlackColor,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(
