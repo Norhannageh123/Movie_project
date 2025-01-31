@@ -22,6 +22,7 @@ class MovieApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.onBoarding,
+
       routes: {
         AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
         AppRoutes.loginRoute:(context)=>const LoginScreen(),

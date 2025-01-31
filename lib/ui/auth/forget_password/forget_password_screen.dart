@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/custom_widgets/custom_text_field.dart';
+import 'package:movie_app/utils/app_colors.dart';
 import 'package:movie_app/utils/app_images.dart';
 import 'package:movie_app/utils/app_style.dart';
 
@@ -16,6 +17,7 @@ class ForgetPasswordScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Forget Password'),
+          iconTheme: IconThemeData(color:AppColors.yellowColor),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 0.02),

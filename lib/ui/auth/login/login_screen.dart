@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/UI/home/home_screen.dart';
 import 'package:movie_app/utils/app_colors.dart';
 import 'package:movie_app/utils/app_images.dart';
 import 'package:movie_app/utils/app_style.dart';
@@ -128,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       onTap: () {
                         // todo: navigate to forget password screen
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => ForgetPasswordScreen()),
@@ -148,6 +149,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   onClickedButton: () {
                     // todo: navigation
                     if (formKey.currentState?.validate() == true) {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen()),
+                        );
                       print('valid');
                     } else {
                       print('not valid');
