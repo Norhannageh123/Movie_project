@@ -38,6 +38,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           backgroundColor: AppColors.blackColor,
           centerTitle: true,
           title: Text(AppLocalizations.of(context)!.edit_profile, style: AppStyle.yellow15Regular),
+          iconTheme: IconThemeData(color: AppColors.yellowColor),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -111,6 +112,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   bgColor: AppColors.redColor,
                   text: AppLocalizations.of(context)!.delete_account,
                   textStyle: AppStyle.white20Regular,
+                  borderColor: AppColors.redColor,
                 ),
                 SizedBox(
                   height: height * .02,

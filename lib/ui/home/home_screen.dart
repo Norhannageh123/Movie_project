@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/UI/home/tabs/profile_tab/profile_tab_ui.dart';
 import 'package:movie_app/ui/home/tabs/browse_tab/browseTabUi.dart';
 import 'package:movie_app/ui/home/tabs/home_tab/home_tab_ui.dart';
 //import 'package:movie_app/ui/home/tabs/profile_tab/profileTabUi.dart';
@@ -18,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeTab(),
     const SearchTab(),
      BrowseTab(),
-     //const ProfileTab(),
+     Profiletab(),
   ];
 
   @override
