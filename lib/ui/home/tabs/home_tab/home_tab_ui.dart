@@ -60,10 +60,10 @@ class _HomeTabState extends State<HomeTab> {
               ),
               Image.asset(
                 AppImages.watchNow,
-                scale: 1.25,
+                scale: .95
               ),
               SizedBox(
-                height: height * .02,
+                height: height * .04,
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -99,15 +99,14 @@ class _HomeTabState extends State<HomeTab> {
                       SizedBox(
                         height: height * .3,
                         child: ListView.separated(
-
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
                               return SizedBox(
-                                  height: width * 0.02,
+                                  width: width * .35,
                                   child: WatchNowSlider());
                             },
                             separatorBuilder: (context, index) {
-                              return SizedBox(width: width * .05);
+                              return SizedBox(width: width * .04);
                             },
                             itemCount: 20),
                       )

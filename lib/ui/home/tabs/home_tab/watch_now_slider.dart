@@ -19,7 +19,8 @@ class WatchNowSlider extends StatelessWidget {
             ),
             clipBehavior: Clip.antiAlias,
             child: Image.asset(AppImages.onBoarding6,
-                fit: BoxFit.fill, height: height * .35 ,)),
+                fit: BoxFit.fill, height: double.infinity ,
+            width: double.infinity,)),
         Container(
           margin: EdgeInsetsDirectional.symmetric(
               horizontal: width * .02, vertical: height * .01),
