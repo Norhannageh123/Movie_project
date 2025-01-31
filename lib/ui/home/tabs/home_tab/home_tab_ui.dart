@@ -18,8 +18,9 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return Scaffold(
-        body: SingleChildScrollView(
+    return SafeArea(
+        top: true,
+        child: SingleChildScrollView(
             child: Column(children: [
       Stack(
         children: [
