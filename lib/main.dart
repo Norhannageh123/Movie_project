@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/UI/Home/home_screen.dart';
-import 'package:movie_app/UI/onboarding_screen.dart';
-import 'package:movie_app/ui/auth/Register/register.dart';
-import 'package:movie_app/ui/update_profile_screen.dart';
-import 'package:movie_app/utils/app_routes.dart';
-import 'package:movie_app/utils/app_theme.dart';
-import 'ui/auth/Login/login_screen.dart';
+import 'package:movie_app/core/cubit_language/bloc_observer.dart';
+import 'package:movie_app/core/di/inject.dart';
+import 'package:movie_app/core/utils/app_routes.dart';
+import 'package:movie_app/core/utils/app_theme.dart';
+import 'package:movie_app/feature/ui/auth/login/login_screen.dart';
+import 'package:movie_app/feature/ui/auth/register/register.dart';
+import 'package:movie_app/feature/ui/home/home_screen.dart';
+import 'package:movie_app/feature/ui/onboarding_screen.dart';
+import 'package:movie_app/feature/ui/update_profile_screen.dart';
 
 
 
 void main(){
+  Bloc.observer = MyBlocObserver();
+  configureDependencies();
   runApp(const MovieApp());
 }
 
