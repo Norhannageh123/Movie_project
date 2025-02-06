@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie_app/core/cubit_language/bloc_observer.dart';
+import 'package:movie_app/core/cubit_language/cubit_language.dart';
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_theme.dart';
@@ -11,9 +12,7 @@ import 'package:movie_app/feature/ui/home/home_screen.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
 import 'package:movie_app/feature/ui/update_profile_screen.dart';
 
-
-
-void main(){
+void main() {
   Bloc.observer = MyBlocObserver();
   configureDependencies();
   runApp(const MovieApp());
@@ -24,22 +23,28 @@ class MovieApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoarding,
-
-      routes: {
-        AppRoutes.onBoarding:(context)=>const OnboardingScreen(),
-        AppRoutes.loginRoute:(context)=>const LoginScreen(),
-        AppRoutes.registerRoute:(context)=>const Register(),
-        AppRoutes.updateProfileRoute:(context)=>const UpdateProfileScreen(),
-        AppRoutes.homeRoute:(context)=> const HomeScreen(),
-      },
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+    return BlocProvider(
+      create: (context) => LanguageCubit(),
+      child: BlocBuilder<LanguageCubit, String>(
+        builder: (context, language) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: AppRoutes.onBoarding,
+            routes: {
+              AppRoutes.onBoarding: (context) => const OnboardingScreen(),
+              AppRoutes.loginRoute: (context) => const LoginScreen(),
+              AppRoutes.registerRoute: (context) => const Register(),
+              AppRoutes.updateProfileRoute: (context) => const UpdateProfileScreen(),
+              AppRoutes.homeRoute: (context) => const HomeScreen(),
+            },
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.dark,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: Locale(language), 
+          );
+        },
+      ),
     );
-     
   }
 }

@@ -55,6 +55,12 @@
     "enter_same_password": "ضيف نفس الباسورد",
     "enter_valid_user_name":"ادخل اسم صح",
     "enter_numbers_only":"ادخل ارقام بس",
-    "enter_11_digit":"لازم يكون 11 رقم "
+    "enter_11_digit":"لازم يكون 11 رقم ",
+    "login_successfully": "عاش  أشطر كتكوت سجلت بنجاح",
+    "loading":"بيحمل.....",
+    "ok":"حسنا",
+    "cancel":"أغلق",
+    "error":"خطأ",
+    "success":"أشطر كتكوت"
 
 }

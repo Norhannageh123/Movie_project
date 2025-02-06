@@ -8,8 +8,9 @@ import 'package:movie_app/feature/ui/auth/login/cubit/login_state.dart';
 class LoginViewModel extends Cubit<LoginState>{
   LoginUseCase loginUseCase;
   LoginViewModel({required this.loginUseCase}):super(LoginInitState());
-   var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var emailController = TextEditingController(text: "amr2@gmail.com");
+var passwordController = TextEditingController(text: "Amr2510@");
+
   var formKey = GlobalKey<FormState>();
 
  void login() async {

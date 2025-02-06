@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
+import 'package:movie_app/core/api/api_constants.dart';
+
 @Singleton()
 class ApiManager {
   ApiManager._();
@@ -11,18 +13,17 @@ class ApiManager {
   static ApiManager get instance => _instance;
 
   Future<Either<Failures, dynamic>> request({
-    required String baseUrl,
     required String endpoint,
     required String method,
     Map<String, dynamic>? body,
   }) async {
     var connectivityResult = await Connectivity().checkConnectivity();
-    if (connectivityResult != ConnectivityResult.mobile &&
-        connectivityResult != ConnectivityResult.wifi) {
-      return Left(NetworkError(errorMessage: 'Please check Internet Connection'));
+    if (connectivityResult == ConnectivityResult.none) {
+      return Left(NetworkError(errorMessage: 'Please check your internet connection'));
     }
 
-    Uri url = Uri.https(baseUrl, endpoint);
+   Uri url = Uri.parse('${ApiConstants.baseUrl}$endpoint');
+
     http.Response response;
 
     try {
@@ -31,10 +32,18 @@ class ApiManager {
           response = await http.get(url);
           break;
         case 'POST':
-          response = await http.post(url, body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
+          response = await http.post(
+            url,
+            body: jsonEncode(body),
+            headers: {'Content-Type': 'application/json'},
+          );
           break;
         case 'PATCH':
-          response = await http.patch(url, body: jsonEncode(body), headers: {'Content-Type': 'application/json'});
+          response = await http.patch(
+            url,
+            body: jsonEncode(body),
+            headers: {'Content-Type': 'application/json'},
+          );
           break;
         case 'DELETE':
           response = await http.delete(url);

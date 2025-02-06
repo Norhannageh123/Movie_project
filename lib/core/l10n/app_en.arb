@@ -55,6 +55,11 @@
     "enter_same_password": "enter same password",
     "enter_valid_user_name":"enter valid userName",
     "enter_numbers_only":"enter numbers only",
-    "enter_11_digit":"enter value must equal 11 digit"
-
+    "enter_11_digit":"enter value must equal 11 digit",
+    "login_successfully": "Login Successfully",
+    "loading":"Loading....",
+    "ok":"OK",
+    "cancel":"Cancel",
+    "error":"Error",
+    "success":"Success"
 }
