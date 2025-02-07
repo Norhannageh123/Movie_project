@@ -227,25 +227,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: height * 0.02,
                   ),
                   Center(
-                    child: ToggleSwitch(
-                      borderColor: [AppColors.yellowColor],
-                      minWidth: width * 0.13,
-                      initialLabelIndex: language == 'en' ? 0 : 1,
-                      cornerRadius: 25.0,
-                      totalSwitches: 2,
-                      activeBgColor: [AppColors.yellowColor],
-                      iconSize: 35,
-                      curve: Curves.bounceInOut,
-                      changeOnTap: true,
-                      inactiveBgColor: AppColors.transparentColor,
-                      customWidgets: [
-                        Image(image: AssetImage(AppImages.americanIcon)),
-                        Image(image: AssetImage(AppImages.egyptIcon)),
-                      ],
-                      onToggle: (index) {
-                        final newLanguage = index == 0 ? 'en' : 'ar';
-                        context.read<LanguageCubit>().changeLanguage(newLanguage);
-                      },
+
+                    child: Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: ToggleSwitch(
+                        borderColor: [AppColors.yellowColor],
+                        minWidth: width * 0.13,
+                        initialLabelIndex: language == 'en' ? 0 : 1,
+                        cornerRadius: 25.0,
+                        totalSwitches: 2,
+                        activeBgColor: [AppColors.yellowColor],
+                        iconSize: 35,
+                        curve: Curves.bounceInOut,
+                        changeOnTap: true,
+                        inactiveBgColor: AppColors.transparentColor,
+                        customWidgets: [
+                          Image(image: AssetImage(AppImages.americanIcon)),
+                          Image(image: AssetImage(AppImages.egyptIcon)),
+                        ],
+                        onToggle: (index) {
+                          final newLanguage = index == 0 ? 'en' : 'ar';
+                          context.read<LanguageCubit>().changeLanguage(newLanguage);
+                        },
+                      ),
                     ),
                   ),
                 ],
