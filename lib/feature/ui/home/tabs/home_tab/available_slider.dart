@@ -1,9 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 class AvailableSlider extends StatelessWidget {
-  const AvailableSlider({super.key});
+  MoviesEntity moviesList;
+   AvailableSlider({required this.moviesList});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,10 @@ class AvailableSlider extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             clipBehavior: Clip.antiAlias,
-            child: Image.asset(AppImages.onBoarding6,
+            child: 
+            CachedNetworkImage(imageUrl: moviesList.largeCoverImage!,
+                placeholder:(context, url) => Center(child: Lottie.asset('assets/lottie/loading.json',)),
+                errorWidget: (context, url, error) => Icon(Icons.error),
                 fit: BoxFit.fill, height: height * .5)),
         Container(
           margin: EdgeInsetsDirectional.symmetric(
@@ -34,7 +42,7 @@ class AvailableSlider extends StatelessWidget {
                 Padding(
                   padding: EdgeInsetsDirectional.only(end: 5),
                   child: Text(
-                    "7.7",
+                    "${moviesList.rating}",
                     style: AppStyle.white16Regular,
                   ),
                 ),

@@ -8,27 +8,35 @@ import 'package:movie_app/core/api/api_constants.dart';
 
 @Singleton()
 class ApiManager {
+  //singleton pattern
   ApiManager._();
   static final ApiManager _instance = ApiManager._();
   static ApiManager get instance => _instance;
 
   Future<Either<Failures, dynamic>> request({
+    required String baseUrl,
     required String endpoint,
     required String method,
     Map<String, dynamic>? body,
+    Map<String, String>? header,
+
   }) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       return Left(NetworkError(errorMessage: 'Please check your internet connection'));
     }
 
-   Uri url = Uri.parse('${ApiConstants.baseUrl}$endpoint');
+   Uri url = Uri.parse('$baseUrl$endpoint');
 
     http.Response response;
 
     try {
       switch (method.toUpperCase()) {
         case 'GET':
+            url = Uri.parse('$baseUrl$endpoint')
+                .replace(queryParameters: header);
+
+
           response = await http.get(url);
           break;
         case 'POST':
