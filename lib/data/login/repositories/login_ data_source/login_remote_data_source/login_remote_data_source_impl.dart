@@ -13,6 +13,7 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
   @override
   Future<Either<Failures, LoginResponseDm>> login(String email, String password) async {
     var result = await ApiManager.instance.request(
+      baseUrl: ApiConstants.baseUrl,
       endpoint: ApiEndpoints.loginEndPoint,
       method: 'POST',
       body: {'email': email, 'password': password},

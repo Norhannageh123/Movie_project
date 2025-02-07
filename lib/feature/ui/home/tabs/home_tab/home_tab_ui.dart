@@ -1,23 +1,70 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/available_slider.dart';
+import 'package:movie_app/feature/ui/home/tabs/home_tab/cubit/home_state.dart';
+import 'package:movie_app/feature/ui/home/tabs/home_tab/cubit/home_view_model.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/watch_now_slider.dart';
+import '../../../../../core/di/inject.dart';
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
 
   @override
   State<HomeTab> createState() => _HomeTabState();
+
 }
 
+
 class _HomeTabState extends State<HomeTab> {
+  ///any view should know his viewModel
+
+  HomeViewModel homeViewModel=getIt<HomeViewModel>();
+  static int selectedImageSlider=0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("movieeees");
+    homeViewModel.getMoviesList();
+  }
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return SafeArea(
+
+    return BlocBuilder<HomeViewModel,HomeState>(
+    //   (listener: (context,state){
+    //   if(state is HomeLoadingState){
+    //     print("Loading");
+    //   }
+    //   else if(state is HomeErrorState){
+    //     print("errror");
+    //     print(state.failures.errorMessage);
+    //
+    //   }
+    //   else if(state is HomeSuccessState){
+    //     print("success");
+    //     print(homeViewModel.moviesList.data?.movies?.length??0);
+    //     print(homeViewModel.moviesList.data?.movies?[selectedImageSlider].backgroundImageOriginal);
+    //
+    //   }
+    //   print(homeViewModel.moviesList.data?.movies?.length??0);
+    // },
+    bloc: homeViewModel
+    ,builder:(context,state){
+      if(state is HomeErrorState){
+        return Center(child: Text(state.failures.errorMessage),);
+      }else if(state is HomeLoadingState){
+        return Center(child: Lottie.asset('assets/lottie/loading.json'));
+      }else if(state is HomeSuccessState){
+      return
+
+      SafeArea(
         top: true,
         child: SingleChildScrollView(
             child: Column(children: [
@@ -35,8 +82,10 @@ class _HomeTabState extends State<HomeTab> {
                 ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
               },
               blendMode: BlendMode.dstIn,
-              child: Image.asset(
-                AppImages.onBoarding6,
+              child:  CachedNetworkImage(imageUrl: homeViewModel.moviesList.data!.
+              movies![selectedImageSlider].largeCoverImage!,
+                placeholder:(context, url) => Center(child: Lottie.asset('assets/lottie/loading.json'),),
+                errorWidget: (context, url, error) => Icon(Icons.error),
                 height: height * .7,
               )),
           Column(
@@ -44,19 +93,30 @@ class _HomeTabState extends State<HomeTab> {
             children: [
               Image.asset(AppImages.availableNow),
               CarouselSlider.builder(
-                itemCount: 15,
+                itemCount: homeViewModel.moviesList.data?.movies?.length??0,
                 itemBuilder:
-                    (BuildContext context, int itemIndex, int pageViewIndex) =>
-                        Container(
-                  child: AvailableSlider(),
-                ),
+                    (BuildContext context, int itemIndex, int pageViewIndex) {
+
+                      print(selectedImageSlider);
+                      var movie = homeViewModel.moviesList.data
+                          ?.movies?[itemIndex];
+                      return AvailableSlider(moviesList: movie!,);
+                    },
+
+
                 options: CarouselOptions(
                     height: height * .4,
                     autoPlay: true,
                     enlargeCenterPage: true,
                     viewportFraction: .5,
                     padEnds: true,
-                    enlargeFactor: .3),
+                    enlargeFactor: .3,
+                onPageChanged: (index,_){
+                  selectedImageSlider=index;
+                  setState(() {
+
+                  });
+                }),
               ),
               Image.asset(
                 AppImages.watchNow,
@@ -117,6 +177,10 @@ class _HomeTabState extends State<HomeTab> {
           )
         ],
       ),
-    ])));
+    ])));}
+          else{
+            return Container();
+          }
+          ;});
   }
 }
