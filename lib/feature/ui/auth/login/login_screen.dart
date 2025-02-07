@@ -222,7 +222,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: AppLocalizations.of(context)!.login_with_google,
                     prefixIcon: Image(image: AssetImage(AppImages.googleIcon)),
                     textStyle: AppStyle.black20SemiBoldInter,
-
                   ),
                   SizedBox(
                     height: height * 0.02,
