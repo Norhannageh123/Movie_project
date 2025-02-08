@@ -1,4 +1,4 @@
-import 'package:dartz/dartz.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -10,8 +10,8 @@ class LoginViewModel extends Cubit<LoginState>{
   LoginUseCase loginUseCase;
   LoginResponseEntity loginResponseEntity=LoginResponseEntity();
   LoginViewModel({required this.loginUseCase}):super(LoginInitState());
-  var emailController = TextEditingController(text: "amr2@gmail.com");
-var passwordController = TextEditingController(text: "Amr2510@");
+  var emailController = TextEditingController(text:"norhan@gmail.com");
+var passwordController = TextEditingController(text: "Nn123456");
 
   var formKey = GlobalKey<FormState>();
 
