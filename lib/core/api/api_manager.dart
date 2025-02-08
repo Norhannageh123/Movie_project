@@ -60,6 +60,8 @@ class ApiManager {
           return Left(ServerError(errorMessage: 'Invalid HTTP Method'));
       }
 
+      print(response.body);
+      print(response.statusCode);
       var jsonResponse = jsonDecode(response.body);
       if (response.statusCode >= 200 && response.statusCode < 300) {
         return Right(jsonResponse);

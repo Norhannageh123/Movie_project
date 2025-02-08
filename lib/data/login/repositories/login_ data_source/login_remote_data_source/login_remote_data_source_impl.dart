@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:movie_app/core/api/api_constants.dart';
 import 'package:movie_app/core/api/api_endpoints.dart';
 import 'package:movie_app/core/api/api_manager.dart';
 import 'package:movie_app/core/errors/failures.dart';

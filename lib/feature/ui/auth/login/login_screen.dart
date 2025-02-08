@@ -10,9 +10,9 @@ import 'package:movie_app/core/utils/app_validator.dart';
 import 'package:movie_app/feature/custom_widgets/alert_dialoge.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/custom_text_field.dart';
+import 'package:movie_app/feature/custom_widgets/taggle_resuble.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_state.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_view_model.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Register/register.dart';
 import '../forget_password/forget_password_screen.dart';
@@ -222,6 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: AppLocalizations.of(context)!.login_with_google,
                     prefixIcon: Image(image: AssetImage(AppImages.googleIcon)),
                     textStyle: AppStyle.black20SemiBoldInter,
+                    padding: EdgeInsets.symmetric(horizontal: 10),
                   ),
                   SizedBox(
                     height: height * 0.02,
