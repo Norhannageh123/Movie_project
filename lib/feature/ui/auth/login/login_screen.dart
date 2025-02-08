@@ -14,6 +14,7 @@ import 'package:movie_app/feature/custom_widgets/taggle_resuble.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_state.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_view_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import '../Register/register.dart';
 import '../forget_password/forget_password_screen.dart';
 

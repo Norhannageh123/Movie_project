@@ -6,6 +6,8 @@ import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/data/register/model/register_response_dm.dart';
 import 'package:movie_app/domain/register/repositories/data_source/remote_data_source/register_remote_data_source.dart';
 
+import '../../../../../core/api/api_constants.dart';
+
 @Injectable(as: RegisterRemoteDataSource)
 class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
   @override
@@ -27,7 +29,7 @@ class RegisterRemoteDataSourceImpl implements RegisterRemoteDataSource {
         'confirmPassword': confirmPassword,
         'phone': phoneNumber,
         'avaterId': avatarId
-      },
+      }, baseUrl: ApiConstants.baseUrl,
     );
 
     return result.fold(
