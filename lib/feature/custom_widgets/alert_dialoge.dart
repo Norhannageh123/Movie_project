@@ -37,7 +37,7 @@ class DialogeUtls{
       actions.add(
         TextButton(
           onPressed: (){
-            Navigator.pop(context);
+            Navigator.of(context, rootNavigator: true).pop();
             posAction?.call();
           },
            child: Text(posActionName))

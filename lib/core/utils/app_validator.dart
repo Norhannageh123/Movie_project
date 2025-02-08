@@ -54,7 +54,7 @@ class AppValidator {
   // التحقق من اسم المستخدم
   static String? validateUserName(String? val, BuildContext context) {
     final local = AppLocalizations.of(context)!;
-    RegExp userNameRegex = RegExp(r'^[a-zA-Z0-9,.-]+$');
+    RegExp userNameRegex = RegExp(r'^(?![\s.]+$)[a-zA-Z\s.]*$');
     if (val == null) {
       return local.this_field_is_required;
     } else if (val.isEmpty) {
@@ -83,7 +83,7 @@ class AppValidator {
       return local.this_field_is_required;
     } else if (int.tryParse(val.trim()) == null) {
       return local.enter_numbers_only;
-    } else if (val.trim().length != 11) {
+    } else if (val.trim().length != 13) {
       return local.enter_11_digit;
     } else {
       return null;

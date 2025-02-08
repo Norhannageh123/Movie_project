@@ -10,9 +10,9 @@ import 'package:movie_app/core/utils/app_validator.dart';
 import 'package:movie_app/feature/custom_widgets/alert_dialoge.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/custom_text_field.dart';
+import 'package:movie_app/feature/custom_widgets/taggle_resuble.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_state.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_view_model.dart';
-import 'package:toggle_switch/toggle_switch.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../Register/register.dart';
 import '../forget_password/forget_password_screen.dart';
@@ -34,10 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    
-    
-    final language = context.watch<LanguageCubit>().state;
-
     return BlocListener<LoginViewModel, LoginState>(
       bloc: viewModel,
       listener: (context, state) {
@@ -227,28 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  Center(
-                    child: ToggleSwitch(
-                      borderColor: [AppColors.yellowColor],
-                      minWidth: width * 0.13,
-                      initialLabelIndex: language == 'en' ? 0 : 1,
-                      cornerRadius: 25.0,
-                      totalSwitches: 2,
-                      activeBgColor: [AppColors.yellowColor],
-                      iconSize: 35,
-                      curve: Curves.bounceInOut,
-                      changeOnTap: true,
-                      inactiveBgColor: AppColors.transparentColor,
-                      customWidgets: [
-                        Image(image: AssetImage(AppImages.americanIcon)),
-                        Image(image: AssetImage(AppImages.egyptIcon)),
-                      ],
-                      onToggle: (index) {
-                        final newLanguage = index == 0 ? 'en' : 'ar';
-                        context.read<LanguageCubit>().changeLanguage(newLanguage);
-                      },
-                    ),
-                  ),
+                   ToggleReusable(),
                 ],
               ),
             ),

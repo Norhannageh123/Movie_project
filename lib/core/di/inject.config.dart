@@ -16,12 +16,22 @@ import '../../data/login/repositories/login_%20data_source/login_remote_data_sou
     as _i1063;
 import '../../data/login/repositories/login_repository/login_repository_impl.dart'
     as _i335;
+import '../../data/register/repositories/register_data_source/regitser_remote_data_source/register_remote_data_source_impl.dart'
+    as _i195;
+import '../../data/register/repositories/register_repository/register_repository_impl.dart'
+    as _i7;
 import '../../domain/login/repositories/data_source/remote_data_source/login_remote_data_source.dart'
     as _i297;
 import '../../domain/login/repositories/repository/login_repository.dart'
     as _i429;
 import '../../domain/login/usecases/login_use_case.dart' as _i631;
+import '../../domain/register/repositories/data_source/remote_data_source/register_remote_data_source.dart'
+    as _i100;
+import '../../domain/register/repositories/repository/register_repository.dart'
+    as _i857;
+import '../../domain/register/usecases/register_use_case.dart' as _i545;
 import '../../feature/ui/auth/login/cubit/login_view_model.dart' as _i761;
+import '../../feature/ui/auth/register/cubit/register_view_model.dart' as _i552;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -34,12 +44,20 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i100.RegisterRemoteDataSource>(
+        () => _i195.RegisterRemoteDataSourceImpl());
     gh.factory<_i297.LoginRemoteDataSource>(
         () => _i1063.LoginRemoteDataSourceImpl());
+    gh.factory<_i857.RegisterRepository>(() => _i7.RegisterRepositoryImpl(
+        registerRemoteDataSource: gh<_i100.RegisterRemoteDataSource>()));
     gh.factory<_i429.LoginRepository>(() => _i335.LoginRepositoryImpl(
         loginRemoteDataSource: gh<_i297.LoginRemoteDataSource>()));
+    gh.factory<_i545.RegisterUseCase>(() => _i545.RegisterUseCase(
+        registerRepository: gh<_i857.RegisterRepository>()));
     gh.factory<_i631.LoginUseCase>(
         () => _i631.LoginUseCase(loginRepository: gh<_i429.LoginRepository>()));
+    gh.factory<_i552.RegisterViewModel>(() =>
+        _i552.RegisterViewModel(registerUseCase: gh<_i545.RegisterUseCase>()));
     gh.factory<_i761.LoginViewModel>(
         () => _i761.LoginViewModel(loginUseCase: gh<_i631.LoginUseCase>()));
     return this;
