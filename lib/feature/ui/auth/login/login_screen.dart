@@ -27,7 +27,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool seenPassword = true;
-
   LoginViewModel viewModel = getIt<LoginViewModel>();
 
   @override

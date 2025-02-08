@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+import 'package:movie_app/feature/custom_widgets/alert_dialoge.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/custom_text_field.dart';
+import 'package:movie_app/feature/ui/auth/login/cubit/login_view_model.dart';
+import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_state.dart';
+import '../../core/di/inject.dart';
 import 'auth/forget_password/forget_password_screen.dart';
+import 'home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
 
@@ -14,6 +21,7 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  EditeProfileViewModel editeProfileViewModel = getIt<EditeProfileViewModel>();
   int selectedIndex = 0;
   List<String> imagePath = [
     AppImages.avatar1,
@@ -32,7 +40,44 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return BlocListener<EditeProfileViewModel, EditProfileState>(
+        bloc: editeProfileViewModel,
+        listener: (context, state) {
+      if (state is EditProfileLoading) {
+        DialogeUtls.showLoading(context: context, message: AppLocalizations.of(context)!.loading);
+      } else if (state is EditProfileError) {
+        DialogeUtls.hideLoading(context: context);
+        DialogeUtls.showMessage(
+          context: context,
+          message: state.errorMessage,
+          title: AppLocalizations.of(context)!.error,
+          posActionName: AppLocalizations.of(context)!.ok,
+          posAction: () {
+            // Navigator.of(context).pop();
+          },
+          negActionName: AppLocalizations.of(context)!.cancel,
+          negAction: () {
+            // Navigator.of(context).pop();
+          },
+        );
+      } else if (state is EditProfileSuccess) {
+        DialogeUtls.hideLoading(context: context);
+        DialogeUtls.showMessage(
+          context: context,
+          message: AppLocalizations.of(context)!.login_successfully,
+          title: AppLocalizations.of(context)!.success,
+          posActionName:AppLocalizations.of(context)!.ok,
+          posAction: () {
+            Navigator.of(context).pushReplacementNamed(AppRoutes.homeRoute);
+          },
+          negActionName: AppLocalizations.of(context)!.cancel,
+          negAction: () {
+            // Navigator.of(context).pop();
+          },
+        );
+      }
+    },
+    child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.blackColor,
           centerTitle: true,
@@ -117,7 +162,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   height: height * .02,
                 ),
                 CustomElevatedButton(
-                  onClickedButton: () {},
+                  onClickedButton: () {
+                    editeProfileViewModel.updateProfile(LoginViewModel.loginResponseEntity.data!);
+                  },
                   bgColor: AppColors.yellowColor,
                   text: AppLocalizations.of(context)!.update_data,
                   textStyle: AppStyle.black20Regular,
@@ -128,7 +175,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               ],
             ),
           ),
-        ));
+        ),
+    )
+    );
   }
 
   void pickAvatar(int index) {

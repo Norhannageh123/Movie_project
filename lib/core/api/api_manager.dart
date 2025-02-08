@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
-import 'package:movie_app/core/api/api_constants.dart';
 
 @Singleton()
 class ApiManager {
@@ -19,6 +18,7 @@ class ApiManager {
     required String method,
     Map<String, dynamic>? body,
     Map<String, String>? header,
+    String? token
 
   }) async {
     var connectivityResult = await Connectivity().checkConnectivity();
@@ -35,8 +35,6 @@ class ApiManager {
         case 'GET':
             url = Uri.parse('$baseUrl$endpoint')
                 .replace(queryParameters: header);
-
-
           response = await http.get(url);
           break;
         case 'POST':
@@ -50,7 +48,7 @@ class ApiManager {
           response = await http.patch(
             url,
             body: jsonEncode(body),
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'},
           );
           break;
         case 'DELETE':
