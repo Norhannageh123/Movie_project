@@ -6,4 +6,5 @@ import '../../../../core/errors/failures.dart';
 
 abstract class HomeRepo  {
   Future<Either<Failures,MoviesListEntity>>getMoviesList();
+  Future<Either<Failures,MoviesListEntity>>getFilterGenreMoviesList(String genre);
 }

@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 class WatchNowSlider extends StatelessWidget {
-  const WatchNowSlider({super.key});
+  MoviesListEntity moviesListEntity;
+  int index=0;
+   WatchNowSlider({required this.moviesListEntity,required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class WatchNowSlider extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Image.asset(AppImages.onBoarding6,
+          child: Image.network(moviesListEntity.data!.movies![index].largeCoverImage!,
               fit: BoxFit.fill, height: double.infinity ,
           width: double.infinity,)),
       Container(
@@ -34,7 +37,7 @@ class WatchNowSlider extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.only(end: 5),
                 child: Text(
-                  "7.7",
+                  "${moviesListEntity.data!.movies![index].rating}",
                   style: AppStyle.white16Regular,
                 ),
               ),

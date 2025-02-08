@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
-    
+
     
     final language = context.watch<LanguageCubit>().state;
 
@@ -59,6 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           );
         } else if (state is LoginSuccessState) {
+          print('Toooooooooooken : ${viewModel.loginResponseEntity.data}');
           DialogeUtls.hideLoading(context: context);
           DialogeUtls.showMessage(
             context: context,

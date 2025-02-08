@@ -6,5 +6,6 @@ import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 abstract class HomeRemoteDataSource{
 
   Future<Either<Failures,MoviesListEntity>>getMoviesList();
+  Future<Either<Failures,MoviesListEntity>>getFilterGenreMoviesList(String genre);
 
 }
