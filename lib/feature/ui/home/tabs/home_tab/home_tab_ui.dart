@@ -11,6 +11,7 @@ import 'package:movie_app/feature/ui/home/tabs/home_tab/cubit/home_state.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/cubit/home_view_model.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/watch_now_slider.dart';
 import '../../../../../core/di/inject.dart';
+import '../../../../../core/utils/app_routes.dart';
 class HomeTab extends StatefulWidget {
   const HomeTab({super.key});
 
@@ -31,6 +32,8 @@ class _HomeTabState extends State<HomeTab> {
     super.initState();
     print("movieeees");
     homeViewModel.getMoviesList();
+    homeViewModel.getFilterGenreMoviesList();
+    //print(homeViewModel.moviesFilterGenreList.data!.movies!.length);
   }
   @override
   Widget build(BuildContext context) {
@@ -82,8 +85,8 @@ class _HomeTabState extends State<HomeTab> {
                 ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
               },
               blendMode: BlendMode.dstIn,
-              child:  CachedNetworkImage(imageUrl: homeViewModel.moviesList.data!.
-              movies![selectedImageSlider].largeCoverImage!,
+              child:  CachedNetworkImage(imageUrl: homeViewModel.moviesList.data?.
+              movies?[selectedImageSlider].largeCoverImage??'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                 placeholder:(context, url) => Center(child: Lottie.asset('assets/lottie/loading.json'),),
                 errorWidget: (context, url, error) => Icon(Icons.error),
                 height: height * .7,
@@ -96,14 +99,9 @@ class _HomeTabState extends State<HomeTab> {
                 itemCount: homeViewModel.moviesList.data?.movies?.length??0,
                 itemBuilder:
                     (BuildContext context, int itemIndex, int pageViewIndex) {
-
-                      print(selectedImageSlider);
-                      var movie = homeViewModel.moviesList.data
-                          ?.movies?[itemIndex];
+                      var movie = homeViewModel.moviesList.data?.movies?[itemIndex];
                       return AvailableSlider(moviesList: movie!,);
                     },
-
-
                 options: CarouselOptions(
                     height: height * .4,
                     autoPlay: true,
@@ -123,7 +121,7 @@ class _HomeTabState extends State<HomeTab> {
                 scale: .95
               ),
               SizedBox(
-                height: height * .04,
+                height: height * .02,
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -133,12 +131,12 @@ class _HomeTabState extends State<HomeTab> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Action',
+                            homeViewModel.moviesFilterGenreList.data?.movies?[0].genres?[0]??"",
                             style: AppStyle.white20Regular,
                           ),
                           InkWell(
                             onTap: () {
-                              Navigator.of(context, rootNavigator: true);
+                              Navigator.of(context).pushNamed(AppRoutes.browseRoute);
                             },
                             child: Row(
                               children: [
@@ -162,14 +160,15 @@ class _HomeTabState extends State<HomeTab> {
                             scrollDirection: Axis.horizontal,
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
+                              print(index);
                               return SizedBox(
                                   width: width * 0.35,
-                                  child: WatchNowSlider());
+                                  child: WatchNowSlider(moviesListEntity: homeViewModel.moviesFilterGenreList, index: index,));
                             },
                             separatorBuilder: (context, index) {
                               return SizedBox(width: width * 0.04);
                             },
-                            itemCount: 20),
+                            itemCount: 3),
                       )
                     ],
                   ))

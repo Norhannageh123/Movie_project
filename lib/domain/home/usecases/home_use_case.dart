@@ -17,4 +17,7 @@ class HomeUseCase{
   Future<Either<Failures,MoviesListEntity>>invoke(){
     return homeRepo.getMoviesList();
   }
+  Future<Either<Failures,MoviesListEntity>>invokeFilter(String genre){
+    return homeRepo.getFilterGenreMoviesList(genre);
+  }
 }
