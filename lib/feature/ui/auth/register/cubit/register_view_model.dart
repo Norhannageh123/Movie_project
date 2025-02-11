@@ -42,6 +42,7 @@ class RegisterViewModel extends Cubit<RegisterState> {
         },
         (response) {
           emit(RegisterSuccessState(registerResponseEntity: response));
+          
         },
       );
     }

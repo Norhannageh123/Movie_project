@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
-import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 class AvailableSlider extends StatelessWidget {

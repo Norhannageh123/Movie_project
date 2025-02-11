@@ -5,33 +5,41 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/domain/login/entites/login_response_entity.dart';
 import 'package:movie_app/domain/login/usecases/login_use_case.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/login_state.dart';
+import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
 @injectable
-class LoginViewModel extends Cubit<LoginState>{
-  LoginUseCase loginUseCase;
-  LoginResponseEntity loginResponseEntity=LoginResponseEntity();
-  LoginViewModel({required this.loginUseCase}):super(LoginInitState());
-  var emailController = TextEditingController(text:"norhan@gmail.com");
-var passwordController = TextEditingController(text: "Nn123456");
+class LoginViewModel extends Cubit<LoginState> {
+  LoginResponseEntity? loginResponseEntity;
+
+  final LoginUseCase loginUseCase;
+  final EditeProfileViewModel editeProfileViewModel;  
+
+  LoginViewModel({
+    required this.loginUseCase,
+    required this.editeProfileViewModel,  
+  }) : super(LoginInitState());
+
+  var emailController = TextEditingController(text: "norhan@gmail.com");
+  var passwordController = TextEditingController(text: "Nn123456");
 
   var formKey = GlobalKey<FormState>();
 
- void login() async {
-  if (formKey.currentState!.validate() == true) {
-    emit(LoginLoadingState()); 
-    
-    var either = await loginUseCase.invoke(emailController.text, passwordController.text);
-    
-    either.fold(
-      (error) {
-        emit(LoginErrorState(error: error));  
-      },
-      (response) {
-        loginResponseEntity=response;
-        emit(LoginSuccessState(loginResponseEntity: response));  
-      },
-    );
+  void login() async {
+    if (formKey.currentState!.validate() == true) {
+      emit(LoginLoadingState());
+
+      var either = await loginUseCase.invoke(
+          emailController.text, passwordController.text);
+
+      either.fold(
+        (error) {
+          emit(LoginErrorState(error: error));
+        },
+        (response) {
+          loginResponseEntity = response;
+          emit(LoginSuccessState(loginResponseEntity: response));
+          editeProfileViewModel.setToken(loginResponseEntity!.data!);
+        },
+      );
+    }
   }
-}
-
-
 }

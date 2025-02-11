@@ -8,6 +8,7 @@ import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_theme.dart';
 import 'package:movie_app/feature/ui/auth/login/login_screen.dart';
 import 'package:movie_app/feature/ui/auth/register/register.dart';
+import 'package:movie_app/feature/ui/home/detais_screen/details_screen.dart';
 import 'package:movie_app/feature/ui/home/home_screen.dart';
 import 'package:movie_app/feature/ui/home/tabs/browse_tab/browseTabUi.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
@@ -30,7 +31,7 @@ class MovieApp extends StatelessWidget {
         builder: (context, language) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.loginRoute,
+            initialRoute: AppRoutes.detailsScreenRoute,
             routes: {
               AppRoutes.onBoarding: (context) => const OnboardingScreen(),
               AppRoutes.loginRoute: (context) => const LoginScreen(),
@@ -38,6 +39,7 @@ class MovieApp extends StatelessWidget {
               AppRoutes.updateProfileRoute: (context) => const UpdateProfileScreen(),
               AppRoutes.homeRoute: (context) => const HomeScreen(),
               AppRoutes.browseRoute: (context) => BrowseTab(),
+              AppRoutes.detailsScreenRoute:(context)=> DetailsScreen(),
             },
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.dark,

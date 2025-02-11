@@ -46,6 +46,6 @@ class AppImages{
   static const String availableNow="assets/images/available_now.png";
   static const String watchNow="assets/images/watch_now.png";
   static const String watchListIcon="assets/images/watch_list_icon.png";
-
+  static const String detailsPerson="assets/images/details_person_image.png";
 
 }

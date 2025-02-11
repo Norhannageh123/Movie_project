@@ -28,7 +28,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool seenPassword = true;
-
   LoginViewModel viewModel = getIt<LoginViewModel>();
 
   @override
@@ -60,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
           );
         } else if (state is LoginSuccessState) {
-          print('Toooooooooooken : ${viewModel.loginResponseEntity.data}');
+          //print('Toooooooooooken : ${viewModel.loginResponseEntity.data}');
           DialogeUtls.hideLoading(context: context);
           DialogeUtls.showMessage(
             context: context,
