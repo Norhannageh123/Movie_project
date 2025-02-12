@@ -15,11 +15,14 @@ import 'package:movie_app/feature/ui/home/tabs/browse_tab/browseTabUi.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
 import 'package:movie_app/feature/ui/update_profile_screen.dart';
 
+import 'feature/ui/auth/reset_password/reset_password_screen.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   await CacheHelper().init();
+  setupLocator();
   configureDependencies();
   runApp(const MovieApp());
 }
@@ -44,6 +47,8 @@ class MovieApp extends StatelessWidget {
               AppRoutes.homeRoute: (context) => const HomeScreen(),
               AppRoutes.browseRoute: (context) => BrowseTab(),
               AppRoutes.detailsScreenRoute:(context)=> DetailsScreen(),
+              AppRoutes.resetPasswordRoute: (context) => const ResetPasswordScreen(),
+
             },
             darkTheme: AppTheme.darkTheme,
             themeMode: ThemeMode.dark,

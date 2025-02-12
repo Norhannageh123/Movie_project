@@ -61,5 +61,9 @@
     "ok":"OK",
     "cancel":"Cancel",
     "error":"Error",
-    "success":"Success"
+    "success":"Success",
+    "oldPassword":"Old Password",
+    "newPassword":"New Password",
+    "updatePassword":"Update Password",
+    "updatedSuccessfully":"Updated Successfully"
 }
