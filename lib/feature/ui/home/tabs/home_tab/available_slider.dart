@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 class AvailableSlider extends StatelessWidget {
@@ -22,10 +23,16 @@ class AvailableSlider extends StatelessWidget {
             ),
             clipBehavior: Clip.antiAlias,
             child: 
-            CachedNetworkImage(imageUrl: moviesList.largeCoverImage!,
-                placeholder:(context, url) => Center(child: Lottie.asset('assets/lottie/loading.json',)),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                fit: BoxFit.fill, height: height * .5)),
+            InkWell(
+              onTap: (){
+                print("idddddddddddddddddd ${moviesList.id}");
+                Navigator.pushNamed(context, AppRoutes.detailsScreenRoute,arguments: moviesList.id);
+              },
+              child: CachedNetworkImage(imageUrl: moviesList.largeCoverImage!,
+                  placeholder:(context, url) => Center(child: Lottie.asset('assets/lottie/loading.json',)),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  fit: BoxFit.fill, height: height * .5),
+            )),
         Container(
           margin: EdgeInsetsDirectional.symmetric(
               horizontal: width * .02, vertical: height * .01),
