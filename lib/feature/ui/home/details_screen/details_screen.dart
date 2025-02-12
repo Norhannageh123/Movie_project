@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
@@ -90,6 +91,67 @@ class DetailsScreen extends StatelessWidget {
               ],
              ),
              ////////////////Screenshot
+            SizedBox(height: height*0.02,),
+            Padding(
+              padding:  EdgeInsets.symmetric(
+                  horizontal: width*0.03
+              ),
+              child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 270,
+                      crossAxisCount: 2, // Number of columns
+                      crossAxisSpacing: 5, // Spacing between columns
+                      mainAxisSpacing: 5,
+                  ),
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      height: height*.5,
+                      margin: EdgeInsets.all(5),
+                      child: Stack(
+                          fit: StackFit.loose, children: [
+                        Container(
+                          height: height*0.35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            clipBehavior: Clip.antiAlias,
+                            child: Image.asset(AppImages.onBoarding6,
+                                fit: BoxFit.fitHeight, height: height * .5)),
+                        Container(
+                          margin: EdgeInsetsDirectional.symmetric(
+                              horizontal: width * .02, vertical: height * .01),
+                          padding: EdgeInsetsDirectional.symmetric(
+                              horizontal: width * .02, vertical: height * .007),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: AppColors.transparentBlackColor,
+                          ),
+                          child: IntrinsicWidth(
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.only(end: 5),
+                                  child: Text(
+                                    "7.7",
+                                    style: AppStyle.white16Regular,
+                                  ),
+                                ),
+                                Icon(
+                                  CupertinoIcons.star_fill,
+                                  color: AppColors.yellowColor,
+                                  size: 18,
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ]),
+                    );
+                  }),
+            )
           ],
         ),
       ),
