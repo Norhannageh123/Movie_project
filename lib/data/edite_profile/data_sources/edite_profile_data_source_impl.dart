@@ -9,18 +9,29 @@ import 'package:movie_app/domain/edite_profile/repositories/data_source/edite_pr
 @Injectable(as: EditeProfileDataSource)
 class EditeProfileDataSourceImpl implements EditeProfileDataSource{
   @override
-  Future<Either<Failures, EditeProfileResponseEntity>> updateProfile(String token) async {
-    var result = await ApiManager.instance.request(
-        baseUrl: ApiConstants.baseUrl,
-        endpoint: ApiEndpoints.updateProfileEndPoint,
-        token: token,
-        body: {
-      "name": "Updated Name", 
-      "phone": "+201111111111"
-    },
-        method: 'PATCH');
-    return result.fold((failure) => Left(failure), (response) => Right(response));
-  }
+ Future<Either<Failures, EditeProfileResponseEntity>> updateProfile(String token) async {
+  var body = <String, String>{
+    "name": "Updated Name",
+    "phone": "+201111111111"
+  };
+
+  var result = await ApiManager.instance.request(
+    baseUrl: ApiConstants.baseUrl,
+    endpoint: ApiEndpoints.updateProfileEndPoint,
+    token: token,
+    body: body,
+    method: 'PATCH',
+  );
+
+  return result.fold(
+    (failure) => Left(failure), 
+    (response) {
+      
+      return Right(EditeProfileResponseEntity(message: response.toString()));
+
+    }
+  );
+}
 
   @override
   Future<Either<Failures, EditeProfileResponseEntity>> deleteProfile(String token) async {
