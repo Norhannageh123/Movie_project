@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:get_it/get_it.dart';
 import 'package:movie_app/core/cache/cache_helper.dart';
 import 'package:movie_app/core/cubit_language/bloc_observer.dart';
 import 'package:movie_app/core/cubit_language/cubit_language.dart';
@@ -10,7 +9,7 @@ import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_theme.dart';
 import 'package:movie_app/feature/ui/auth/login/login_screen.dart';
 import 'package:movie_app/feature/ui/auth/register/register.dart';
-import 'package:movie_app/feature/ui/home/detais_screen/details_screen.dart';
+import 'package:movie_app/feature/ui/home/details_screen/details_screen.dart';
 import 'package:movie_app/feature/ui/home/home_screen.dart';
 import 'package:movie_app/feature/ui/home/tabs/browse_tab/browseTabUi.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
@@ -36,7 +35,7 @@ class MovieApp extends StatelessWidget {
         builder: (context, language) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.loginRoute,
+            initialRoute: AppRoutes.detailsScreenRoute,
             routes: {
               AppRoutes.onBoarding: (context) => const OnboardingScreen(),
               AppRoutes.loginRoute: (context) => const LoginScreen(),

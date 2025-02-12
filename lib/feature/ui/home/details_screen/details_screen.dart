@@ -30,7 +30,15 @@ class DetailsScreen extends StatelessWidget {
                 Positioned(
                   top: height * 0.06,
                   right: width * 0.03,
-                  child: InkWell(child: Image.asset(AppImages.saveIcon)),
+                  child: InkWell(child: Image.asset(AppImages.saveIcon),
+                    onTap: (){
+                    ///caching this movie
+                      ///first i should have an object of this movie
+                      ///then save object in hive
+                      ///return this in profile ->>save
+                    },
+                  ),
+
                 ),
                 Positioned(
                   top: height * 0.13,
