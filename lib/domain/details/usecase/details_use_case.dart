@@ -1,8 +1,10 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
 
+@injectable
 class DetailsUseCase{
 
   ///business logic

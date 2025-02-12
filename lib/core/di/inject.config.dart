@@ -12,6 +12,11 @@ import 'package:flutter/cupertino.dart' as _i719;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../data/details/datasources/details_local_data_source_impl.dart'
+    as _i555;
+import '../../data/details/datasources/details_remote_data_source_impl.dart'
+    as _i444;
+import '../../data/details/repository/details_repo_impl.dart' as _i63;
 import '../../data/edite_profile/data_sources/edite_profile_data_source_impl.dart'
     as _i885;
 import '../../data/edite_profile/repositories/edite_profile_repository_impl.dart'
@@ -30,6 +35,10 @@ import '../../data/reset_password/dataSources/reset_remote_data_source_impl.dart
     as _i870;
 import '../../data/reset_password/repositories/reset_repository_impl.dart'
     as _i929;
+import '../../domain/details/repositories/data_source/details_local_data_source.dart'
+    as _i649;
+import '../../domain/details/repositories/repo/details_repo.dart' as _i949;
+import '../../domain/details/usecase/details_use_case.dart' as _i15;
 import '../../domain/edite_profile/repositories/data_source/edite_profile_data_source.dart'
     as _i511;
 import '../../domain/edite_profile/repositories/repository/edite_profile_repository.dart'
@@ -75,6 +84,8 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i444.DetailsRemoteDataSourceImpl>(
+        () => _i444.DetailsRemoteDataSourceImpl());
     gh.factory<_i541.HomeRemoteDataSourceImpl>(
         () => _i541.HomeRemoteDataSourceImpl());
     gh.factory<_i914.ResetRemoteDataSource>(
@@ -83,6 +94,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i850.ResetPasswordScreen(key: gh<_i719.Key>()));
     gh.factory<_i100.RegisterRemoteDataSource>(
         () => _i195.RegisterRemoteDataSourceImpl());
+    gh.factory<_i649.DetailsLocalDataSource>(
+        () => _i555.DetailsLocalDataSourceImpl());
     gh.factory<_i511.EditeProfileDataSource>(
         () => _i885.EditeProfileDataSourceImpl());
     gh.factory<_i548.EditeProfileRepository>(() =>
@@ -95,6 +108,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1063.LoginRemoteDataSourceImpl());
     gh.factory<_i756.HomeUseCase>(
         () => _i756.HomeUseCase(homeRepo: gh<_i260.HomeRepo>()));
+    gh.factory<_i949.DetailsRepo>(() => _i63.DetailsRepoImpl(
+        detailsRemoteDataSource: gh<_i444.DetailsRemoteDataSourceImpl>()));
+    gh.factory<_i15.DetailsUseCase>(
+        () => _i15.DetailsUseCase(detailsRepo: gh<_i949.DetailsRepo>()));
     gh.factory<_i857.RegisterRepository>(() => _i7.RegisterRepositoryImpl(
         registerRemoteDataSource: gh<_i100.RegisterRemoteDataSource>()));
     gh.factory<_i60.HomeViewModel>(

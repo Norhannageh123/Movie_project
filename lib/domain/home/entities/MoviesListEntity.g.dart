@@ -34,7 +34,7 @@ Map<String, dynamic> _$MoviesDataToJson(MoviesData instance) =>
     };
 
 MoviesEntity _$MoviesEntityFromJson(Map<String, dynamic> json) => MoviesEntity(
-      id: (json['id']as num?)?.toInt(),
+      id: (json['id'] as num?)?.toInt(),
       url: json['url'] as String?,
       title: json['title'] as String?,
       year: (json['year'] as num?)?.toInt(),
@@ -53,7 +53,7 @@ MoviesEntity _$MoviesEntityFromJson(Map<String, dynamic> json) => MoviesEntity(
 
 Map<String, dynamic> _$MoviesEntityToJson(MoviesEntity instance) =>
     <String, dynamic>{
-      'id':instance.id,
+      'id': instance.id,
       'url': instance.url,
       'title': instance.title,
       'year': instance.year,

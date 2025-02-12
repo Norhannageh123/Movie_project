@@ -1,18 +1,19 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
-import 'package:movie_app/data/details/datasources/details_local_data_source_impl.dart';
 import 'package:movie_app/data/details/datasources/details_remote_data_source_impl.dart';
 import 'package:movie_app/data/details/model/details_response_dm.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
 
+@Injectable(as:DetailsRepo)
 class DetailsRepoImpl implements DetailsRepo{
   ///any repo must know the dataSource
   ///so it should have object from remote and local data sources
 
-  DetailsLocalDataSourceImpl detailsLocalDataSource;
+  //DetailsLocalDataSourceImpl detailsLocalDataSource;
   DetailsRemoteDataSourceImpl detailsRemoteDataSource;
 
-  DetailsRepoImpl({required this.detailsLocalDataSource,
+  DetailsRepoImpl({
   required this.detailsRemoteDataSource});
 
   @override
