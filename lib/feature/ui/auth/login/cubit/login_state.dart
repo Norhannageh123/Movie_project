@@ -10,5 +10,6 @@ class LoginErrorState extends LoginState{
 }
 class LoginSuccessState extends LoginState{
    LoginResponseEntity loginResponseEntity;
-   LoginSuccessState({required this.loginResponseEntity});
+   final String? token;
+   LoginSuccessState({required this.loginResponseEntity,required this.token});
 }

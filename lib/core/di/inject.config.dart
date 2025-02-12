@@ -10,6 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:movie_app/core/cache/cache_helper.dart';
+import 'package:movie_app/feature/ui/auth/login/cubit/token_manager.dart';
 import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
 
 import '../../data/edite_profile/data_sources/edite_profile_data_source_impl.dart'
@@ -85,20 +87,24 @@ extension GetItInjectableX on _i174.GetIt {
         editeProfileRepository: gh<_i548.EditeProfileRepository>()));
     gh.factory<_i429.LoginRepository>(() => _i335.LoginRepositoryImpl(
         loginRemoteDataSource: gh<_i297.LoginRemoteDataSource>()));
+    gh.factory<CacheHelper>(() => CacheHelper());
+    gh.factory<TokenManager>(() => TokenManager(gh<CacheHelper>()));
+
+// في EditeProfileViewModel:
     gh.factory<_i16.EditeProfileViewModel>(() => _i16.EditeProfileViewModel(
-        editeProfileUseCase: gh<_i912.EditeProfileUseCase>()));
+          editeProfileUseCase: gh<_i912.EditeProfileUseCase>(),
+          tokenManager: gh<TokenManager>(), // الآن يمكنك استخدام TokenManager
+        ));
     gh.factory<_i545.RegisterUseCase>(() => _i545.RegisterUseCase(
         registerRepository: gh<_i857.RegisterRepository>()));
     gh.factory<_i631.LoginUseCase>(
         () => _i631.LoginUseCase(loginRepository: gh<_i429.LoginRepository>()));
     gh.factory<_i552.RegisterViewModel>(() =>
         _i552.RegisterViewModel(registerUseCase: gh<_i545.RegisterUseCase>()));
-    gh.factory<_i761.LoginViewModel>(
-        () => _i761.LoginViewModel(
-    loginUseCase: gh<_i631.LoginUseCase>(),
-    editeProfileViewModel: gh<EditeProfileViewModel>(), 
-)
-    );
+    gh.factory<_i761.LoginViewModel>(() => _i761.LoginViewModel(
+          loginUseCase: gh<_i631.LoginUseCase>(),
+          editeProfileViewModel: gh<EditeProfileViewModel>(),
+        ));
     return this;
   }
 }

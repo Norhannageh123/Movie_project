@@ -1,6 +1,6 @@
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
 
-abstract class EditProfileState {}
+class EditProfileState {}
 
 class EditProfileInitial extends EditProfileState {}
 

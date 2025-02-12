@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
+import 'package:movie_app/core/cache/cache_helper.dart';
 import 'package:movie_app/core/cubit_language/bloc_observer.dart';
 import 'package:movie_app/core/cubit_language/cubit_language.dart';
 import 'package:movie_app/core/di/inject.dart';
@@ -14,8 +16,11 @@ import 'package:movie_app/feature/ui/home/tabs/browse_tab/browseTabUi.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
 import 'package:movie_app/feature/ui/update_profile_screen.dart';
 
-void main() {
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  await CacheHelper().init();
   configureDependencies();
   runApp(const MovieApp());
 }
@@ -31,7 +36,7 @@ class MovieApp extends StatelessWidget {
         builder: (context, language) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: AppRoutes.detailsScreenRoute,
+            initialRoute: AppRoutes.loginRoute,
             routes: {
               AppRoutes.onBoarding: (context) => const OnboardingScreen(),
               AppRoutes.loginRoute: (context) => const LoginScreen(),

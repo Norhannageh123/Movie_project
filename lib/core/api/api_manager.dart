@@ -52,7 +52,7 @@ class ApiManager {
           );
           break;
         case 'DELETE':
-          response = await http.delete(url);
+          response = await http.delete(url, headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer $token'},  );
           break;
         default:
           return Left(ServerError(errorMessage: 'Invalid HTTP Method'));

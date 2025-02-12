@@ -6,8 +6,8 @@ class EditeProfileResponseDm extends EditeProfileResponseEntity {
   EditeProfileResponseDm({
     super.message, super.error, super.statusCode});
 
-  EditeProfileResponseDm.fromJson(dynamic json) {
-    message = json['message'];
+  EditeProfileResponseDm.fromJson(Map<String, dynamic> json) {
+    message = json['message'] as String?;
     error = json['error'];
     statusCode = json['statusCode'];
   }

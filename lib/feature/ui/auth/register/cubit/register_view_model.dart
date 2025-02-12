@@ -9,11 +9,11 @@ class RegisterViewModel extends Cubit<RegisterState> {
   RegisterUseCase registerUseCase;
   RegisterViewModel({required this.registerUseCase}) : super(RegisterInitState());
 
-  final TextEditingController userNameController = TextEditingController(text:"Hanaa Hany");
-  final TextEditingController emailController = TextEditingController(text:"hanaa3@gmail.com");
+  final TextEditingController userNameController = TextEditingController(text:"Norhan Nageh");
+  final TextEditingController emailController = TextEditingController(text:"norhan3@gmail.com");
   final TextEditingController phoneNumberController = TextEditingController(text:"+201007896325");
-  final TextEditingController passwordController = TextEditingController(text:"Hh123456@");
-  final TextEditingController rePasswordController = TextEditingController(text:"Hh123456@");
+  final TextEditingController passwordController = TextEditingController(text:"Nn123456@");
+  final TextEditingController rePasswordController = TextEditingController(text:"Nn123456@");
   var formKey = GlobalKey<FormState>();
 
   int avatarId = 0; 
