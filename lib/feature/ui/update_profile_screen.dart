@@ -64,7 +64,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           DialogeUtls.hideLoading(context: context);
           DialogeUtls.showMessage(
             context: context,
-            message: AppLocalizations.of(context)!.login_successfully,
+            message: "updated successfully",
             title: AppLocalizations.of(context)!.success,
             posActionName: AppLocalizations.of(context)!.ok,
             posAction: () {
