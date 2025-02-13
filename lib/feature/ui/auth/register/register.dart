@@ -9,7 +9,6 @@ import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/core/utils/app_validator.dart';
-import 'package:movie_app/feature/custom_widgets/alert_dialoge.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/custom_text_field.dart';
 import 'package:movie_app/feature/custom_widgets/taggle_resuble.dart';

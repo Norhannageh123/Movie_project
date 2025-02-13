@@ -1,4 +1,3 @@
-import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/cache/cache_helper.dart';
 
 class TokenManager {

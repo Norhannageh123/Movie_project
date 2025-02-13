@@ -8,7 +8,7 @@ import 'package:movie_app/data/home/model/MoviesListResponseDM.dart';
 import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 import 'package:movie_app/domain/home/repositories/datasources/home_remote_data_source.dart';
 
-@injectable
+@Injectable(as:HomeRemoteDataSource)
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource{
   @override
   Future<Either<Failures,MoviesListResponseDM>>getMoviesList()async{

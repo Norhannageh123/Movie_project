@@ -37,7 +37,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return BlocListener<EditeProfileViewModel, EditProfileState>(
       bloc: editeProfileViewModel,

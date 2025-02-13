@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
-import 'package:movie_app/data/register/model/register_response_dm.dart';
 import 'package:movie_app/domain/register/entites/register_response_entity.dart';
 import 'package:movie_app/domain/register/repositories/data_source/remote_data_source/register_remote_data_source.dart';
 import 'package:movie_app/domain/register/repositories/repository/register_repository.dart';

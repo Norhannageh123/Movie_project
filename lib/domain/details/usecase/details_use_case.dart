@@ -6,10 +6,9 @@ import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
 
 @injectable
 class DetailsUseCase{
-
   ///business logic
   ///must know the repo
-  DetailsRepo detailsRepo;
+  final DetailsRepo detailsRepo;
   DetailsUseCase({required this.detailsRepo});//constructor injection
   void invokeCachingMovie(){
     detailsRepo.cachingMovie();
