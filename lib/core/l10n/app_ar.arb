@@ -61,6 +61,10 @@
     "ok":"حسنا",
     "cancel":"أغلق",
     "error":"خطأ",
-    "success":"أشطر كتكوت"
+    "success":"أشطر كتكوت",
+    "oldPassword":"كلمة السر القديمة",
+    "newPassword":"كلمة السر الجديدة",
+    "updatePassword":"تحديث كلمة السر",
+    "updatedSuccessfully":"تم التحديث"
 
 }
