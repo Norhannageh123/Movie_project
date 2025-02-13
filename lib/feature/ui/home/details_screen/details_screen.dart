@@ -219,7 +219,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: 6,
+                              itemCount: detailsViewModel.detailsResponseEntity.data!.movie!.genres!.length??1,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
@@ -240,7 +240,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      'Romance',
+                                      detailsViewModel.detailsResponseEntity.data!.movie!.genres![index],
                                       style: AppStyle.white14Regular,
                                     ),
                                   ),
