@@ -8,4 +8,6 @@ class AppRoutes{
   static const String browseRoute="browse";
   static const String detailsScreenRoute="details";
   static const String resetPasswordRoute="reset_password";
+
+  static const String searchTab = "searchTab";
 }

@@ -16,10 +16,6 @@ class CustomContainerRate extends StatelessWidget {
         horizontal: width*0.02,
         vertical: height*0.005,
       ),
-      margin: EdgeInsets.symmetric(
-        horizontal: width*0.02,
-        //vertical: height*0.02,
-      ),
       width: width*0.25,
       height: height*0.04,
       decoration: BoxDecoration(
