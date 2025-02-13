@@ -50,6 +50,7 @@ class _BrowseTabState extends State<BrowseTab> {
                                     moviesGenresList.indexOf(tabName),
                                 tabName: tabName);
                           }).toList())),
+                  //// screenshots ui
                   SizedBox(
                     height: height * 0.02,
                   ),
@@ -62,7 +63,7 @@ class _BrowseTabState extends State<BrowseTab> {
                           mainAxisSpacing: 10.0,
                           childAspectRatio: .5// Spacing between rows
                       ),
-                      itemCount: 10,
+                      itemCount: 4,
                       itemBuilder: (context, index) {
                         return Container(
                           height: height*.5,
@@ -106,7 +107,9 @@ class _BrowseTabState extends State<BrowseTab> {
                             )
                           ]),
                         );
-                      })
+                      }),
+                  //// description ui
+
                 ],
               ),
             ]));

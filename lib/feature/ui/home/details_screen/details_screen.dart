@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,6 +12,8 @@ import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
+import 'package:movie_app/feature/ui/home/details_screen/movies_suggestions/cubit/movieSuggestionsViewModel.dart';
+import 'package:movie_app/feature/ui/home/details_screen/web_view_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -21,7 +24,6 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
-
   @override
   Widget build(BuildContext context) {
     List<String?> screenshotImages = [
@@ -68,7 +70,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   Lottie.asset('assets/lottie/loading.json')),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
-                              height: height * .7,
+                          height: height * .7,
                         ),
                         Positioned(
                           top: height * 0.1,
@@ -102,8 +104,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           right: width * 0.2,
                           left: width * 0.2,
                           child: Text(
-                            detailsViewModel.detailsResponseEntity.data!.movie!
-                                    .title ??
+                            detailsViewModel
+                                    .detailsResponseEntity.data!.movie!.title ??
                                 "No title",
                             style: AppStyle.white24Bold,
                           ),
@@ -128,7 +130,30 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           CustomElevatedButton(
-                            onClickedButton: () {},
+                            onClickedButton: () async {
+                              if (detailsViewModel.detailsResponseEntity.data
+                                      ?.movie?.url?.isNotEmpty ??
+                                  false) {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => WebViewScreen(
+                                      url: detailsViewModel
+                                              .detailsResponseEntity
+                                              .data!
+                                              .movie!
+                                              .url ??
+                                          "",
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                // يمكنك إظهار snackbar أو dialog لإخبار المستخدم أن الرابط غير متوفر
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text('الرابط غير متوفر')),
+                                );
+                              }
+                            },
                             bgColor: AppColors.redColor,
                             text: AppLocalizations.of(context)!.watch,
                             textStyle: AppStyle.white20Regular,
@@ -161,54 +186,112 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ],
                           ),
-                          SizedBox(
-                            height: height * .01,
-                          ),
+                          SizedBox(height: height * 0.01),
                           //screen shots ui
                           Text(
                             AppLocalizations.of(context)!.screen_shots,
                             style: AppStyle.white24Bold,
                           ),
-                          SizedBox(
-                            height: height * .01,
+                          SizedBox(height: height * 0.01),
+                          ListView.separated(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                height: height * .02,
+                              );
+                            },
+                            itemBuilder: (context, index) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: CachedNetworkImage(
+                                  imageUrl: screenshotImages[index] ??
+                                      'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                                  placeholder: (context, url) => Center(
+                                      child: Lottie.asset(
+                                          'assets/lottie/loading.json')),
+                                  errorWidget: (context, url, error) =>
+                                      Icon(Icons.error),
+                                  height: height * .2,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ),
+                              );
+                            },
+                            itemCount: screenshotImages.length,
                           ),
-                          SizedBox(
-                            child: ListView.separated(
-                              padding: EdgeInsets.zero,
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              separatorBuilder: (context, index) {
-                                return SizedBox(
-                                  height: height * .02,
-                                );
-                              },
-                              itemBuilder: (context, index) {
-                                return ClipRRect(
-                                  borderRadius: BorderRadius.circular(16),
-                                  child: CachedNetworkImage(
-                                    imageUrl: screenshotImages[index] ??
-                                        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
-                                    placeholder: (context, url) => Center(
-                                        child: Lottie.asset(
-                                            'assets/lottie/loading.json')),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
-                                    height: height * .2,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                );
-                              },
-                              itemCount: screenshotImages.length,
-                            ),
-                          ),
-                          SizedBox(
-                            height: height * .01,
-                          ),
-                          //screen shots ui
-                          Text(
-                            AppLocalizations.of(context)!.genres,
-                            style: AppStyle.white24Bold,
+                          SizedBox(height: height * 0.02),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: width * 0.03),
+                            child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  mainAxisExtent: 270,
+                                  crossAxisCount: 2, // Number of columns
+                                  crossAxisSpacing:
+                                      5, // Spacing between columns
+                                  mainAxisSpacing: 5,
+                                ),
+                                itemCount: 4,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    height: height * .5,
+                                    margin: EdgeInsets.all(5),
+                                    child:
+                                        Stack(fit: StackFit.loose, children: [
+                                      Container(
+                                        height: height * 0.35,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                        ),
+                                        clipBehavior: Clip.antiAlias,
+                                        child: Image.asset(
+                                            AppImages.onBoarding6,
+                                            fit: BoxFit.fitHeight,
+                                            height: height * .5),
+                                      ),
+                                      Container(
+                                        margin: EdgeInsetsDirectional.symmetric(
+                                            horizontal: width * .02,
+                                            vertical: height * .01),
+                                        padding:
+                                            EdgeInsetsDirectional.symmetric(
+                                                horizontal: width * .02,
+                                                vertical: height * .007),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          color:
+                                              AppColors.transparentBlackColor,
+                                        ),
+                                        child: IntrinsicWidth(
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.only(
+                                                        end: 5),
+                                                child: Text("7.7",
+                                                    style: AppStyle
+                                                        .white16Regular),
+                                              ),
+                                              Icon(
+                                                CupertinoIcons.star_fill,
+                                                color: AppColors.yellowColor,
+                                                size: 18,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      )
+                                    ]),
+                                  );
+                                }),
                           ),
                           SizedBox(
                             height: height * .01,
@@ -219,7 +302,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: detailsViewModel.detailsResponseEntity.data!.movie!.genres!.length??1,
+                              itemCount: detailsViewModel.detailsResponseEntity
+                                      .data!.movie!.genres!.length ??
+                                  1,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
@@ -240,7 +325,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      detailsViewModel.detailsResponseEntity.data!.movie!.genres![index],
+                                      detailsViewModel.detailsResponseEntity
+                                          .data!.movie!.genres![index],
                                       style: AppStyle.white14Regular,
                                     ),
                                   ),
