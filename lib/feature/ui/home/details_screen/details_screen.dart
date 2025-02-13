@@ -15,6 +15,7 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Stack(
               children: [
@@ -89,6 +90,45 @@ class DetailsScreen extends StatelessWidget {
                 CustomContainerRate(image: AppImages.starIcon,text: "7.5",),
               ],
              ),
+            SizedBox(height: height*0.02,),
+            Text(AppLocalizations.of(context)!.genres,style: AppStyle.white24Bold,),
+            // genres
+            SizedBox(
+              height: height*0.2,
+              child: GridView.builder(
+                itemCount: 6,
+                gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 3,
+                    crossAxisSpacing: 1,
+                    mainAxisSpacing: 16),
+                itemBuilder: (context, index) {
+                  return Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width*0.02,
+                      vertical: height*0.005,
+                    ),
+                    margin: EdgeInsets.symmetric(
+                      horizontal: width*0.02,
+                      //vertical: height*0.02,
+                    ),
+                    width: width*0.25,
+                    decoration: BoxDecoration(
+                      color: AppColors.babyBlackColor,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Romance',
+                        style: AppStyle.white14Regular,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: height*0.02,),
              ////////////////Screenshot
           ],
         ),
