@@ -18,8 +18,8 @@ class ApiManager {
     required String method,
     Map<String, dynamic>? body,
     Map<String, String>? header,
-    String? token
-
+    String? token,
+    int? movieId,
   }) async {
     var connectivityResult = await Connectivity().checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
