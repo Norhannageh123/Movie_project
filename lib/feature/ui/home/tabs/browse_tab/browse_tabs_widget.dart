@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+// ignore: must_be_immutable
 class BrowseTabsWidget extends StatelessWidget {
   String tabName;
   bool selectedTab;

@@ -114,7 +114,10 @@ class _HomeTabState extends State<HomeTab> {
                   setState(() {
 
                   });
-                }),
+
+                },
+
+                ),
               ),
               Image.asset(
                 AppImages.watchNow,

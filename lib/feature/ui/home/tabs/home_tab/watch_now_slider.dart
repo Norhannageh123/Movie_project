@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
-import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
+// ignore: must_be_immutable
 class WatchNowSlider extends StatelessWidget {
   MoviesListEntity moviesListEntity;
   int index=0;

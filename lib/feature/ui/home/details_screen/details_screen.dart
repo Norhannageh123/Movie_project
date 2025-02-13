@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart'; // تأكد من إضافة مكتبة Lottie
+import 'package:lottie/lottie.dart'; 
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
@@ -20,19 +20,18 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
- DetailsViewModel detailsViewModel=getIt<DetailsViewModel>();
-
-  @override
-  void initState() {
-    super.initState();
-     detailsViewModel.getMovieDetails(movieId);
-  // detailsViewModel = DetailsViewModel(detailsUseCase: YourDetailsUseCaseImplementation());
-  }
+  DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
 
   @override
   Widget build(BuildContext context) {
+    
+    final arguments = (ModalRoute.of(context)?.settings.arguments) as int;
+    print("Movie id $arguments");
+    detailsViewModel.getMovieDetails(arguments);
+
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
     return BlocProvider(
       create: (_) => detailsViewModel,
       child: BlocBuilder<DetailsViewModel, DetailsState>(
@@ -43,7 +42,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             );
           } else if (state is DetailsLoadingState) {
             return Center(
-              child: Lottie.asset('assets/lottie/loading.json'), 
+              child: Lottie.asset('assets/lottie/loading.json'),
             );
           } else if (state is DetailsSuccessState) {
             return Scaffold(
@@ -52,13 +51,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   children: [
                     Stack(
                       children: [
-                          CachedNetworkImage(imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.smallCoverImage??'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
-                placeholder:(context, url) => Center(child: Lottie.asset('assets/lottie/loading.json'),),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                height: height * .7,
-              ),
-
-
+                        CachedNetworkImage(
+                          imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.smallCoverImage ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                          placeholder: (context, url) => Center(child: Lottie.asset('assets/lottie/loading.json')),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          height: height * .7,
+                        ),
                         Positioned(
                           top: height * 0.05,
                           child: IconButton(
@@ -81,18 +79,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           top: height * 0.13,
                           right: width * 0.1,
                           left: width * 0.1,
-                          child: InkWell(onTap: (){
-
-                          },
-                            child: Image.asset(AppImages.logoDetailsScreen
-                            )),
+                          child: InkWell(
+                            onTap: () {},
+                            child: Image.asset(AppImages.logoDetailsScreen),
+                          ),
                         ),
                         Positioned(
                           top: height * 0.6,
                           right: width * 0.15,
                           left: width * 0.2,
                           child: Text(
-                           detailsViewModel.detailsResponseEntity.data!.movie!.descriptionIntro??"",
+                            detailsViewModel.detailsResponseEntity.data!.movie!.descriptionIntro ?? "",
                             style: AppStyle.white24Bold,
                           ),
                         ),
@@ -101,7 +98,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           right: width * 0.3,
                           left: width * 0.4,
                           child: Text(
-                             detailsViewModel.detailsResponseEntity.data!.movie!.year.toString(),
+                            detailsViewModel.detailsResponseEntity.data!.movie!.year.toString(),
                             style: AppStyle.white20Regular,
                           ),
                         ),
@@ -128,7 +125,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                         CustomContainerRate(
                           image: AppImages.clockIcon,
-                          text:  detailsViewModel.detailsResponseEntity.data!.movie!.runtime?.toString() ?? "0"
+                          text: detailsViewModel.detailsResponseEntity.data!.movie!.runtime?.toString() ?? "0",
                         ),
                         CustomContainerRate(
                           image: AppImages.starIcon,
@@ -136,6 +133,42 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ),
                       ],
                     ),
+                    // genres
+                    SizedBox(
+                      height: height * 0.2,
+                      child: GridView.builder(
+                        itemCount: 6,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 3,
+                          crossAxisSpacing: 1,
+                          mainAxisSpacing: 16,
+                        ),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: width * 0.02,
+                              vertical: height * 0.005,
+                            ),
+                            margin: EdgeInsets.symmetric(
+                              horizontal: width * 0.02,
+                            ),
+                            width: width * 0.25,
+                            decoration: BoxDecoration(
+                              color: AppColors.babyBlackColor,
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Romance',
+                                style: AppStyle.white14Regular,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: height * 0.02),
                   ],
                 ),
               ),

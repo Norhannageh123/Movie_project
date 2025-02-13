@@ -8,11 +8,9 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:flutter/cupertino.dart' as _i719;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:movie_app/core/cache/cache_helper.dart';
-import 'package:movie_app/feature/ui/auth/login/cubit/token_manager.dart';
-import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
 
 import '../../data/edite_profile/data_sources/edite_profile_data_source_impl.dart'
     as _i885;
@@ -28,6 +26,10 @@ import '../../data/register/repositories/register_data_source/regitser_remote_da
     as _i195;
 import '../../data/register/repositories/register_repository/register_repository_impl.dart'
     as _i7;
+import '../../data/reset_password/dataSources/reset_remote_data_source_impl.dart'
+    as _i870;
+import '../../data/reset_password/repositories/reset_repository_impl.dart'
+    as _i929;
 import '../../domain/edite_profile/repositories/data_source/edite_profile_data_source.dart'
     as _i511;
 import '../../domain/edite_profile/repositories/repository/edite_profile_repository.dart'
@@ -46,8 +48,18 @@ import '../../domain/register/repositories/data_source/remote_data_source/regist
 import '../../domain/register/repositories/repository/register_repository.dart'
     as _i857;
 import '../../domain/register/usecases/register_use_case.dart' as _i545;
+import '../../domain/reset_password/repositories/data_source/reset_remote_data_source.dart'
+    as _i914;
+import '../../domain/reset_password/repositories/repository/reset_repository.dart'
+    as _i1021;
+import '../../domain/reset_password/usecases/reset_use_case.dart' as _i339;
 import '../../feature/ui/auth/login/cubit/login_view_model.dart' as _i761;
+import '../../feature/ui/auth/login/cubit/token_manager.dart' as _i734;
 import '../../feature/ui/auth/register/cubit/register_view_model.dart' as _i552;
+import '../../feature/ui/auth/reset_password/cubit/reset_view_model.dart'
+    as _i1039;
+import '../../feature/ui/auth/reset_password/reset_password_screen.dart'
+    as _i850;
 import '../../feature/ui/home/tabs/home_tab/cubit/home_view_model.dart' as _i60;
 import '../../feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart'
     as _i16;
@@ -65,6 +77,10 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i541.HomeRemoteDataSourceImpl>(
         () => _i541.HomeRemoteDataSourceImpl());
+    gh.factory<_i914.ResetRemoteDataSource>(
+        () => _i870.ResetRemoteDataSourceImpl());
+    gh.factory<_i850.ResetPasswordScreen>(
+        () => _i850.ResetPasswordScreen(key: gh<_i719.Key>()));
     gh.factory<_i100.RegisterRemoteDataSource>(
         () => _i195.RegisterRemoteDataSourceImpl());
     gh.factory<_i511.EditeProfileDataSource>(
@@ -87,24 +103,26 @@ extension GetItInjectableX on _i174.GetIt {
         editeProfileRepository: gh<_i548.EditeProfileRepository>()));
     gh.factory<_i429.LoginRepository>(() => _i335.LoginRepositoryImpl(
         loginRemoteDataSource: gh<_i297.LoginRemoteDataSource>()));
-    gh.factory<CacheHelper>(() => CacheHelper());
-    gh.factory<TokenManager>(() => TokenManager(gh<CacheHelper>()));
-
-// في EditeProfileViewModel:
+    gh.factory<_i1021.ResetRepository>(() => _i929.ResetRepositoryImpl(
+        resetRemoteDataSource: gh<_i914.ResetRemoteDataSource>()));
     gh.factory<_i16.EditeProfileViewModel>(() => _i16.EditeProfileViewModel(
           editeProfileUseCase: gh<_i912.EditeProfileUseCase>(),
-          tokenManager: gh<TokenManager>(), // الآن يمكنك استخدام TokenManager
+          tokenManager: gh<_i734.TokenManager>(),
         ));
     gh.factory<_i545.RegisterUseCase>(() => _i545.RegisterUseCase(
         registerRepository: gh<_i857.RegisterRepository>()));
     gh.factory<_i631.LoginUseCase>(
         () => _i631.LoginUseCase(loginRepository: gh<_i429.LoginRepository>()));
+    gh.factory<_i339.ResetUseCase>(() =>
+        _i339.ResetUseCase(resetRepository: gh<_i1021.ResetRepository>()));
     gh.factory<_i552.RegisterViewModel>(() =>
         _i552.RegisterViewModel(registerUseCase: gh<_i545.RegisterUseCase>()));
     gh.factory<_i761.LoginViewModel>(() => _i761.LoginViewModel(
           loginUseCase: gh<_i631.LoginUseCase>(),
-          editeProfileViewModel: gh<EditeProfileViewModel>(),
+          editeProfileViewModel: gh<_i16.EditeProfileViewModel>(),
         ));
+    gh.factory<_i1039.ResetViewModel>(
+        () => _i1039.ResetViewModel(resetUseCase: gh<_i339.ResetUseCase>()));
     return this;
   }
 }

@@ -10,7 +10,6 @@ import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/custom_text_field.dart';
 import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_state.dart';
 import '../../core/di/inject.dart';
-import 'auth/forget_password/forget_password_screen.dart';
 import 'home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
@@ -129,9 +128,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(builder: (context) => ForgetPasswordScreen()),
+                         AppRoutes.resetPasswordRoute
                         );
                       },
                       child: Text(AppLocalizations.of(context)!.reset_password, style: AppStyle.white20Regular),

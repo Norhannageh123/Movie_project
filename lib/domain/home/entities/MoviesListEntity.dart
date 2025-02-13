@@ -37,6 +37,7 @@ class MoviesData {
 @JsonSerializable()
 class MoviesEntity {
   MoviesEntity({
+    this.id,
     this.url,
     this.title,
     this.year,
@@ -51,7 +52,7 @@ class MoviesEntity {
     this.largeCoverImage,
     this.state,
   });
-
+  int? id;
   String? url;
   String? title;
   int? year;
