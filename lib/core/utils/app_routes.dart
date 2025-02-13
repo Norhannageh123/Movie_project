@@ -7,4 +7,5 @@ class AppRoutes{
   static const String updateProfileRoute="update_profile";
   static const String browseRoute="browse";
   static const String detailsScreenRoute="details";
+  static const String resetPasswordRoute="reset_password";
 }

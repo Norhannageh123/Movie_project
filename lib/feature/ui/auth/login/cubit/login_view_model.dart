@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/cache/cache_helper.dart';
 import 'package:movie_app/core/errors/failures.dart';
@@ -23,7 +24,8 @@ class LoginViewModel extends Cubit<LoginState> {
 
   var emailController = TextEditingController(text: "norhan3@gmail.com");
   var passwordController = TextEditingController(text: "Nn123456@");
-  final TokenManager tokenManager = TokenManager(CacheHelper());
+  // Retrieve TokenManager using GetIt
+  final TokenManager tokenManager = GetIt.instance<TokenManager>();
   var formKey = GlobalKey<FormState>();
 
   void login() async {

@@ -129,9 +129,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pushReplacement(
+                        Navigator.pushNamed(
                           context,
-                          MaterialPageRoute(builder: (context) => ForgetPasswordScreen()),
+                         AppRoutes.resetPasswordRoute
                         );
                       },
                       child: Text(AppLocalizations.of(context)!.reset_password, style: AppStyle.white20Regular),
