@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/core/errors/failures.dart';
-import 'package:movie_app/domain/login/repositories/repository/login_repository.dart';
 import 'package:injectable/injectable.dart';
 import '../../../domain/reset_password/entites/reset_response_entity.dart';
 import '../../../domain/reset_password/repositories/data_source/reset_remote_data_source.dart';

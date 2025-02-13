@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/api/api_constants.dart';
 import 'package:movie_app/core/api/api_endpoints.dart';
 import 'package:movie_app/core/api/api_manager.dart';
@@ -6,6 +7,7 @@ import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/data/details/model/details_response_dm.dart';
 import '../../../domain/details/repositories/data_source/details_remote_data_source.dart';
 
+@Injectable(as:DetailsRemoteDataSource)
 class DetailsRemoteDataSourceImpl implements DetailsRemoteDataSource {
   @override
   Future<Either<Failures, DetailsResponseDm>> getMovieDetails({

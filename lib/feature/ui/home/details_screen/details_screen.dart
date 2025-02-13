@@ -52,7 +52,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     Stack(
                       children: [
                         CachedNetworkImage(
-                          imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.smallCoverImage ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                          imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.largeCoverImage ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                           placeholder: (context, url) => Center(child: Lottie.asset('assets/lottie/loading.json')),
                           errorWidget: (context, url, error) => Icon(Icons.error),
                           height: height * .7,
@@ -89,7 +89,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           right: width * 0.15,
                           left: width * 0.2,
                           child: Text(
-                            detailsViewModel.detailsResponseEntity.data!.movie!.descriptionIntro ?? "",
+                            detailsViewModel.detailsResponseEntity.data!.movie!.title?? "",
                             style: AppStyle.white24Bold,
                           ),
                         ),

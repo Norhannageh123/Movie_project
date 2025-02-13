@@ -1,4 +1,8 @@
-// الكلاس الرئيسي للاستجابة
+import 'package:json_annotation/json_annotation.dart';
+
+part 'details_response_entity.g.dart';
+
+@JsonSerializable()
 class DetailsResponseEntity {
   DetailsResponseEntity({
     this.status,
@@ -11,18 +15,26 @@ class DetailsResponseEntity {
   String? statusMessage;
   DataDetailsEntity? data;
   MetaDetailsEntity? meta;
+
+  factory DetailsResponseEntity.fromJson(Map<String, dynamic> json) =>
+      _$DetailsResponseEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DetailsResponseEntityToJson(this);
 }
 
-// بيانات الفيلم
+@JsonSerializable()
 class DataDetailsEntity {
-  DataDetailsEntity({
-    this.movie,
-  });
+  DataDetailsEntity({this.movie});
 
   MovieDetailsEntity? movie;
+
+  factory DataDetailsEntity.fromJson(Map<String, dynamic> json) =>
+      _$DataDetailsEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DataDetailsEntityToJson(this);
 }
 
-// تفاصيل الفيلم
+@JsonSerializable()
 class MovieDetailsEntity {
   MovieDetailsEntity({
     this.id,
@@ -91,10 +103,14 @@ class MovieDetailsEntity {
   List<TorrentsDetailsEntity>? torrents;
   String? dateUploaded;
   int? dateUploadedUnix;
+
+  factory MovieDetailsEntity.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailsEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MovieDetailsEntityToJson(this);
 }
 
-
-// تفاصيل الميتا
+@JsonSerializable()
 class MetaDetailsEntity {
   MetaDetailsEntity({
     this.serverTime,
@@ -107,24 +123,32 @@ class MetaDetailsEntity {
   String? serverTimezone;
   int? apiVersion;
   String? executionTime;
+
+  factory MetaDetailsEntity.fromJson(Map<String, dynamic> json) =>
+      _$MetaDetailsEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$MetaDetailsEntityToJson(this);
 }
 
+@JsonSerializable()
 class TorrentsDetailsEntity {
   TorrentsDetailsEntity({
-      this.url, 
-      this.hash, 
-      this.quality, 
-      this.type, 
-      this.isRepack, 
-      this.videoCodec, 
-      this.bitDepth, 
-      this.audioChannels, 
-      this.seeds, 
-      this.peers, 
-      this.size, 
-      this.sizeBytes, 
-      this.dateUploaded, 
-      this.dateUploadedUnix,});
+    this.url,
+    this.hash,
+    this.quality,
+    this.type,
+    this.isRepack,
+    this.videoCodec,
+    this.bitDepth,
+    this.audioChannels,
+    this.seeds,
+    this.peers,
+    this.size,
+    this.sizeBytes,
+    this.dateUploaded,
+    this.dateUploadedUnix,
+  });
+
   String? url;
   String? hash;
   String? quality;
@@ -140,19 +164,28 @@ class TorrentsDetailsEntity {
   String? dateUploaded;
   int? dateUploadedUnix;
 
+  factory TorrentsDetailsEntity.fromJson(Map<String, dynamic> json) =>
+      _$TorrentsDetailsEntityFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TorrentsDetailsEntityToJson(this);
 }
 
+@JsonSerializable()
 class CastDetailsEntity {
   CastDetailsEntity({
-      this.name, 
-      this.characterName, 
-      this.urlSmallImage, 
-      this.imdbCode,});
+    this.name,
+    this.characterName,
+    this.urlSmallImage,
+    this.imdbCode,
+  });
 
   String? name;
   String? characterName;
   String? urlSmallImage;
   String? imdbCode;
 
+  factory CastDetailsEntity.fromJson(Map<String, dynamic> json) =>
+      _$CastDetailsEntityFromJson(json);
 
+  Map<String, dynamic> toJson() => _$CastDetailsEntityToJson(this);
 }

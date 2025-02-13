@@ -7,6 +7,7 @@ import 'package:movie_app/core/cubit_language/cubit_language.dart';
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_theme.dart';
+import 'package:movie_app/domain/details/repositories/data_source/details_remote_data_source.dart';
 import 'package:movie_app/feature/ui/auth/login/login_screen.dart';
 import 'package:movie_app/feature/ui/auth/register/register.dart';
 import 'package:movie_app/feature/ui/home/details_screen/details_screen.dart';
@@ -16,6 +17,7 @@ import 'package:movie_app/feature/ui/onboarding_screen.dart';
 import 'package:movie_app/feature/ui/update_profile_screen.dart';
 
 import 'feature/ui/auth/reset_password/reset_password_screen.dart';
+import 'feature/ui/home/details_screen/cubit/details_view_model.dart';
 
 
 void main() async{
@@ -24,6 +26,8 @@ void main() async{
   await CacheHelper().init();
   setupLocator();
   configureDependencies();
+  print("Dependencies configured.");
+  print(getIt.isRegistered<DetailsViewModel>());
   runApp(const MovieApp());
 }
 

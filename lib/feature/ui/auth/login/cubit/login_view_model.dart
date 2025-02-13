@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_app/core/cache/cache_helper.dart';
 import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/domain/login/entites/login_response_entity.dart';
 import 'package:movie_app/domain/login/usecases/login_use_case.dart';
