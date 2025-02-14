@@ -37,11 +37,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     List<String?> screenshotImages = [
       detailsViewModel
-          .detailsResponseEntity.data?.movie?.mediumScreenshotImage1,
+          .detailsResponseEntity.data?.movie?.medium_screenshot_image1,
       detailsViewModel
-          .detailsResponseEntity.data?.movie?.mediumScreenshotImage2,
+          .detailsResponseEntity.data?.movie?.medium_screenshot_image2,
       detailsViewModel
-          .detailsResponseEntity.data?.movie?.mediumScreenshotImage3,
+          .detailsResponseEntity.data?.movie?.medium_screenshot_image3,
     ];
 
     final arguments = (ModalRoute.of(context)?.settings.arguments) as int;
@@ -127,7 +127,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             detailsViewModel
                                     .detailsResponseEntity.data!.movie!.title ??
                                 "No title",
-                            detailsViewModel.detailsResponseEntity.data!.movie!.description_intro ?? "",
+                            // detailsViewModel.detailsResponseEntity.data!.movie!.description_intro ?? "",
                             style: AppStyle.white24Bold,
                           ),
                         ),
@@ -187,7 +187,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               CustomContainerRate(
                                 image: AppImages.heartIcon,
                                 text: detailsViewModel.detailsResponseEntity
-                                        .data!.movie!.likeCount
+                                        .data!.movie!.like_count
                                         ?.toString() ??
                                     "0",
                               ),
