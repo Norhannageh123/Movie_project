@@ -29,7 +29,7 @@ class CustomContainerRate extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(image),
+          Expanded(child: Image.asset(image)),
           Text(
             text,
             style: AppStyle.white20Regular,

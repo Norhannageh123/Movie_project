@@ -10,10 +10,10 @@ class DetailsUseCase{
   ///must know the repo
   final DetailsRepo detailsRepo;
   DetailsUseCase({required this.detailsRepo});//constructor injection
-  void invokeCachingMovie(){
-    detailsRepo.cachingMovie();
+  void invokeCachingMovie(int id,MovieDetailsEntity movieDetailsEntity){
+    detailsRepo.cachingMovie(id,movieDetailsEntity);
   }
-  getCachingMovie(){
+  Future<List<MovieDetailsEntity>>invokeGetCachingMovie(){
     return detailsRepo.getCachingMovie();
   }
   Future<Either<Failures, DetailsResponseEntity>> invoke({

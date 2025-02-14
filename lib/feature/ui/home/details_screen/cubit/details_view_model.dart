@@ -20,4 +20,9 @@ class DetailsViewModel extends Cubit<DetailsState>{
           emit(DetailsSuccessState(detailsResponseEntity: detailsResponse));
         });
   }
+  void savedMovie(int movieId,MovieDetailsEntity movie)async{
+
+   detailsUseCase.invokeCachingMovie(movieId,movie);
+
+  }
 }

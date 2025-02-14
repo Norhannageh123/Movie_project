@@ -1,16 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart'; 
+import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
-import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
+import 'package:movie_app/feature/custom_widgets/toast.dart';
+
+import 'cubit/details_state.dart';
+import 'cubit/details_view_model.dart';
+
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -24,7 +28,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
+
     final arguments = (ModalRoute.of(context)?.settings.arguments) as int;
     print("Movie id $arguments");
     detailsViewModel.getMovieDetails(arguments);
@@ -52,7 +56,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     Stack(
                       children: [
                         CachedNetworkImage(
-                          imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.smallCoverImage ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                          imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.mediumCoverImage ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                           placeholder: (context, url) => Center(child: Lottie.asset('assets/lottie/loading.json')),
                           errorWidget: (context, url, error) => Icon(Icons.error),
                           height: height * .7,
@@ -71,7 +75,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           child: InkWell(
                             child: Image.asset(AppImages.saveIcon),
                             onTap: () {
-                              // الكود الخاص بالحفظ
+                              detailsViewModel.savedMovie(detailsViewModel.detailsResponseEntity.data!.movie!.id!, detailsViewModel.detailsResponseEntity.data!.movie!);
+                              ToastHelper.showSuccessToast("Saved Successfully");
+                              // Navigator.pushReplacementNamed(context, AppRoutes.homeRoute);
                             },
                           ),
                         ),

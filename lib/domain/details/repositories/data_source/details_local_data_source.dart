@@ -1,5 +1,7 @@
+import 'package:movie_app/domain/details/entities/details_response_entity.dart';
+
 abstract class DetailsLocalDataSource{
-  void cachingMovie();
+  void cachingMovie(int id,MovieDetailsEntity movieDetailsEntity);
   ///return Movie Response
-  getCachingMovie();
+  Future<List<MovieDetailsEntity>> getCachingMovie();
 }

@@ -1,16 +1,22 @@
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/use_cases/edite_profile_use_case.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/token_manager.dart';
 import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_state.dart';
+
+import '../../../../../../domain/details/usecase/details_use_case.dart';
 @injectable
 class EditeProfileViewModel extends Cubit<EditProfileState> {
   static EditeProfileResponseEntity editeProfileResponseEntity = EditeProfileResponseEntity();
   EditeProfileUseCase editeProfileUseCase;
+  DetailsUseCase detailsUseCase;
+  MovieDetailsEntity movieDetailsEntity=MovieDetailsEntity();
+  List<MovieDetailsEntity>listCachedMovie=[];
   final TokenManager tokenManager;
 
-  EditeProfileViewModel({required this.editeProfileUseCase, required this.tokenManager})
+  EditeProfileViewModel({required this.editeProfileUseCase, required this.tokenManager,required this.detailsUseCase})
       : super(EditProfileInitial());
 
   
@@ -53,5 +59,10 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
     } else {
       emit(DeleteAccountError("Token is not available"));
     }
+  }
+  void getCachedMovie()async{
+    listCachedMovie=await detailsUseCase.invokeGetCachingMovie();
+    print("ViewModellllllllllll${listCachedMovie.length}");
+    emit(EditProfileCachedSuccess(listCachedMovie));
   }
 }

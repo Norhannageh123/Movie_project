@@ -3,6 +3,65 @@
 part of 'details_response_entity.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class MovieDetailsEntityAdapter extends TypeAdapter<MovieDetailsEntity> {
+  @override
+  final int typeId = 1;
+
+  @override
+  MovieDetailsEntity read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return MovieDetailsEntity(
+      id: fields[1] as int?,
+      title: fields[2] as String?,
+      year: fields[3] as int?,
+      rating: fields[4] as double?,
+      runtime: fields[10] as int?,
+      likeCount: fields[6] as int?,
+      descriptionFull: fields[7] as String?,
+      backgroundImage: fields[8] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, MovieDetailsEntity obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(1)
+      ..write(obj.id)
+      ..writeByte(2)
+      ..write(obj.title)
+      ..writeByte(3)
+      ..write(obj.year)
+      ..writeByte(4)
+      ..write(obj.rating)
+      ..writeByte(10)
+      ..write(obj.runtime)
+      ..writeByte(6)
+      ..write(obj.likeCount)
+      ..writeByte(7)
+      ..write(obj.descriptionFull)
+      ..writeByte(8)
+      ..write(obj.backgroundImage);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MovieDetailsEntityAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

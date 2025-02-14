@@ -1,3 +1,4 @@
+import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
 
 class EditProfileState {}
@@ -10,6 +11,11 @@ class EditProfileSuccess extends EditProfileState {
   final EditeProfileResponseEntity successMessage;
 
   EditProfileSuccess(this.successMessage);
+}
+class EditProfileCachedSuccess extends EditProfileState {
+  final List<MovieDetailsEntity> movieDetailsEntity;
+
+  EditProfileCachedSuccess(this.movieDetailsEntity);
 }
 
 class EditProfileError extends EditProfileState {
@@ -31,3 +37,5 @@ class DeleteAccountError extends EditProfileState {
 
   DeleteAccountError(this.errorMessage);
 }
+
+

@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'details_response_entity.g.dart';
@@ -35,7 +36,8 @@ class DataDetailsEntity {
 }
 
 @JsonSerializable()
-class MovieDetailsEntity {
+@HiveType(typeId: 1)
+class MovieDetailsEntity extends HiveObject {
   MovieDetailsEntity({
     this.id,
     this.url,
@@ -70,24 +72,31 @@ class MovieDetailsEntity {
     this.dateUploaded,
     this.dateUploadedUnix,
   });
-
+  @HiveField(1)
   int? id;
   String? url;
   String? imdbCode;
+  @HiveField(2)
   String? title;
   String? titleEnglish;
   String? titleLong;
   String? slug;
+  @HiveField(3)
   int? year;
+  @HiveField(4)
   double? rating;
+  @HiveField(10)
   int? runtime;
   List<String>? genres;
+  @HiveField(6)
   int? likeCount;
   String? descriptionIntro;
+  @HiveField(7)
   String? descriptionFull;
   String? ytTrailerCode;
   String? language;
   String? mpaRating;
+  @HiveField(8)
   String? backgroundImage;
   String? backgroundImageOriginal;
   String? smallCoverImage;

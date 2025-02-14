@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:movie_app/core/cache/cache_helper.dart';
 import 'package:movie_app/core/cubit_language/bloc_observer.dart';
 import 'package:movie_app/core/cubit_language/cubit_language.dart';
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_theme.dart';
+import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/data_source/details_remote_data_source.dart';
 import 'package:movie_app/feature/ui/auth/login/login_screen.dart';
 import 'package:movie_app/feature/ui/auth/register/register.dart';
 import 'package:movie_app/feature/ui/home/details_screen/details_screen.dart';
 import 'package:movie_app/feature/ui/home/home_screen.dart';
 import 'package:movie_app/feature/ui/home/tabs/browse_tab/browseTabUi.dart';
+import 'package:movie_app/feature/ui/home/tabs/profile_tab/profile_tab_ui.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
 import 'package:movie_app/feature/ui/update_profile_screen.dart';
-
+import 'package:path_provider/path_provider.dart';
 import 'feature/ui/auth/reset_password/reset_password_screen.dart';
 import 'feature/ui/home/details_screen/cubit/details_view_model.dart';
 
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  // To intialise the hive database
+  Hive.registerAdapter(MovieDetailsEntityAdapter());
+  var directory=await getApplicationDocumentsDirectory();
+  await Hive.initFlutter(directory.path);
   Bloc.observer = MyBlocObserver();
   await CacheHelper().init();
   setupLocator();
@@ -52,6 +60,7 @@ class MovieApp extends StatelessWidget {
               AppRoutes.browseRoute: (context) => BrowseTab(),
               AppRoutes.detailsScreenRoute:(context)=> DetailsScreen(),
               AppRoutes.resetPasswordRoute: (context) => const ResetPasswordScreen(),
+
 
             },
             darkTheme: AppTheme.darkTheme,
