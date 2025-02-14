@@ -18,6 +18,6 @@ void setupLocator() {
   getIt.registerLazySingleton<TokenManager>(() => TokenManager(CacheHelper()));
 }
 void configureDependencies() {
-  getIt.registerFactory<EditeProfileDataSourceImpl>(() => EditeProfileDataSourceImpl());
+  //getIt.registerFactory<EditeProfileDataSourceImpl>(() => EditeProfileDataSourceImpl());
   getIt.init(); //
 }

@@ -9,7 +9,7 @@ import '../model/movieSuggestionsResponseDm.dart';
 @Injectable(as: MovieSuggestionsDataSource)
 class MovieSuggestionsDataSourceImpl implements MovieSuggestionsDataSource{
   @override
-  Future<Either<Failures, MovieSuggestionsResponseDm>> getMovieSuggestions() async {
+  Future<Either<Failures, List<MovieSuggestionsResponseDm>>> getMovieSuggestions(int movieID) async {
     var either = await ApiManager.instance.request(
         baseUrl: ApiConstants.moviesBaseUrl,
         endpoint: ApiEndpoints.suggestionsEndPoint,

@@ -8,6 +8,7 @@ import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+import 'package:movie_app/domain/details/movie_suggestions/entities/movieSuggestionsResponseEntity.dart';
 import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
@@ -24,6 +25,14 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
+  //MovieSuggestionsViewModel movieSuggestionsViewModel =
+      //getIt<MovieSuggestionsViewModel>();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //detailsViewModel.getSuggestionsMovies(detailsViewModel.detailsResponseEntity.data!.movie!.id!);
+  }
   @override
   Widget build(BuildContext context) {
     List<String?> screenshotImages = [
@@ -34,10 +43,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
       detailsViewModel
           .detailsResponseEntity.data?.movie?.mediumScreenshotImage3,
     ];
+    //List<MovieSuggestionsResponseEntity> similarList = movieSuggestionsViewModel.moviesSuggestionsList;
 
     final arguments = (ModalRoute.of(context)?.settings.arguments) as int;
     print("Movie id $arguments");
     detailsViewModel.getMovieDetails(arguments);
+    detailsViewModel.getSuggestionsMovies(arguments);
 
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
@@ -55,6 +66,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: Lottie.asset('assets/lottie/loading.json'),
             );
           } else if (state is DetailsSuccessState) {
+            print("RESULT LENGTH ${detailsViewModel.movieSuggestionsResponseEntity.data!.movies!.length}");
+            print("RESULT LENGTH ${detailsViewModel.movieSuggestionsResponseEntity.data!.movies?[1].mediumCoverImage}");
             return Scaffold(
               body: SingleChildScrollView(
                 child: Column(
@@ -222,6 +235,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             itemCount: screenshotImages.length,
                           ),
                           SizedBox(height: height * 0.02),
+                          Text(
+                            AppLocalizations.of(context)!.similar,
+                            style: AppStyle.white24Bold,
+                          ),
                           Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: width * 0.03),
@@ -236,7 +253,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       5, // Spacing between columns
                                   mainAxisSpacing: 5,
                                 ),
-                                itemCount: 4,
+                                itemCount: detailsViewModel.movieSuggestionsResponseEntity.data!.movies!.length,//similarList.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: height * .5,
@@ -250,10 +267,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                               BorderRadius.circular(16),
                                         ),
                                         clipBehavior: Clip.antiAlias,
-                                        child: Image.asset(
-                                            AppImages.onBoarding6,
-                                            fit: BoxFit.fitHeight,
-                                            height: height * .5),
+                                        child: CachedNetworkImage(
+                                          imageUrl: detailsViewModel.movieSuggestionsResponseEntity.data!.movies?[index].mediumCoverImage??
+                                              'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                                          placeholder: (context, url) => Center(
+                                              child:
+                                              Lottie.asset('assets/lottie/loading.json')),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                          height: height * .7,
+                                        ),
+
                                       ),
                                       Container(
                                         margin: EdgeInsetsDirectional.symmetric(

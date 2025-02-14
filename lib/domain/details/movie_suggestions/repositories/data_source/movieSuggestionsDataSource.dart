@@ -3,6 +3,5 @@ import 'package:movie_app/core/errors/failures.dart';
 import '../../entities/movieSuggestionsResponseEntity.dart';
 
 abstract class MovieSuggestionsDataSource {
-  Future<Either<Failures, MovieSuggestionsResponseEntity>> getMovieSuggestions();
-
+  Future<Either<Failures, List<MovieSuggestionsResponseEntity>>> getMovieSuggestions(int movieID);
 }

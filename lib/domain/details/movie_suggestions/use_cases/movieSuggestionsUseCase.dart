@@ -9,7 +9,7 @@ class MovieSuggestionsUseCase {
 
   MovieSuggestionsUseCase({required this.movieSuggestionsRepository});
 
-  Future<Either<Failures, MovieSuggestionsResponseEntity>> invoke(int movieID) {
+  Future<Either<Failures, List<MovieSuggestionsResponseEntity>>> invoke(int movieID) {
     return movieSuggestionsRepository.getMovieSuggestions(movieID);
   }
 }
