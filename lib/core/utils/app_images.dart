@@ -36,6 +36,7 @@ class AppImages{
   static const String profileYellow="assets/images/Profile_yellow.png";
   static const String route="assets/images/routeGold.png";
   static const String saveIcon="assets/images/save_icon.png";
+  static const String unsavedIcon="assets/images/unsaved_ic.png";
   static const String searchWhite="assets/images/search_white.png";
   static const String searchYellow="assets/images/search_yellow.png";
   static const String splashScreen="assets/images/splash_screen.png";

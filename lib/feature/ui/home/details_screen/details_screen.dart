@@ -4,12 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
+import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:movie_app/feature/custom_widgets/toast.dart';
+
+import 'cubit/details_state.dart';
+import 'cubit/details_view_model.dart';
+
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
 import 'package:movie_app/feature/ui/home/details_screen/movies_suggestions/cubit/movieSuggestionsViewModel.dart';
@@ -24,6 +32,7 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
+
   @override
   Widget build(BuildContext context) {
     List<String?> screenshotImages = [
@@ -62,18 +71,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     Stack(
                       children: [
                         CachedNetworkImage(
-                          imageUrl: detailsViewModel.detailsResponseEntity.data!
-                                  .movie!.largeCoverImage ??
-                              'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
-                          placeholder: (context, url) => Center(
-                              child:
-                                  Lottie.asset('assets/lottie/loading.json')),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+                          imageUrl: detailsViewModel.detailsResponseEntity.data!.movie!.medium_cover_image ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                          placeholder: (context, url) => Center(child: Lottie.asset('assets/lottie/loading.json')),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
                           height: height * .7,
                         ),
                         Positioned(
-                          top: height * 0.1,
+                          top: height * 0.05,
                           child: IconButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
@@ -84,9 +88,25 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           top: height * 0.11,
                           right: width * 0.03,
                           child: InkWell(
-                            child: Image.asset(AppImages.saveIcon),
+                            child:detailsViewModel.toggleSavedIcon.getToggleIcon()==0?Icon(Icons.save):
+                            Image.asset(AppImages.saveIcon),
                             onTap: () {
-                              // الكود الخاص بالحفظ
+                              if(detailsViewModel.toggleSavedIcon.getToggleIcon()==0) {
+                                detailsViewModel.savedMovie(
+                                    detailsViewModel.detailsResponseEntity.data!
+                                        .movie!.id!,
+                                    detailsViewModel.detailsResponseEntity.data!
+                                        .movie!);
+                                ToastHelper.showSuccessToast(
+                                    "Saved Successfully");
+                              }else{
+                                detailsViewModel.deleteMovie(
+                                    detailsViewModel.detailsResponseEntity.data!
+                                        .movie!.id!,);
+                                ToastHelper.showSuccessToast(
+                                    "UnSaved Successfully");
+                              }
+                              // Navigator.pushReplacementNamed(context, AppRoutes.homeRoute);
                             },
                           ),
                         ),
@@ -107,6 +127,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             detailsViewModel
                                     .detailsResponseEntity.data!.movie!.title ??
                                 "No title",
+                            detailsViewModel.detailsResponseEntity.data!.movie!.description_intro ?? "",
                             style: AppStyle.white24Bold,
                           ),
                         ),

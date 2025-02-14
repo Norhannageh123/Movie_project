@@ -75,9 +75,11 @@ import '../../feature/ui/auth/reset_password/reset_password_screen.dart'
     as _i850;
 import '../../feature/ui/home/details_screen/cubit/details_view_model.dart'
     as _i731;
+import '../../feature/ui/home/details_screen/cubit/toggle_icon.dart' as _i936;
 import '../../feature/ui/home/tabs/home_tab/cubit/home_view_model.dart' as _i60;
 import '../../feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart'
     as _i16;
+import '../cache/cache_helper.dart' as _i144;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -90,6 +92,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i144.CacheHelper>(() => _i144.CacheHelper());
     gh.factory<_i914.ResetRemoteDataSource>(
         () => _i870.ResetRemoteDataSourceImpl());
     gh.factory<_i850.ResetPasswordScreen>(
@@ -98,6 +101,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i195.RegisterRemoteDataSourceImpl());
     gh.factory<_i649.DetailsLocalDataSource>(
         () => _i555.DetailsLocalDataSourceImpl());
+    gh.factory<_i936.ToggleIcon>(
+        () => _i936.ToggleIcon(gh<_i144.CacheHelper>()));
     gh.factory<_i511.EditeProfileDataSource>(
         () => _i885.EditeProfileDataSourceImpl());
     gh.factory<_i477.DetailsRemoteDataSource>(
@@ -106,10 +111,6 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1063.LoginRemoteDataSourceImpl());
     gh.factory<_i249.HomeRemoteDataSource>(
         () => _i541.HomeRemoteDataSourceImpl());
-    gh.factory<_i949.DetailsRepo>(() => _i63.DetailsRepoImpl(
-        detailsRemoteDataSource: gh<_i477.DetailsRemoteDataSource>()));
-    gh.factory<_i15.DetailsUseCase>(
-        () => _i15.DetailsUseCase(detailsRepo: gh<_i949.DetailsRepo>()));
     gh.factory<_i857.RegisterRepository>(() => _i7.RegisterRepositoryImpl(
         registerRemoteDataSource: gh<_i100.RegisterRemoteDataSource>()));
     gh.factory<_i429.LoginRepository>(() => _i335.LoginRepositoryImpl(
@@ -119,6 +120,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i548.EditeProfileRepository>(() =>
         _i673.EditeProfileRepositoryImpl(
             editeProfileDataSourceImpl: gh<_i511.EditeProfileDataSource>()));
+    gh.factory<_i949.DetailsRepo>(() => _i63.DetailsRepoImpl(
+          detailsRemoteDataSource: gh<_i477.DetailsRemoteDataSource>(),
+          detailsLocalDataSource: gh<_i649.DetailsLocalDataSource>(),
+        ));
     gh.factory<_i545.RegisterUseCase>(() => _i545.RegisterUseCase(
         registerRepository: gh<_i857.RegisterRepository>()));
     gh.factory<_i260.HomeRepo>(() => _i985.HomeRepoImpl(
@@ -127,22 +132,25 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i631.LoginUseCase(loginRepository: gh<_i429.LoginRepository>()));
     gh.factory<_i339.ResetUseCase>(() =>
         _i339.ResetUseCase(resetRepository: gh<_i1021.ResetRepository>()));
-    gh.factory<_i731.DetailsViewModel>(() =>
-        _i731.DetailsViewModel(detailsUseCase: gh<_i15.DetailsUseCase>()));
     gh.factory<_i756.HomeUseCase>(
         () => _i756.HomeUseCase(homeRepo: gh<_i260.HomeRepo>()));
     gh.factory<_i552.RegisterViewModel>(() =>
         _i552.RegisterViewModel(registerUseCase: gh<_i545.RegisterUseCase>()));
+    gh.factory<_i15.DetailsUseCase>(
+        () => _i15.DetailsUseCase(detailsRepo: gh<_i949.DetailsRepo>()));
     gh.factory<_i60.HomeViewModel>(
         () => _i60.HomeViewModel(homeUseCase: gh<_i756.HomeUseCase>()));
     gh.factory<_i912.EditeProfileUseCase>(() => _i912.EditeProfileUseCase(
         editeProfileRepository: gh<_i548.EditeProfileRepository>()));
+    gh.factory<_i1039.ResetViewModel>(
+        () => _i1039.ResetViewModel(resetUseCase: gh<_i339.ResetUseCase>()));
+    gh.factory<_i731.DetailsViewModel>(() =>
+        _i731.DetailsViewModel(detailsUseCase: gh<_i15.DetailsUseCase>()));
     gh.factory<_i16.EditeProfileViewModel>(() => _i16.EditeProfileViewModel(
           editeProfileUseCase: gh<_i912.EditeProfileUseCase>(),
           tokenManager: gh<_i734.TokenManager>(),
+          detailsUseCase: gh<_i15.DetailsUseCase>(),
         ));
-    gh.factory<_i1039.ResetViewModel>(
-        () => _i1039.ResetViewModel(resetUseCase: gh<_i339.ResetUseCase>()));
     gh.factory<_i761.LoginViewModel>(() => _i761.LoginViewModel(
           loginUseCase: gh<_i631.LoginUseCase>(),
           editeProfileViewModel: gh<_i16.EditeProfileViewModel>(),

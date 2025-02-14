@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'details_response_entity.g.dart';
@@ -35,7 +36,8 @@ class DataDetailsEntity {
 }
 
 @JsonSerializable()
-class MovieDetailsEntity {
+@HiveType(typeId: 1)
+class MovieDetailsEntity extends HiveObject {
   MovieDetailsEntity({
     this.id,
     this.url,
@@ -48,57 +50,64 @@ class MovieDetailsEntity {
     this.rating,
     this.runtime,
     this.genres,
-    this.likeCount,
-    this.descriptionIntro,
-    this.descriptionFull,
+    this.like_count,
+    this.description_intro,
+    this.description_full,
     this.ytTrailerCode,
     this.language,
     this.mpaRating,
-    this.backgroundImage,
-    this.backgroundImageOriginal,
-    this.smallCoverImage,
-    this.mediumCoverImage,
-    this.largeCoverImage,
-    this.mediumScreenshotImage1,
-    this.mediumScreenshotImage2,
-    this.mediumScreenshotImage3,
-    this.largeScreenshotImage1,
-    this.largeScreenshotImage2,
-    this.largeScreenshotImage3,
+    this.background_image,
+    this.background_image_original,
+    this.small_cover_image,
+    this.medium_cover_image,
+    this.large_cover_image,
+    this.medium_screenshot_image1,
+    this.medium_screenshot_image2,
+    this.medium_screenshot_image3,
+    this.large_screenshot_image1,
+    this.large_screenshot_image2,
+    this.large_screenshot_image3,
     this.cast,
     this.torrents,
     this.dateUploaded,
     this.dateUploadedUnix,
   });
-
+  @HiveField(1)
   int? id;
   String? url;
   String? imdbCode;
+  @HiveField(2)
   String? title;
   String? titleEnglish;
   String? titleLong;
   String? slug;
+  @HiveField(3)
   int? year;
+  @HiveField(4)
   double? rating;
+  @HiveField(10)
   int? runtime;
   List<String>? genres;
-  int? likeCount;
-  String? descriptionIntro;
-  String? descriptionFull;
+  @HiveField(6)
+  int? like_count;
+  String? description_intro;
+  @HiveField(7)
+  String? description_full;
   String? ytTrailerCode;
   String? language;
   String? mpaRating;
-  String? backgroundImage;
-  String? backgroundImageOriginal;
-  String? smallCoverImage;
-  String? mediumCoverImage;
-  String? largeCoverImage;
-  String? mediumScreenshotImage1;
-  String? mediumScreenshotImage2;
-  String? mediumScreenshotImage3;
-  String? largeScreenshotImage1;
-  String? largeScreenshotImage2;
-  String? largeScreenshotImage3;
+  String? background_image;
+  String? background_image_original;
+  String? small_cover_image;
+  @HiveField(8)
+  String? medium_cover_image;
+  String? large_cover_image;
+  String? medium_screenshot_image1;
+  String? medium_screenshot_image2;
+  String? medium_screenshot_image3;
+  String? large_screenshot_image1;
+  String? large_screenshot_image2;
+  String? large_screenshot_image3;
   List<CastDetailsEntity>? cast;
   List<TorrentsDetailsEntity>? torrents;
   String? dateUploaded;
@@ -174,15 +183,15 @@ class TorrentsDetailsEntity {
 class CastDetailsEntity {
   CastDetailsEntity({
     this.name,
-    this.characterName,
+    this.character_name,
     this.urlSmallImage,
-    this.imdbCode,
+    this.imdb_code,
   });
 
   String? name;
-  String? characterName;
+  String? character_name;
   String? urlSmallImage;
-  String? imdbCode;
+  String? imdb_code;
 
   factory CastDetailsEntity.fromJson(Map<String, dynamic> json) =>
       _$CastDetailsEntityFromJson(json);

@@ -10,4 +10,5 @@ class AppRoutes{
   static const String resetPasswordRoute="reset_password";
 
   static const String searchTab = "searchTab";
+  static const String profileRoute="profile";
 }
