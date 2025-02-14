@@ -65,5 +65,7 @@
     "oldPassword":"Old Password",
     "newPassword":"New Password",
     "updatePassword":"Update Password",
-    "updatedSuccessfully":"Updated Successfully"
+    "updatedSuccessfully":"Updated Successfully",
+    "character": "Character"
+
 }

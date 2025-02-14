@@ -65,6 +65,7 @@
     "oldPassword":"كلمة السر القديمة",
     "newPassword":"كلمة السر الجديدة",
     "updatePassword":"تحديث كلمة السر",
-    "updatedSuccessfully":"تم التحديث"
+    "updatedSuccessfully":"تم التحديث",
+    "character":"الشخصية"
 
 }

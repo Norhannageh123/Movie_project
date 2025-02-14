@@ -11,6 +11,7 @@ import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
+import '../../../custom_widgets/ReusableCastWidget.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -205,6 +206,75 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           SizedBox(
                             height: height * .01,
                           ),
+                          Text(
+                            AppLocalizations.of(context)!.summary,
+                            style: AppStyle.white24Bold,
+                          ),
+                          SizedBox(
+                            height: height * .01,
+                          ),
+                          Text(
+                            detailsViewModel.detailsResponseEntity
+                                .data!.movie!.descriptionFull??'No Description Available',
+                            style: AppStyle.white16Regular,
+                          ),
+                          SizedBox(
+                            height: height * .01,
+                          ),
+                          Text(
+                            AppLocalizations.of(context)!.cast,
+                            style: AppStyle.white24Bold,
+                          ),
+
+                          // TextFormField(
+                          //  decoration: InputDecoration(
+                          //    enabledBorder: OutlineInputBorder(
+                          //     borderRadius:BorderRadius.circular(16),
+                          //   ),
+                          //    prefixIcon: CachedNetworkImage(
+                          //       imageUrl: detailsViewModel.detailsResponseEntity.data!
+                          //             .movie!.smallCoverImage ??
+                          //            'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                          //        scale: 6,)
+                          //),
+                          // ),
+                          SizedBox(
+                            height: height * .01,
+                          ),
+                          SizedBox(
+                            child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ReusableCastWidget(index: index,);
+                                },
+                                separatorBuilder: (context, index) {
+                                  return SizedBox(
+                                    height: height * .01,
+                                  );
+                                },
+                                itemCount: 3),
+                          ),
+                          SizedBox(
+                            height: height * .01,
+                          ),
+                          // SizedBox(
+                          //   child: ListView.separated(
+                          //     padding: EdgeInsets.zero,
+                          //       shrinkWrap: true,
+                          //       physics: NeverScrollableScrollPhysics(),
+                          //       itemBuilder: itemBuilder,
+                          //       separatorBuilder: (context, index) {
+                          //         return SizedBox(
+                          //           height: height * .02,
+                          //         );
+                          //       },
+                          //       itemCount: itemCount),
+                          // ),
+                          SizedBox(
+                            height: height * .01,
+                          ),
                           //screen shots ui
                           Text(
                             AppLocalizations.of(context)!.genres,
@@ -219,7 +289,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               padding: EdgeInsets.zero,
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
-                              itemCount: detailsViewModel.detailsResponseEntity.data!.movie!.genres!.length??1,
+                              itemCount: detailsViewModel.detailsResponseEntity
+                                      .data!.movie!.genres!.length ??
+                                  1,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
@@ -240,7 +312,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      detailsViewModel.detailsResponseEntity.data!.movie!.genres![index],
+                                      detailsViewModel.detailsResponseEntity
+                                          .data!.movie!.genres![index],
                                       style: AppStyle.white14Regular,
                                     ),
                                   ),
