@@ -6,6 +6,7 @@ import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/available_slider.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/cubit/home_state.dart';
 import 'package:movie_app/feature/ui/home/tabs/home_tab/cubit/home_view_model.dart';
@@ -99,8 +100,13 @@ class _HomeTabState extends State<HomeTab> {
                 itemCount: homeViewModel.moviesList.data?.movies?.length??0,
                 itemBuilder:
                     (BuildContext context, int itemIndex, int pageViewIndex) {
-                      var movie = homeViewModel.moviesList.data?.movies?[itemIndex];
-                      return AvailableSlider(moviesList: movie!,);
+                      MoviesEntity? movie = homeViewModel.moviesList.data?.movies?[itemIndex];
+                      if(movie!=null){
+                        return AvailableSlider(moviesList: movie,);
+                      }else{
+                        return SizedBox();
+                      }
+
                     },
                 options: CarouselOptions(
                     height: height * .4,
@@ -163,10 +169,20 @@ class _HomeTabState extends State<HomeTab> {
                             scrollDirection: Axis.horizontal,
                             padding: EdgeInsets.zero,
                             itemBuilder: (context, index) {
-                              print(index);
-                              return SizedBox(
-                                  width: width * 0.35,
-                                  child: WatchNowSlider(moviesListEntity: homeViewModel.moviesFilterGenreList, index: index,));
+                              if (homeViewModel.moviesFilterGenreList.data !=
+                                  null) {
+                                print(index);
+                                return SizedBox(
+                                    width: width * 0.35,
+                                    child:
+
+                                    WatchNowSlider(
+                                      moviesListEntity: homeViewModel
+                                          .moviesFilterGenreList,
+                                      index: index,));
+                              }else{
+                                return SizedBox();
+                              }
                             },
                             separatorBuilder: (context, index) {
                               return SizedBox(width: width * 0.04);
