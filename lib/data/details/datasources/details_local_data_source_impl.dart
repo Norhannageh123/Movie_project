@@ -49,5 +49,10 @@ class DetailsLocalDataSourceImpl implements DetailsLocalDataSource {
     await _initBox(); // Ensure the box is initialized
     return _movieBox!.values.toList();
   }
+  @override
+  Future<void> deleteMovieFromCaching(int id) async {
+    await _initBox(); // Ensure the box is initialized
+    await _movieBox!.delete(id);
+  }
 }
 

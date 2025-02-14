@@ -26,6 +26,7 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
 
+
   @override
   Widget build(BuildContext context) {
 
@@ -73,10 +74,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           top: height * 0.06,
                           right: width * 0.03,
                           child: InkWell(
-                            child: Image.asset(AppImages.saveIcon),
+                            child:detailsViewModel.toggleSavedIcon.getToggleIcon()==0?Icon(Icons.save):
+                            Image.asset(AppImages.saveIcon),
                             onTap: () {
-                              detailsViewModel.savedMovie(detailsViewModel.detailsResponseEntity.data!.movie!.id!, detailsViewModel.detailsResponseEntity.data!.movie!);
-                              ToastHelper.showSuccessToast("Saved Successfully");
+                              if(detailsViewModel.toggleSavedIcon.getToggleIcon()==0) {
+                                detailsViewModel.savedMovie(
+                                    detailsViewModel.detailsResponseEntity.data!
+                                        .movie!.id!,
+                                    detailsViewModel.detailsResponseEntity.data!
+                                        .movie!);
+                                ToastHelper.showSuccessToast(
+                                    "Saved Successfully");
+                              }else{
+                                detailsViewModel.deleteMovie(
+                                    detailsViewModel.detailsResponseEntity.data!
+                                        .movie!.id!,);
+                                ToastHelper.showSuccessToast(
+                                    "UnSaved Successfully");
+                              }
                               // Navigator.pushReplacementNamed(context, AppRoutes.homeRoute);
                             },
                           ),

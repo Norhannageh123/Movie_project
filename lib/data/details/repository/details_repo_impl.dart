@@ -39,4 +39,10 @@ class DetailsRepoImpl implements DetailsRepo{
     return detailsLocalDataSource.getCachingMovie();
   }
 
+  @override
+  Future<void> deleteMovieFromCaching(int id) async {
+    detailsLocalDataSource.deleteMovieFromCaching(id);
+  }
+
+
 }

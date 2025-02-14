@@ -12,5 +12,6 @@ abstract class DetailsRepo{
     bool withImage = true,
     bool withCast = true,
   });
+  void deleteMovieFromCaching(int id);
 
 }

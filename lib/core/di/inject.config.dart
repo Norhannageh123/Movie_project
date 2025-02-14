@@ -75,9 +75,11 @@ import '../../feature/ui/auth/reset_password/reset_password_screen.dart'
     as _i850;
 import '../../feature/ui/home/details_screen/cubit/details_view_model.dart'
     as _i731;
+import '../../feature/ui/home/details_screen/cubit/toggle_icon.dart' as _i936;
 import '../../feature/ui/home/tabs/home_tab/cubit/home_view_model.dart' as _i60;
 import '../../feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart'
     as _i16;
+import '../cache/cache_helper.dart' as _i144;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -90,6 +92,7 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
+    gh.factory<_i144.CacheHelper>(() => _i144.CacheHelper());
     gh.factory<_i914.ResetRemoteDataSource>(
         () => _i870.ResetRemoteDataSourceImpl());
     gh.factory<_i850.ResetPasswordScreen>(
@@ -98,6 +101,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i195.RegisterRemoteDataSourceImpl());
     gh.factory<_i649.DetailsLocalDataSource>(
         () => _i555.DetailsLocalDataSourceImpl());
+    gh.factory<_i936.ToggleIcon>(
+        () => _i936.ToggleIcon(gh<_i144.CacheHelper>()));
     gh.factory<_i511.EditeProfileDataSource>(
         () => _i885.EditeProfileDataSourceImpl());
     gh.factory<_i477.DetailsRemoteDataSource>(

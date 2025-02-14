@@ -4,4 +4,5 @@ abstract class DetailsLocalDataSource{
   void cachingMovie(int id,MovieDetailsEntity movieDetailsEntity);
   ///return Movie Response
   Future<List<MovieDetailsEntity>> getCachingMovie();
+  void deleteMovieFromCaching(int id);
 }

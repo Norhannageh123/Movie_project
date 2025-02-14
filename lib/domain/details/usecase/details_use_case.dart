@@ -27,5 +27,8 @@ class DetailsUseCase{
     withCast: withCast,
   );
 }
+  void deleteMovieFromCaching(int id){
+    detailsRepo.deleteMovieFromCaching(id);
+  }
 
 }
