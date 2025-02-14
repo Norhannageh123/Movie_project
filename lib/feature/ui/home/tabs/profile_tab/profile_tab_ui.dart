@@ -224,7 +224,7 @@ class _ProfiletabState extends State<Profiletab> {
                                   itemBuilder: (context, index) {
                                     return StackedImageAndRating(imageUrl: editeProfileViewModel
                                         .listCachedMovie[index]
-                                        .smallCoverImage, rating: editeProfileViewModel.listCachedMovie[index].rating.toString(), onItemClicked:()=> onItemClicked());
+                                        .medium_cover_image, rating: editeProfileViewModel.listCachedMovie[index].rating.toString(), onItemClicked:()=> onItemClicked());
                                   },
                                   itemCount: editeProfileViewModel
                                       .listCachedMovie.length,

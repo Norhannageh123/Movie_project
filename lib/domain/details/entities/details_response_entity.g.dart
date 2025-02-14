@@ -22,9 +22,9 @@ class MovieDetailsEntityAdapter extends TypeAdapter<MovieDetailsEntity> {
       year: fields[3] as int?,
       rating: fields[4] as double?,
       runtime: fields[10] as int?,
-      likeCount: fields[6] as int?,
-      descriptionFull: fields[7] as String?,
-      backgroundImage: fields[8] as String?,
+      like_count: fields[6] as int?,
+      description_full: fields[7] as String?,
+      medium_cover_image: fields[8] as String?,
     );
   }
 
@@ -43,11 +43,11 @@ class MovieDetailsEntityAdapter extends TypeAdapter<MovieDetailsEntity> {
       ..writeByte(10)
       ..write(obj.runtime)
       ..writeByte(6)
-      ..write(obj.likeCount)
+      ..write(obj.like_count)
       ..writeByte(7)
-      ..write(obj.descriptionFull)
+      ..write(obj.description_full)
       ..writeByte(8)
-      ..write(obj.backgroundImage);
+      ..write(obj.medium_cover_image);
   }
 
   @override
@@ -113,23 +113,23 @@ MovieDetailsEntity _$MovieDetailsEntityFromJson(Map<String, dynamic> json) =>
       runtime: (json['runtime'] as num?)?.toInt(),
       genres:
           (json['genres'] as List<dynamic>?)?.map((e) => e as String).toList(),
-      likeCount: (json['likeCount'] as num?)?.toInt(),
-      descriptionIntro: json['descriptionIntro'] as String?,
-      descriptionFull: json['descriptionFull'] as String?,
+      like_count: (json['like_count'] as num?)?.toInt(),
+      description_intro: json['description_intro'] as String?,
+      description_full: json['description_full'] as String?,
       ytTrailerCode: json['ytTrailerCode'] as String?,
       language: json['language'] as String?,
       mpaRating: json['mpaRating'] as String?,
-      backgroundImage: json['backgroundImage'] as String?,
-      backgroundImageOriginal: json['backgroundImageOriginal'] as String?,
-      smallCoverImage: json['smallCoverImage'] as String?,
-      mediumCoverImage: json['mediumCoverImage'] as String?,
-      largeCoverImage: json['largeCoverImage'] as String?,
-      mediumScreenshotImage1: json['mediumScreenshotImage1'] as String?,
-      mediumScreenshotImage2: json['mediumScreenshotImage2'] as String?,
-      mediumScreenshotImage3: json['mediumScreenshotImage3'] as String?,
-      largeScreenshotImage1: json['largeScreenshotImage1'] as String?,
-      largeScreenshotImage2: json['largeScreenshotImage2'] as String?,
-      largeScreenshotImage3: json['largeScreenshotImage3'] as String?,
+      background_image: json['background_image'] as String?,
+      background_image_original: json['background_image_original'] as String?,
+      small_cover_image: json['small_cover_image'] as String?,
+      medium_cover_image: json['medium_cover_image'] as String?,
+      large_cover_image: json['large_cover_image'] as String?,
+      medium_screenshot_image1: json['medium_screenshot_image1'] as String?,
+      medium_screenshot_image2: json['medium_screenshot_image2'] as String?,
+      medium_screenshot_image3: json['medium_screenshot_image3'] as String?,
+      large_screenshot_image1: json['large_screenshot_image1'] as String?,
+      large_screenshot_image2: json['large_screenshot_image2'] as String?,
+      large_screenshot_image3: json['large_screenshot_image3'] as String?,
       cast: (json['cast'] as List<dynamic>?)
           ?.map((e) => CastDetailsEntity.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -154,23 +154,23 @@ Map<String, dynamic> _$MovieDetailsEntityToJson(MovieDetailsEntity instance) =>
       'rating': instance.rating,
       'runtime': instance.runtime,
       'genres': instance.genres,
-      'likeCount': instance.likeCount,
-      'descriptionIntro': instance.descriptionIntro,
-      'descriptionFull': instance.descriptionFull,
+      'like_count': instance.like_count,
+      'description_intro': instance.description_intro,
+      'description_full': instance.description_full,
       'ytTrailerCode': instance.ytTrailerCode,
       'language': instance.language,
       'mpaRating': instance.mpaRating,
-      'backgroundImage': instance.backgroundImage,
-      'backgroundImageOriginal': instance.backgroundImageOriginal,
-      'smallCoverImage': instance.smallCoverImage,
-      'mediumCoverImage': instance.mediumCoverImage,
-      'largeCoverImage': instance.largeCoverImage,
-      'mediumScreenshotImage1': instance.mediumScreenshotImage1,
-      'mediumScreenshotImage2': instance.mediumScreenshotImage2,
-      'mediumScreenshotImage3': instance.mediumScreenshotImage3,
-      'largeScreenshotImage1': instance.largeScreenshotImage1,
-      'largeScreenshotImage2': instance.largeScreenshotImage2,
-      'largeScreenshotImage3': instance.largeScreenshotImage3,
+      'background_image': instance.background_image,
+      'background_image_original': instance.background_image_original,
+      'small_cover_image': instance.small_cover_image,
+      'medium_cover_image': instance.medium_cover_image,
+      'large_cover_image': instance.large_cover_image,
+      'medium_screenshot_image1': instance.medium_screenshot_image1,
+      'medium_screenshot_image2': instance.medium_screenshot_image2,
+      'medium_screenshot_image3': instance.medium_screenshot_image3,
+      'large_screenshot_image1': instance.large_screenshot_image1,
+      'large_screenshot_image2': instance.large_screenshot_image2,
+      'large_screenshot_image3': instance.large_screenshot_image3,
       'cast': instance.cast,
       'torrents': instance.torrents,
       'dateUploaded': instance.dateUploaded,
@@ -234,15 +234,15 @@ Map<String, dynamic> _$TorrentsDetailsEntityToJson(
 CastDetailsEntity _$CastDetailsEntityFromJson(Map<String, dynamic> json) =>
     CastDetailsEntity(
       name: json['name'] as String?,
-      characterName: json['characterName'] as String?,
+      character_name: json['character_name'] as String?,
       urlSmallImage: json['urlSmallImage'] as String?,
-      imdbCode: json['imdbCode'] as String?,
+      imdb_code: json['imdb_code'] as String?,
     );
 
 Map<String, dynamic> _$CastDetailsEntityToJson(CastDetailsEntity instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'characterName': instance.characterName,
+      'character_name': instance.character_name,
       'urlSmallImage': instance.urlSmallImage,
-      'imdbCode': instance.imdbCode,
+      'imdb_code': instance.imdb_code,
     };
