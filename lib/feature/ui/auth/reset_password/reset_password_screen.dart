@@ -88,7 +88,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   Image.asset(AppImages.forgetPassword),
                   CustomTextField(
                     controller: viewModel.newPasswordController,
-                    hintText: AppLocalizations.of(context)!.confirm_password,
+                    hintText: AppLocalizations.of(context)!.oldPassword,
                     prefixIcon: Image(image: AssetImage(AppImages.passwordIcon)),
                     hintStyle: AppStyle.white16Regular,
                     style: AppStyle.white16Regular,
@@ -116,7 +116,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   ),
                   CustomTextField(
                     controller: viewModel.oldPasswordController,
-                    hintText: AppLocalizations.of(context)!.confirm_password,
+                    hintText: AppLocalizations.of(context)!.newPassword,
                     prefixIcon: Image(image: AssetImage(AppImages.passwordIcon)),
                     hintStyle: AppStyle.white16Regular,
                     style: AppStyle.white16Regular,
