@@ -10,8 +10,12 @@ import '../movies_suggestions/cubit/movies_suggestions_state.dart';
 @injectable
 class DetailsViewModel extends Cubit<DetailsState>{
    DetailsUseCase detailsUseCase;
-   DetailsViewModel({required this.detailsUseCase, required this.movieSuggestionsUseCase}):super(DetailsLoadingState());
+   MovieSuggestionsUseCase  movieSuggestionsUseCase;
+   DetailsViewModel({required this.detailsUseCase, required this.movieSuggestionsUseCase}):super(DetailsInitialState());
    DetailsResponseEntity detailsResponseEntity=DetailsResponseEntity();
+   //MovieSuggestionsResponseEntity movieSuggestionsResponseEntity = MovieSuggestionsResponseEntity();
+   List<MovieSuggestionsEntity>? moviesSuggestionsList;
+
    void getMovieDetails(int movieId)async {
      print(detailsResponseEntity.status);
     emit(DetailsLoadingState());
@@ -24,10 +28,6 @@ class DetailsViewModel extends Cubit<DetailsState>{
         });
   }
 
-   MovieSuggestionsUseCase  movieSuggestionsUseCase;
-   MovieSuggestionsResponseEntity movieSuggestionsResponseEntity = MovieSuggestionsResponseEntity();
-   //List<MovieSuggestionsResponseEntity> moviesSuggestionsList = [];
-
    void getSuggestionsMovies(int movieID)async {
      emit(DetailsLoadingState());
      var either = await movieSuggestionsUseCase.invoke(movieID);
@@ -36,8 +36,9 @@ class DetailsViewModel extends Cubit<DetailsState>{
            emit(DetailsErrorState(failures: error));
          },
              (response){
-           //moviesSuggestionsList = response;
-           emit(MoviesSuggestionsSuccessState( movieSuggestionsResponseEntity: response));
+           moviesSuggestionsList = response.data?.movies;
+           if (moviesSuggestionsList != null){
+           emit(MoviesSuggestionsSuccessState( movieSuggestionsResponseEntity: response));}
          }
      );
    }

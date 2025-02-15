@@ -6,13 +6,14 @@ import '../../../../domain/details/movie_suggestions/repositories/data_source/mo
 import '../../../../domain/details/movie_suggestions/repositories/repository/movieSuggestionsRepositories.dart';
 @Injectable(as: MovieSuggestionsRepository)
 class MovieSuggestionsRepositoryImpl implements MovieSuggestionsRepository{
-  final MovieSuggestionsDataSource movieSuggestionsDataSourceImpl;
+  MovieSuggestionsDataSource movieSuggestionsDataSourceImpl;
   MovieSuggestionsRepositoryImpl({required this.movieSuggestionsDataSourceImpl});
 
   @override
-  Future<Either<Failures, List<MovieSuggestionsResponseEntity>>> getMovieSuggestions(movieID) async{
+  Future<Either<Failures, MovieSuggestionsResponseEntity>> getMovieSuggestions(movieID) async{
     var either = await movieSuggestionsDataSourceImpl.
     getMovieSuggestions(movieID);
-    return either.fold((error) => Left(error), (response) => Right(response));
+    return either.fold((error) => Left(error),
+            (response) => Right(response));
   }
 }

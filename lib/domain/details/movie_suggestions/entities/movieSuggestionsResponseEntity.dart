@@ -10,8 +10,6 @@ class MovieSuggestionsResponseEntity {
   String? statusMessage;
   MoviesSuggestionsDataEntity? data;
   MoviesSuggestionsMetaEntity? meta;
-
-
 }
 
 class MoviesSuggestionsMetaEntity {

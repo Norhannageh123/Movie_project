@@ -4,17 +4,27 @@ import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import '../../../../../domain/details/movie_suggestions/entities/movieSuggestionsResponseEntity.dart';
 
 abstract class DetailsState {}
+
+class DetailsInitialState extends DetailsState{}
+
 class DetailsLoadingState extends DetailsState{}
+
 class DetailsErrorState extends DetailsState{
   Failures failures;
   DetailsErrorState({required this.failures});
 }
+
+class MoviesSuggestionsErrorState extends DetailsState{
+  Failures failures;
+  MoviesSuggestionsErrorState({required this.failures});
+}
+
 class DetailsSuccessState extends DetailsState{
   DetailsResponseEntity detailsResponseEntity;
   DetailsSuccessState({required this.detailsResponseEntity});
 }
 
 class MoviesSuggestionsSuccessState extends DetailsState {
-  List <MovieSuggestionsResponseEntity> movieSuggestionsResponseEntity ;
+  MovieSuggestionsResponseEntity movieSuggestionsResponseEntity ;
   MoviesSuggestionsSuccessState( {required this.movieSuggestionsResponseEntity});
 }

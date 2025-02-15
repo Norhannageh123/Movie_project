@@ -8,12 +8,10 @@ import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
-import 'package:movie_app/domain/details/movie_suggestions/entities/movieSuggestionsResponseEntity.dart';
 import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
-import 'package:movie_app/feature/ui/home/details_screen/movies_suggestions/cubit/movieSuggestionsViewModel.dart';
 import 'package:movie_app/feature/ui/home/details_screen/web_view_screen.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -47,14 +45,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
     final arguments = (ModalRoute.of(context)?.settings.arguments) as int;
     print("Movie id $arguments");
-    detailsViewModel.getMovieDetails(arguments);
-    detailsViewModel.getSuggestionsMovies(arguments);
+    //detailsViewModel.getMovieDetails(arguments);
+    //detailsViewModel.getSuggestionsMovies(arguments);
 
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
     return BlocProvider(
-      create: (_) => detailsViewModel,
+      create: (context) =>
+      detailsViewModel
+        ..getMovieDetails(arguments)
+        ..getSuggestionsMovies(arguments),
       child: BlocBuilder<DetailsViewModel, DetailsState>(
         builder: (context, state) {
           if (state is DetailsErrorState) {
@@ -66,8 +67,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: Lottie.asset('assets/lottie/loading.json'),
             );
           } else if (state is DetailsSuccessState) {
-            print("RESULT LENGTH ${detailsViewModel.movieSuggestionsResponseEntity.data!.movies!.length}");
-            print("RESULT LENGTH ${detailsViewModel.movieSuggestionsResponseEntity.data!.movies?[1].mediumCoverImage}");
+            print("RESULT LENGTH ${detailsViewModel.moviesSuggestionsList?.length}");
+            print("RESULT IMAGE ${detailsViewModel.moviesSuggestionsList?[1].mediumCoverImage}");
             return Scaffold(
               body: SingleChildScrollView(
                 child: Column(
@@ -253,7 +254,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                       5, // Spacing between columns
                                   mainAxisSpacing: 5,
                                 ),
-                                itemCount: detailsViewModel.movieSuggestionsResponseEntity.data!.movies!.length,//similarList.length,
+                                itemCount: detailsViewModel.moviesSuggestionsList?.length ?? 0,//similarList.length,
                                 itemBuilder: (context, index) {
                                   return Container(
                                     height: height * .5,
@@ -268,7 +269,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ),
                                         clipBehavior: Clip.antiAlias,
                                         child: CachedNetworkImage(
-                                          imageUrl: detailsViewModel.movieSuggestionsResponseEntity.data!.movies?[index].mediumCoverImage??
+                                          imageUrl: detailsViewModel.moviesSuggestionsList?[index].mediumCoverImage??
                                               'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                                           placeholder: (context, url) => Center(
                                               child:

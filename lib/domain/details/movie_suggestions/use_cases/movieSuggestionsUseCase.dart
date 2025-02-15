@@ -5,11 +5,10 @@ import '../entities/movieSuggestionsResponseEntity.dart';
 import '../repositories/repository/movieSuggestionsRepositories.dart';
 @injectable
 class MovieSuggestionsUseCase {
-  final MovieSuggestionsRepository movieSuggestionsRepository;
-
+  MovieSuggestionsRepository movieSuggestionsRepository;
   MovieSuggestionsUseCase({required this.movieSuggestionsRepository});
 
-  Future<Either<Failures, List<MovieSuggestionsResponseEntity>>> invoke(int movieID) {
+  Future<Either<Failures, MovieSuggestionsResponseEntity>> invoke(int movieID) {
     return movieSuggestionsRepository.getMovieSuggestions(movieID);
   }
 }
