@@ -8,8 +8,12 @@ import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
 import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_style.dart';
+import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
+import 'package:movie_app/feature/custom_widgets/movie_cast.dart';
+import 'package:movie_app/feature/custom_widgets/reusable_cast_widget.dart';
+import 'package:movie_app/feature/custom_widgets/summary.dart';
 import 'package:movie_app/feature/custom_widgets/toast.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
@@ -58,7 +62,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     final size = MediaQuery.of(context).size;
     final height = size.height;
     final width = size.width;
-
+    List<CastDetailsEntity> movieCast = movie.cast ?? [];
     List<String?> screenshotImages = [
       movie.medium_screenshot_image1,
       movie.medium_screenshot_image2,
@@ -74,7 +78,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               children: [
                 // Movie Poster
                 CachedNetworkImage(
-                  imageUrl: movie.medium_cover_image ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                  imageUrl: movie.medium_cover_image ??
+                      'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                   placeholder: (context, url) => Center(
                     child: Lottie.asset('assets/lottie/loading.json'),
                   ),
@@ -95,7 +100,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     child: IconButton(
                       onPressed: () => Navigator.of(context).pop(),
-                      icon: Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white),
+                      icon: Icon(Icons.arrow_back_ios_new_outlined,
+                          color: Colors.white),
                     ),
                   ),
                 ),
@@ -111,7 +117,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        if (detailsViewModel.toggleSavedIcon.getToggleIcon() == 0) {
+                        if (detailsViewModel.toggleSavedIcon.getToggleIcon() ==
+                            0) {
                           detailsViewModel.savedMovie(movie.id!, movie);
                           ToastHelper.showSuccessToast("Saved Successfully");
                         } else {
@@ -119,9 +126,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ToastHelper.showSuccessToast("UnSaved Successfully");
                         }
                       },
-                      icon: detailsViewModel.toggleSavedIcon.getToggleIcon() == 0
-                          ? Icon(Icons.save, color: Colors.white)
-                          : Image.asset(AppImages.saveIcon),
+                      icon:
+                          detailsViewModel.toggleSavedIcon.getToggleIcon() == 0
+                              ? Icon(Icons.save, color: Colors.white)
+                              : Image.asset(AppImages.saveIcon),
                     ),
                   ),
                 ),
@@ -235,11 +243,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(16),
                         child: CachedNetworkImage(
-                          imageUrl: screenshotImages[index] ?? 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                          imageUrl: screenshotImages[index] ??
+                              'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
                           placeholder: (context, url) => Center(
                             child: Lottie.asset('assets/lottie/loading.json'),
                           ),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                           height: height * .2,
                           width: double.infinity,
                           fit: BoxFit.cover,
@@ -247,23 +257,60 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       );
                     },
                   ),
+                  Text(
+                    AppLocalizations.of(context)!.summary,
+                    style: AppStyle.white24Bold,
+                  ),
+                  SizedBox(
+                    height: height * .01,
+                  ),
+                  SummaryText(
+                      descriptionFull: detailsViewModel.detailsResponseEntity
+                              .data!.movie!.description_full ??
+                          '',
+                      descriptionIntro: detailsViewModel.detailsResponseEntity
+                              .data!.movie!.description_intro ??
+                          ''),
+                  SizedBox(
+                    height: height * .01,
+                  ),
+                  /*
+                            SizedBox(
+                            child: ListView.separated(
+                              padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return ReusableCastWidget(index: index);
+                                },
+                                separatorBuilder: (context, index) {
+                                  return SizedBox(
+                                    height: height * .01,
+                                  );
+                                },
+                                itemCount: 3),
+                          ),
+                          */
+                  CastBuilder(movieCast: movieCast),
+                  SizedBox(
+                    height: height * .01,
+                  ),
                 ],
               ),
             ),
 
             // Genres Grid
-
             if (movie.genres != null && movie.genres!.isNotEmpty)
               Padding(
                 padding: EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                     Text(
-                    AppLocalizations.of(context)!.screen_shots,
-                    style: AppStyle.white24Bold,
-                  ),
-                  SizedBox(height: 16),
+                    Text(
+                      "Genres",
+                      style: AppStyle.white24Bold,
+                    ),
+                    SizedBox(height: 16),
                     GridView.builder(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,

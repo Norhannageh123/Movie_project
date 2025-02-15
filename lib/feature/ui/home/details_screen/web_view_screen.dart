@@ -3,6 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
   final String url;
+
   WebViewScreen({required this.url});
 
   @override
@@ -10,37 +11,33 @@ class WebViewScreen extends StatefulWidget {
 }
 
 class _WebViewScreenState extends State<WebViewScreen> {
+  late final WebViewController _controller; 
   bool isLoading = true;
   String? errorMessage;
 
   @override
-  Widget build(BuildContext context) {
-    final controller = WebViewController()
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(
           onPageStarted: (String url) {
-            if (mounted) {
-              setState(() {
-                isLoading = true;
-                errorMessage = null;
-              });
-            }
+            setState(() {
+              isLoading = true;
+              errorMessage = null;
+            });
           },
           onPageFinished: (String url) {
-            if (mounted) {
-              setState(() {
-                isLoading = false;
-              });
-            }
+            setState(() {
+              isLoading = false;
+            });
           },
           onWebResourceError: (WebResourceError error) {
-            if (mounted) {
-              setState(() {
-                isLoading = false;
-                errorMessage = error.description;
-              });
-            }
+            setState(() {
+              isLoading = false;
+              errorMessage = error.description;
+            });
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('حدث خطأ: ${error.description}'),
@@ -51,7 +48,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
         ),
       )
       ..loadRequest(Uri.parse(widget.url));
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('عرض التفاصيل'),
@@ -62,9 +62,9 @@ class _WebViewScreenState extends State<WebViewScreen> {
       ),
       body: Stack(
         children: [
-          // WebView
-          WebViewWidget(controller: controller),
-          
+          // WebView widget
+          WebViewWidget(controller: _controller),
+
           // Loading Indicator
           if (isLoading)
             Container(
@@ -80,7 +80,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 ),
               ),
             ),
-          
+
           // Error Message
           if (errorMessage != null)
             Container(
@@ -89,9 +89,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.error_outline, 
-                         color: Colors.red, 
-                         size: 60),
+                    Icon(Icons.error_outline, color: Colors.red, size: 60),
                     SizedBox(height: 16),
                     Text(
                       'حدث خطأ في تحميل الصفحة',
@@ -115,7 +113,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                           errorMessage = null;
                           isLoading = true;
                         });
-                        controller.reload();
+                        _controller.reload();
                       },
                       child: Text('إعادة المحاولة'),
                     ),

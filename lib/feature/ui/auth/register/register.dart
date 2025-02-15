@@ -9,6 +9,7 @@ import 'package:movie_app/core/utils/app_images.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/core/utils/app_validator.dart';
+import 'package:movie_app/feature/custom_widgets/alert_dialoge.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/custom_text_field.dart';
 import 'package:movie_app/feature/custom_widgets/taggle_resuble.dart';
@@ -56,7 +57,8 @@ class _RegisterState extends State<Register> {
     return BlocListener<RegisterViewModel, RegisterState>(
       bloc: viewModel,
       listener: (context, state) {
-        if (state is RegisterInitState) {
+        if (state is RegisterLoadingState) {
+            DialogeUtls.showLoading(context: context, message: AppLocalizations.of(context)!.loading);
           // print("Init");
           // DialogeUtls.showLoading(
           //     context: context, message: AppLocalizations.of(context)!.loading);
@@ -75,12 +77,39 @@ class _RegisterState extends State<Register> {
           //
           //     negActionName: "cancel"
           // );
+            DialogeUtls.hideLoading(context: context);
+          DialogeUtls.showMessage(
+            context: context,
+            message: state.error.errorMessage,
+            title: AppLocalizations.of(context)!.error,
+            posActionName: AppLocalizations.of(context)!.ok,
+            posAction: () {
+             // Navigator.of(context).pop();
+            },
+            negActionName: AppLocalizations.of(context)!.cancel,
+            negAction: () {
+             // Navigator.of(context).pop();
+            },
+          );
           ToastHelper.showErrorToast( state.error.errorMessage);
         } else if (state is RegisterSuccessState) {
+           DialogeUtls.hideLoading(context: context);
+          DialogeUtls.showMessage(
+            context: context,
+            message: AppLocalizations.of(context)!.register,
+            title: AppLocalizations.of(context)!.success,
+            posActionName:AppLocalizations.of(context)!.ok,
+            posAction: () {
+              Navigator.of(context).pushReplacementNamed(AppRoutes.loginRoute);
+            },
+            negActionName: AppLocalizations.of(context)!.cancel,
+            negAction: () {
+             // Navigator.of(context).pop();
+            },
+          );
           print("success");
           ToastHelper.showErrorToast("Register Success");
-          Navigator.of(context)
-                       .pushReplacementNamed(AppRoutes.homeRoute);
+          
           // DialogeUtls.hideLoading(context: context);
           // DialogeUtls.showMessage(
           //   context: context,
