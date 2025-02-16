@@ -14,15 +14,16 @@ class ResetRemoteDataSourceImpl implements ResetRemoteDataSource {
   @override
   Future<Either<Failures, ResetResponseEntity>> reset(String oldPassword,String newPassword , String token) async {
     // Retrieve the token
+    var body=<String, String>{
+       "oldPassword": oldPassword,
+        "newPassword": newPassword
+    };
     var result = await ApiManager.instance.request(
       baseUrl: ApiConstants.baseUrl,
       endpoint: ApiEndpoints.resetEndPoint,
       token: token,
       method: 'PATCH',
-      body: {
-        "oldPassword": oldPassword,
-        "newPassword": newPassword
-      },
+      body: body,
     );
    return result.fold(
     (failure) => Left(failure), 

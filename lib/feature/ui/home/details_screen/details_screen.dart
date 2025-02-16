@@ -189,7 +189,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('الرابط غير متوفر')),
+                      SnackBar(content: Text('can not launch link')),
                     );
                   }
                 },

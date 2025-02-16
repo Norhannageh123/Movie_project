@@ -54,7 +54,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('عرض التفاصيل'),
+        title: Text('Page'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -75,7 +75,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                   children: [
                     CircularProgressIndicator(),
                     SizedBox(height: 10),
-                    Text('جاري التحميل...'),
+                    Text('loading ...'),
                   ],
                 ),
               ),
@@ -92,7 +92,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                     Icon(Icons.error_outline, color: Colors.red, size: 60),
                     SizedBox(height: 16),
                     Text(
-                      'حدث خطأ في تحميل الصفحة',
+                      'can not load page',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
                         });
                         _controller.reload();
                       },
-                      child: Text('إعادة المحاولة'),
+                      child: Text('Try again'),
                     ),
                   ],
                 ),
