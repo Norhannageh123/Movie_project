@@ -5,8 +5,10 @@ import 'package:movie_app/core/api/api_endpoints.dart';
 import 'package:movie_app/core/api/api_manager.dart';
 import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/data/details/model/add_fav_movie_response_dm.dart';
+import 'package:movie_app/data/details/model/delete_fav_movie_response_dm.dart';
 import 'package:movie_app/data/details/model/details_response_dm.dart';
 import 'package:movie_app/domain/details/entities/add_fav_movie_response_entity.dart';
+import 'package:movie_app/domain/details/entities/delete_fav_movie_response_entity.dart';
 import '../../../domain/details/repositories/data_source/details_remote_data_source.dart';
 
 @Injectable(as:DetailsRemoteDataSource)
@@ -50,5 +52,15 @@ class DetailsRemoteDataSourceImpl implements DetailsRemoteDataSource {
     token: token);
     return response.fold((error)=>left(error), (successResponse)=>Right(AddFavMovieResponseDm.fromJson(successResponse)));
   }
+
+  @override
+  Future<Either<Failures, DeleteFavMovieResponseEntity>> deleteFavMovie(int movieId,String token) async{
+    var result=await ApiManager.instance.request(baseUrl: ApiConstants.baseUrl,
+        endpoint: ApiEndpoints.deleteFavEndPoint, method: "DELETE",
+    token: token,
+    movieId: movieId);
+    return result.fold((error)=>Left(error), (successResponse)=>Right(DeleteFavMovieResponseDm.fromJson(successResponse)));
+  }
+
 
 }

@@ -26,7 +26,7 @@ class ApiManager {
       return Left(NetworkError(errorMessage: 'Please check your internet connection'));
     }
 
-   Uri url = Uri.parse('$baseUrl$endpoint');
+   Uri url = Uri.parse('$baseUrl$endpoint${movieId??""}');
 
     http.Response response;
 

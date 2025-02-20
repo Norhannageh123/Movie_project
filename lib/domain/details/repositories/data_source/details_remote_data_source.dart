@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/domain/details/entities/add_fav_movie_response_entity.dart';
+import 'package:movie_app/domain/details/entities/delete_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 
 abstract class DetailsRemoteDataSource {
@@ -15,4 +16,5 @@ abstract class DetailsRemoteDataSource {
       String imgURL,
       String year,
       String token);
+  Future<Either<Failures,DeleteFavMovieResponseEntity>>deleteFavMovie(int movieId,String token);
 }

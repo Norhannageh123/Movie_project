@@ -4,6 +4,7 @@ import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/data/details/datasources/details_remote_data_source_impl.dart';
 import 'package:movie_app/data/details/model/details_response_dm.dart';
 import 'package:movie_app/domain/details/entities/add_fav_movie_response_entity.dart';
+import 'package:movie_app/domain/details/entities/delete_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/data_source/details_remote_data_source.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
@@ -49,6 +50,11 @@ class DetailsRepoImpl implements DetailsRepo{
   Future<Either<Failures, AddFavMovieResponseEntity>> addFavMovie(int movieId, String name,
       double rating, String imgURL, String year, String token) {
     return detailsRemoteDataSource.addFavMovie(movieId, name, rating, imgURL, year, token);
+  }
+
+  @override
+  Future<Either<Failures, DeleteFavMovieResponseEntity>> deleteFavMovie(int movieId,String token) {
+    return detailsRemoteDataSource.deleteFavMovie(movieId,token);
   }
 
 

@@ -4,6 +4,7 @@ import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 
 import '../../entities/add_fav_movie_response_entity.dart';
+import '../../entities/delete_fav_movie_response_entity.dart';
 
 abstract class DetailsRepo{
   void cachingMovie(int id,MovieDetailsEntity movieDetailsEntity);
@@ -21,5 +22,8 @@ abstract class DetailsRepo{
       String imgURL,
       String year,
       String token);
+  Future<Either<Failures,DeleteFavMovieResponseEntity>>deleteFavMovie(int movieId,String token);
+
 }
+
 

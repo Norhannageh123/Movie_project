@@ -58,4 +58,16 @@ class DetailsViewModel extends Cubit<DetailsState> {
       },
     );
     }
+  void deleteFavMovieDetails(int movieId,String token) async {
+    var result = await detailsUseCase.deleteFavMovie(movieId,token);
+    result.fold(
+          (error) {
+        print("Error occurred: ${error}");
+      },
+          (deleteFavMovie) {
+        print("Favorite Movie deleted: ${deleteFavMovie.message}");
+
+      },
+    );
+  }
 }

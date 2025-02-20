@@ -5,6 +5,7 @@ import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
 
 import '../entities/add_fav_movie_response_entity.dart';
+import '../entities/delete_fav_movie_response_entity.dart';
 
 @injectable
 class DetailsUseCase{
@@ -39,6 +40,9 @@ class DetailsUseCase{
       String year,
       String token){
     return detailsRepo.addFavMovie(movieId, name, rating, imgURL, year, token);
+  }
+  Future<Either<Failures,DeleteFavMovieResponseEntity>>deleteFavMovie(int movieId,String token){
+    return detailsRepo.deleteFavMovie(movieId,token);
   }
 }
 

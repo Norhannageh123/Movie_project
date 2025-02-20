@@ -123,7 +123,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       onPressed: () {
                         if (detailsViewModel.toggleSavedIcon.getToggleIcon() ==
                             0) {
-                          //detailsViewModel.savedMovie(movie.id!, movie);
+                          detailsViewModel.savedMovie(movie.id!, movie);
 
                           print("Token=>>>>>>>>>${tokenManager.getToken()!}");
                           detailsViewModel.addFavMovieDetails(movie.id!,
@@ -133,6 +133,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                           ToastHelper.showSuccessToast("Saved Successfully");
                         } else {
                           detailsViewModel.deleteMovie(movie.id!);
+                          detailsViewModel.deleteFavMovieDetails(movie.id!,tokenManager.getToken()!);
                           ToastHelper.showSuccessToast("UnSaved Successfully");
                         }
                       },
