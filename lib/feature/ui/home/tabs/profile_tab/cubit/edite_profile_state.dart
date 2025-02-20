@@ -1,3 +1,4 @@
+import 'package:movie_app/domain/details/entities/add_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
 
@@ -12,10 +13,16 @@ class EditProfileSuccess extends EditProfileState {
 
   EditProfileSuccess(this.successMessage);
 }
-class EditProfileCachedSuccess extends EditProfileState {
+class ProfileWishListCachedSuccess extends EditProfileState {
   final List<MovieDetailsEntity> movieDetailsEntity;
 
-  EditProfileCachedSuccess(this.movieDetailsEntity);
+  ProfileWishListCachedSuccess(this.movieDetailsEntity);
+}
+class ProfileGetFavMoviesLoading extends EditProfileState {}
+class ProfileGetFavMoviesSuccess extends EditProfileState {
+  final List<DataFavMovieResponseEntity> listOfFavMovie;
+
+  ProfileGetFavMoviesSuccess(this.listOfFavMovie);
 }
 
 class EditProfileError extends EditProfileState {

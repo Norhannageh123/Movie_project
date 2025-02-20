@@ -48,6 +48,8 @@ import '../../domain/categories/repository/data_sourcse/remote_data_source/categ
 import '../../domain/categories/repository/repository/categories_repository.dart'
     as _i69;
 import '../../domain/categories/use_case/categories_use_case.dart' as _i1004;
+import '../../data/search_tab/search_tab_remote_data_source_impl.dart' as _i840;
+import '../../data/search_tab/search_tab_repo_impl.dart' as _i196;
 import '../../domain/details/movie_suggestions/repositories/data_source/movieSuggestionsDataSource.dart'
     as _i19;
 import '../../domain/details/movie_suggestions/repositories/repository/movieSuggestionsRepositories.dart'
@@ -85,6 +87,10 @@ import '../../domain/reset_password/repositories/data_source/reset_remote_data_s
 import '../../domain/reset_password/repositories/repository/reset_repository.dart'
     as _i1021;
 import '../../domain/reset_password/usecases/reset_use_case.dart' as _i339;
+import '../../domain/search_tab/repository/search_tab_remote_data_source.dart'
+    as _i654;
+import '../../domain/search_tab/repository/search_tab_repo.dart' as _i418;
+import '../../domain/search_tab/search_tab_use_case.dart' as _i281;
 import '../../feature/ui/auth/login/cubit/login_view_model.dart' as _i761;
 import '../../feature/ui/auth/login/cubit/token_manager.dart' as _i734;
 import '../../feature/ui/auth/register/cubit/register_view_model.dart' as _i552;
@@ -100,6 +106,8 @@ import '../../feature/ui/home/tabs/browse_tab/cubit/browse_tab_cubit.dart'
 import '../../feature/ui/home/tabs/home_tab/cubit/home_view_model.dart' as _i60;
 import '../../feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart'
     as _i16;
+import '../../feature/ui/home/tabs/search_tab/cubit/search_tab_view_model.dart'
+    as _i165;
 import '../cache/cache_helper.dart' as _i144;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -140,6 +148,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1063.LoginRemoteDataSourceImpl());
     gh.factory<_i249.HomeRemoteDataSource>(
         () => _i541.HomeRemoteDataSourceImpl());
+    gh.factory<_i654.SearchTabRemoteDataSource>(
+        () => _i840.SearchTabRemoteDataSourceImpl());
     gh.factory<_i857.RegisterRepository>(() => _i7.RegisterRepositoryImpl(
         registerRemoteDataSource: gh<_i100.RegisterRemoteDataSource>()));
     gh.factory<_i429.LoginRepository>(() => _i335.LoginRepositoryImpl(
@@ -160,6 +170,9 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i1004.CategoriesUseCase>(() => _i1004.CategoriesUseCase(
         categoriesRepository: gh<_i69.CategoriesRepository>()));
+
+    gh.factory<_i418.SearchTabRepository>(() => _i196.SearchTabRepoImpl(
+        searchTabRemoteDataSource: gh<_i654.SearchTabRemoteDataSource>()));
     gh.factory<_i545.RegisterUseCase>(() => _i545.RegisterUseCase(
         registerRepository: gh<_i857.RegisterRepository>()));
     gh.factory<_i260.HomeRepo>(() => _i985.HomeRepoImpl(
@@ -176,12 +189,16 @@ extension GetItInjectableX on _i174.GetIt {
         _i552.RegisterViewModel(registerUseCase: gh<_i545.RegisterUseCase>()));
     gh.factory<_i15.DetailsUseCase>(
         () => _i15.DetailsUseCase(detailsRepo: gh<_i949.DetailsRepo>()));
+    gh.factory<_i281.SearchTabUseCase>(() => _i281.SearchTabUseCase(
+        searchTabRepository: gh<_i418.SearchTabRepository>()));
     gh.factory<_i60.HomeViewModel>(
         () => _i60.HomeViewModel(homeUseCase: gh<_i756.HomeUseCase>()));
     gh.factory<_i912.EditeProfileUseCase>(() => _i912.EditeProfileUseCase(
         editeProfileRepository: gh<_i548.EditeProfileRepository>()));
     gh.factory<_i1039.ResetViewModel>(
         () => _i1039.ResetViewModel(resetUseCase: gh<_i339.ResetUseCase>()));
+    gh.factory<_i165.SearchTabViewModel>(() => _i165.SearchTabViewModel(
+        searchTabUseCase: gh<_i281.SearchTabUseCase>()));
     gh.factory<_i731.DetailsViewModel>(() =>
         _i731.DetailsViewModel(detailsUseCase: gh<_i15.DetailsUseCase>()));
     gh.factory<_i16.EditeProfileViewModel>(() => _i16.EditeProfileViewModel(
