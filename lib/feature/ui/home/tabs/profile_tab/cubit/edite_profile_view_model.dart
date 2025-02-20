@@ -66,10 +66,10 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
   void getCachedMovie()async{
     listCachedMovie=await detailsUseCase.invokeGetCachingMovie();
     print("ViewModellllllllllll${listCachedMovie.length}");
-    emit(EditProfileCachedSuccess(listCachedMovie));
+    emit(ProfileWishListCachedSuccess(listCachedMovie));
   }
   void getFavMovieDetails(String token) async {
-    emit(EditProfileGetFavLoading());
+    emit(ProfileGetFavMoviesLoading());
     var result = await detailsUseCase.getFavMovie(token);
     result.fold(
           (error) {
@@ -79,7 +79,7 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
         print("Get Favorite Movies: ${getFavMovie.length}");
         listOfFavMovie= getFavMovie;
 
-        emit(EditProfileGetFavSuccess(listOfFavMovie));
+        emit(ProfileGetFavMoviesSuccess(listOfFavMovie));
 
       },
     );

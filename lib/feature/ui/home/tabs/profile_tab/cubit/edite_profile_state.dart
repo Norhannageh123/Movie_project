@@ -13,16 +13,16 @@ class EditProfileSuccess extends EditProfileState {
 
   EditProfileSuccess(this.successMessage);
 }
-class EditProfileCachedSuccess extends EditProfileState {
+class ProfileWishListCachedSuccess extends EditProfileState {
   final List<MovieDetailsEntity> movieDetailsEntity;
 
-  EditProfileCachedSuccess(this.movieDetailsEntity);
+  ProfileWishListCachedSuccess(this.movieDetailsEntity);
 }
-class EditProfileGetFavLoading extends EditProfileState {}
-class EditProfileGetFavSuccess extends EditProfileState {
+class ProfileGetFavMoviesLoading extends EditProfileState {}
+class ProfileGetFavMoviesSuccess extends EditProfileState {
   final List<DataFavMovieResponseEntity> listOfFavMovie;
 
-  EditProfileGetFavSuccess(this.listOfFavMovie);
+  ProfileGetFavMoviesSuccess(this.listOfFavMovie);
 }
 
 class EditProfileError extends EditProfileState {
