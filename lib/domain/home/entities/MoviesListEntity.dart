@@ -8,7 +8,6 @@ class MoviesListEntity {
     this.statusMessage,
     this.data,
   });
-
   String? status;
   String? statusMessage;
   MoviesData? data; // Renamed to avoid conflict
@@ -32,7 +31,6 @@ class MoviesData {
 
   Map<String, dynamic> toJson() => _$MoviesDataToJson(this);
 }
-
 @JsonSerializable()
 class MoviesEntity {
   MoviesEntity({

@@ -16,6 +16,10 @@ import '../../data/details/datasources/details_local_data_source_impl.dart'
     as _i555;
 import '../../data/details/datasources/details_remote_data_source_impl.dart'
     as _i444;
+import '../../data/details/movies_suggestions/data_sources/movieSuggestionsDataSourceImpl.dart'
+    as _i431;
+import '../../data/details/movies_suggestions/repositories/movieSuggestionsRepositoryImpl.dart'
+    as _i582;
 import '../../data/details/repository/details_repo_impl.dart' as _i63;
 import '../../data/edite_profile/data_sources/edite_profile_data_source_impl.dart'
     as _i885;
@@ -35,6 +39,14 @@ import '../../data/reset_password/dataSources/reset_remote_data_source_impl.dart
     as _i870;
 import '../../data/reset_password/repositories/reset_repository_impl.dart'
     as _i929;
+import '../../data/search_tab/search_tab_remote_data_source_impl.dart' as _i840;
+import '../../data/search_tab/search_tab_repo_impl.dart' as _i196;
+import '../../domain/details/movie_suggestions/repositories/data_source/movieSuggestionsDataSource.dart'
+    as _i19;
+import '../../domain/details/movie_suggestions/repositories/repository/movieSuggestionsRepositories.dart'
+    as _i90;
+import '../../domain/details/movie_suggestions/use_cases/movieSuggestionsUseCase.dart'
+    as _i401;
 import '../../domain/details/repositories/data_source/details_local_data_source.dart'
     as _i649;
 import '../../domain/details/repositories/data_source/details_remote_data_source.dart'
@@ -66,6 +78,10 @@ import '../../domain/reset_password/repositories/data_source/reset_remote_data_s
 import '../../domain/reset_password/repositories/repository/reset_repository.dart'
     as _i1021;
 import '../../domain/reset_password/usecases/reset_use_case.dart' as _i339;
+import '../../domain/search_tab/repository/search_tab_remote_data_source.dart'
+    as _i654;
+import '../../domain/search_tab/repository/search_tab_repo.dart' as _i418;
+import '../../domain/search_tab/search_tab_use_case.dart' as _i281;
 import '../../feature/ui/auth/login/cubit/login_view_model.dart' as _i761;
 import '../../feature/ui/auth/login/cubit/token_manager.dart' as _i734;
 import '../../feature/ui/auth/register/cubit/register_view_model.dart' as _i552;
@@ -79,6 +95,8 @@ import '../../feature/ui/home/details_screen/cubit/toggle_icon.dart' as _i936;
 import '../../feature/ui/home/tabs/home_tab/cubit/home_view_model.dart' as _i60;
 import '../../feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart'
     as _i16;
+import '../../feature/ui/home/tabs/search_tab/cubit/search_tab_view_model.dart'
+    as _i165;
 import '../cache/cache_helper.dart' as _i144;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -105,16 +123,27 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i936.ToggleIcon(gh<_i144.CacheHelper>()));
     gh.factory<_i511.EditeProfileDataSource>(
         () => _i885.EditeProfileDataSourceImpl());
+    gh.factory<_i90.MovieSuggestionsRepository>(() =>
+        _i582.MovieSuggestionsRepositoryImpl(
+            movieSuggestionsDataSourceImpl:
+                gh<_i431.MovieSuggestionsDataSourceImpl>()));
     gh.factory<_i477.DetailsRemoteDataSource>(
         () => _i444.DetailsRemoteDataSourceImpl());
+    gh.factory<_i19.MovieSuggestionsDataSource>(
+        () => _i431.MovieSuggestionsDataSourceImpl());
     gh.factory<_i297.LoginRemoteDataSource>(
         () => _i1063.LoginRemoteDataSourceImpl());
     gh.factory<_i249.HomeRemoteDataSource>(
         () => _i541.HomeRemoteDataSourceImpl());
+    gh.factory<_i654.SearchTabRemoteDataSource>(
+        () => _i840.SearchTabRemoteDataSourceImpl());
     gh.factory<_i857.RegisterRepository>(() => _i7.RegisterRepositoryImpl(
         registerRemoteDataSource: gh<_i100.RegisterRemoteDataSource>()));
     gh.factory<_i429.LoginRepository>(() => _i335.LoginRepositoryImpl(
         loginRemoteDataSource: gh<_i297.LoginRemoteDataSource>()));
+    gh.factory<_i401.MovieSuggestionsUseCase>(() =>
+        _i401.MovieSuggestionsUseCase(
+            movieSuggestionsRepository: gh<_i90.MovieSuggestionsRepository>()));
     gh.factory<_i1021.ResetRepository>(() => _i929.ResetRepositoryImpl(
         resetRemoteDataSource: gh<_i914.ResetRemoteDataSource>()));
     gh.factory<_i548.EditeProfileRepository>(() =>
@@ -124,6 +153,8 @@ extension GetItInjectableX on _i174.GetIt {
           detailsRemoteDataSource: gh<_i477.DetailsRemoteDataSource>(),
           detailsLocalDataSource: gh<_i649.DetailsLocalDataSource>(),
         ));
+    gh.factory<_i418.SearchTabRepository>(() => _i196.SearchTabRepoImpl(
+        searchTabRemoteDataSource: gh<_i654.SearchTabRemoteDataSource>()));
     gh.factory<_i545.RegisterUseCase>(() => _i545.RegisterUseCase(
         registerRepository: gh<_i857.RegisterRepository>()));
     gh.factory<_i260.HomeRepo>(() => _i985.HomeRepoImpl(
@@ -138,12 +169,16 @@ extension GetItInjectableX on _i174.GetIt {
         _i552.RegisterViewModel(registerUseCase: gh<_i545.RegisterUseCase>()));
     gh.factory<_i15.DetailsUseCase>(
         () => _i15.DetailsUseCase(detailsRepo: gh<_i949.DetailsRepo>()));
+    gh.factory<_i281.SearchTabUseCase>(() => _i281.SearchTabUseCase(
+        searchTabRepository: gh<_i418.SearchTabRepository>()));
     gh.factory<_i60.HomeViewModel>(
         () => _i60.HomeViewModel(homeUseCase: gh<_i756.HomeUseCase>()));
     gh.factory<_i912.EditeProfileUseCase>(() => _i912.EditeProfileUseCase(
         editeProfileRepository: gh<_i548.EditeProfileRepository>()));
     gh.factory<_i1039.ResetViewModel>(
         () => _i1039.ResetViewModel(resetUseCase: gh<_i339.ResetUseCase>()));
+    gh.factory<_i165.SearchTabViewModel>(() => _i165.SearchTabViewModel(
+        searchTabUseCase: gh<_i281.SearchTabUseCase>()));
     gh.factory<_i731.DetailsViewModel>(() =>
         _i731.DetailsViewModel(detailsUseCase: gh<_i15.DetailsUseCase>()));
     gh.factory<_i16.EditeProfileViewModel>(() => _i16.EditeProfileViewModel(
