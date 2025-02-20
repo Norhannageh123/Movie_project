@@ -36,7 +36,7 @@ class DataFavMovieResponseDm extends DataFavMovieResponseEntity{
   DataFavMovieResponseDm.fromJson(dynamic json) {
     movieId = json['movieId'];
     name = json['name'];
-    rating = json['rating'] as double;
+    rating = (json['rating'] != null) ? (json['rating'] as num).toDouble() : 0.0;
     imageURL = json['imageURL'];
     year = json['year'];
   }

@@ -8,5 +8,6 @@ class ApiEndpoints {
   static const String detailsEndPoint="movie_details.json";
   static const String addFavEndPoint="favorites/add";
   static const String deleteFavEndPoint="favorites/remove/";
+  static const String getFavEndPoint="favorites/all";
 
 }

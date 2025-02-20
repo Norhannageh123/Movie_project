@@ -70,4 +70,5 @@ class DetailsViewModel extends Cubit<DetailsState> {
       },
     );
   }
+
 }

@@ -130,6 +130,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               movie.title!, movie.rating!, movie.medium_cover_image!, movie.year!.toString(),
                             tokenManager.getToken()!
                               );
+                          //detailsViewModel.getFavMovieDetails(tokenManager.getToken()!);
                           ToastHelper.showSuccessToast("Saved Successfully");
                         } else {
                           detailsViewModel.deleteMovie(movie.id!);

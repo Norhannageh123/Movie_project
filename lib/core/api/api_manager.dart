@@ -35,7 +35,8 @@ class ApiManager {
         case 'GET':
             url = Uri.parse('$baseUrl$endpoint')
                 .replace(queryParameters: header);
-          response = await http.get(url);
+          response = await http.get(url,
+            headers: {'Content-Type': 'application/json','Authorization': 'Bearer $token'},);
           break;
         case 'POST':
           response = await http.post(
