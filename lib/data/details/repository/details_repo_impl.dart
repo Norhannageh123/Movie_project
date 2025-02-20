@@ -1,13 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
-import 'package:movie_app/data/details/datasources/details_remote_data_source_impl.dart';
-import 'package:movie_app/data/details/model/add_fav_movie_response_dm.dart';
-import 'package:movie_app/data/details/model/details_response_dm.dart';
 import 'package:movie_app/domain/details/entities/add_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/details/entities/delete_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
-import 'package:movie_app/domain/details/entities/get_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/data_source/details_remote_data_source.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
 
@@ -60,8 +57,30 @@ class DetailsRepoImpl implements DetailsRepo{
   }
 
   @override
-  Future<Either<Failures, List<DataFavMovieResponseEntity>>> getFavMovie(String token) {
-    return detailsRemoteDataSource.getFavMovie(token);
+  Future<Either<Failures, List<DataFavMovieResponseEntity>>> getFavMovie(String token) async{
+    var connection=await Connectivity().checkConnectivity();
+    if(connection==ConnectivityResult.mobile||
+    connection==ConnectivityResult.wifi){
+      return detailsRemoteDataSource.getFavMovie(token);
+    }else{
+      try {
+        List<MovieDetailsEntity> cachedMovies = await getCachingMovie();
+        List<DataFavMovieResponseEntity> transformedMovies = cachedMovies.map((movie) {
+          return DataFavMovieResponseEntity(
+            movieId: movie.id.toString(),
+            name: movie.title,
+            rating: movie.rating,
+            imageURL: movie.medium_cover_image,
+            year: movie.year.toString(),
+          );
+        }).toList();
+
+        return Right(transformedMovies);
+      } catch (e) {
+        return Left(ServerError( errorMessage: ''));
+      }
+    }
+
   }
 
 
