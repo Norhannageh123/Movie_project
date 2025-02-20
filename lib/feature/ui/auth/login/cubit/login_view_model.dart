@@ -21,8 +21,8 @@ class LoginViewModel extends Cubit<LoginState> {
     required this.editeProfileViewModel,
   }) : super(LoginInitState());
 
-  var emailController = TextEditingController(text: "norhan3@gmail.com");
-  var passwordController = TextEditingController(text: "Nn123456@");
+  var emailController = TextEditingController(text: "hanaa@gmail.com");
+  var passwordController = TextEditingController(text: "Ha123456@");
   // Retrieve TokenManager using GetIt
   final TokenManager tokenManager = GetIt.instance<TokenManager>();
   var formKey = GlobalKey<FormState>();

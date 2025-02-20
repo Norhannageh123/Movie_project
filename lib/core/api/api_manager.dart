@@ -26,7 +26,7 @@ class ApiManager {
       return Left(NetworkError(errorMessage: 'Please check your internet connection'));
     }
 
-   Uri url = Uri.parse('$baseUrl$endpoint');
+   Uri url = Uri.parse('$baseUrl$endpoint${movieId??""}');
 
     http.Response response;
 
@@ -35,13 +35,14 @@ class ApiManager {
         case 'GET':
             url = Uri.parse('$baseUrl$endpoint')
                 .replace(queryParameters: header);
-          response = await http.get(url);
+          response = await http.get(url,
+            headers: {'Content-Type': 'application/json','Authorization': 'Bearer $token'},);
           break;
         case 'POST':
           response = await http.post(
             url,
             body: jsonEncode(body),
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json','Authorization': 'Bearer $token'},
           );
           break;
         case 'PATCH':
