@@ -8,12 +8,12 @@ class ToggleIcon{
 
   ToggleIcon(this.cacheHelper);
 
-  Future<void> saveToggleIcon(int toggle) async {
-    await cacheHelper.saveData(key: 'toggle', value: toggle);
+  Future<void> saveToggleIcon(int value,int key) async {
+    await cacheHelper.saveData(key: key.toString(), value: value);
   }
 
-  int? getToggleIcon() {
-    return cacheHelper.getData(key: 'toggle');
+  int? getToggleIcon(int movieId) {
+    return cacheHelper.getData(key: movieId.toString());
   }
 
 }

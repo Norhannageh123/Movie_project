@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,7 +30,6 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
   final TokenManager tokenManager = GetIt.instance<TokenManager>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -121,27 +119,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        if (detailsViewModel.toggleSavedIcon.getToggleIcon() ==
+                        if (detailsViewModel.toggleSavedIcon
+                                .getToggleIcon(movie.id!) ==
                             0) {
                           detailsViewModel.savedMovie(movie.id!, movie);
 
                           print("Token=>>>>>>>>>${tokenManager.getToken()!}");
-                          detailsViewModel.addFavMovieDetails(movie.id!,
-                              movie.title!, movie.rating!, movie.medium_cover_image!, movie.year!.toString(),
-                            tokenManager.getToken()!
-                              );
+                          detailsViewModel.addFavMovieDetails(
+                              movie.id!,
+                              movie.title!,
+                              movie.rating!,
+                              movie.medium_cover_image!,
+                              movie.year!.toString(),
+                              tokenManager.getToken()!);
                           //detailsViewModel.getFavMovieDetails(tokenManager.getToken()!);
                           ToastHelper.showSuccessToast("Saved Successfully");
                         } else {
                           detailsViewModel.deleteMovie(movie.id!);
-                          detailsViewModel.deleteFavMovieDetails(movie.id!,tokenManager.getToken()!);
+                          detailsViewModel.deleteFavMovieDetails(
+                              movie.id!, tokenManager.getToken()!);
                           ToastHelper.showSuccessToast("UnSaved Successfully");
                         }
                       },
-                      icon:
-                          detailsViewModel.toggleSavedIcon.getToggleIcon() == 0
-                              ? Icon(Icons.save, color: Colors.white)
-                              : Image.asset(AppImages.saveIcon),
+                      icon: detailsViewModel.toggleSavedIcon
+                                  .getToggleIcon(movie.id!) ==
+                              1
+                          ? Image.asset(AppImages.saveIcon)
+                          : Icon(Icons.save, color: Colors.white),
                     ),
                   ),
                 ),

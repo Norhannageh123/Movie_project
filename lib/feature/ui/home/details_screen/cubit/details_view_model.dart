@@ -34,12 +34,12 @@ class DetailsViewModel extends Cubit<DetailsState> {
 
   void savedMovie(int movieId, MovieDetailsEntity movie) async {
     detailsUseCase.invokeCachingMovie(movieId, movie);
-    toggleSavedIcon.saveToggleIcon(1);
+    toggleSavedIcon.saveToggleIcon(1,movieId);
     emit(DetailsSuccessState(detailsResponseEntity: detailsResponseEntity));
   }
 
   void deleteMovie(int movieId) async {
-    toggleSavedIcon.saveToggleIcon(0);
+    toggleSavedIcon.saveToggleIcon(0,movieId);
     detailsUseCase.deleteMovieFromCaching(movieId);
     emit(DetailsSuccessState(detailsResponseEntity: detailsResponseEntity));
   }
