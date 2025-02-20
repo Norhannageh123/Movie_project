@@ -18,6 +18,12 @@ class EditProfileCachedSuccess extends EditProfileState {
   EditProfileCachedSuccess(this.movieDetailsEntity);
 }
 
+class EditProfileHistorySuccess extends EditProfileState {
+  final List<MovieDetailsEntity> movieDetailsEntity;
+
+  EditProfileHistorySuccess(this.movieDetailsEntity);
+}
+
 class EditProfileError extends EditProfileState {
   final String errorMessage;
 

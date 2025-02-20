@@ -29,6 +29,7 @@ class _ProfiletabState extends State<Profiletab> {
     // TODO: implement initState
     super.initState();
     editeProfileViewModel.getCachedMovie();
+    editeProfileViewModel.getSavedMovieHistory();
     // print(editeProfileViewModel.movieDetailsEntity.rating);
 
     print("Wishhhhhhhhhhh${editeProfileViewModel.listCachedMovie.length}");
@@ -104,7 +105,8 @@ class _ProfiletabState extends State<Profiletab> {
                     ),
                     Column(
                       children: [
-                        Text('321', style: AppStyle.white24BoldInter),
+                        Text(editeProfileViewModel
+                            .movieHistoryList.length.toString(), style: AppStyle.white24BoldInter),
                         SizedBox(
                           height: height * 0.02,
                         ),
@@ -231,64 +233,28 @@ class _ProfiletabState extends State<Profiletab> {
                                 ),
                         )
                       : Center(
-                          child: GridView.builder(
-                            padding: EdgeInsetsDirectional.only(start: 5),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 0,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: .70, // Spacing between rows
-                            ),
-                            itemBuilder: (context, index) {
-                              return SafeArea(
-                                child: Stack(fit: StackFit.loose, children: [
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
-                                      ),
-                                      clipBehavior: Clip.antiAlias,
-                                      child: Image.asset(
-                                        AppImages.onBoarding5,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  Container(
-                                    margin: EdgeInsetsDirectional.symmetric(
-                                        horizontal: width * .02,
-                                        vertical: height * .01),
-                                    padding: EdgeInsetsDirectional.symmetric(
-                                      horizontal: width * .01,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: AppColors.transparentBlackColor,
-                                    ),
-                                    child: IntrinsicWidth(
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsetsDirectional.only(
-                                                end: 5),
-                                            child: Text(
-                                              "7.7",
-                                              style: AppStyle.white16Regular,
-                                            ),
-                                          ),
-                                          Icon(
-                                            CupertinoIcons.star_fill,
-                                            color: AppColors.yellowColor,
-                                            size: 18,
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                ]),
-                              );
-                            },
-                            itemCount: 30,
-                          ),
-                        ),
+                    child: editeProfileViewModel.movieHistoryList.isEmpty
+                        ? Image.asset(
+                      AppImages.searchImage,
+                      fit: BoxFit.cover,
+                    )
+                        : GridView.builder(
+                      gridDelegate:
+                      SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,//
+                        childAspectRatio: 0.7, // Number of columns
+                      ),
+                      itemBuilder: (context, index) {
+                        return StackedImageAndRating(imageUrl: editeProfileViewModel
+                            .movieHistoryList[index]
+                            .medium_cover_image, rating: editeProfileViewModel.movieHistoryList[index].rating.toString(), onItemClicked:()=> onItemClicked());
+                      },
+                      itemCount: editeProfileViewModel
+                          .movieHistoryList.length,
+                    ),
+                  ),
                 )
               ],
             ),

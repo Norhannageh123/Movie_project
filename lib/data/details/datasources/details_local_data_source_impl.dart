@@ -30,6 +30,7 @@ import 'package:movie_app/domain/details/repositories/data_source/details_local_
 @Injectable(as: DetailsLocalDataSource)
 class DetailsLocalDataSourceImpl implements DetailsLocalDataSource {
   Box<MovieDetailsEntity>? _movieBox; // Nullable box
+  Box<MovieDetailsEntity>? historyBox; // Nullable box
 
   Future<void> _initBox() async {
     _movieBox ??= Hive.isBoxOpen("SavedMovies")
@@ -43,7 +44,6 @@ class DetailsLocalDataSourceImpl implements DetailsLocalDataSource {
     await _movieBox!.put(id, movieDetailsEntity); // Use `id` as the key
     print("Movie cached successfully!");
   }
-
   @override
   Future<List<MovieDetailsEntity>> getCachingMovie() async {
     await _initBox(); // Ensure the box is initialized
@@ -54,5 +54,25 @@ class DetailsLocalDataSourceImpl implements DetailsLocalDataSource {
     await _initBox(); // Ensure the box is initialized
     await _movieBox!.delete(id);
   }
+
+  Future<void> historyInitBox() async {
+    historyBox ??= Hive.isBoxOpen("HistoryMovies")
+        ? Hive.box<MovieDetailsEntity>("HistoryMovies")
+        : await Hive.openBox<MovieDetailsEntity>("HistoryMovies");
+  }
+
+  @override
+  Future<void> historyMovies(int id, MovieDetailsEntity movieDetailsEntity) async {
+    await historyInitBox(); // Ensure the box is initialized
+    await historyBox!.put(id, movieDetailsEntity); // Use `id` as the key
+    print("Movie history saved successfully!");
+  }
+
+  @override
+  Future<List<MovieDetailsEntity>> getHistoryMovies()async {
+    await historyInitBox(); // Ensure the box is initialized
+    return historyBox!.values.toList();
+  }
+
 }
 

@@ -44,5 +44,15 @@ class DetailsRepoImpl implements DetailsRepo{
     detailsLocalDataSource.deleteMovieFromCaching(id);
   }
 
+  @override
+  Future<List<MovieDetailsEntity>> getHistoryMovie() {
+    return detailsLocalDataSource.getHistoryMovies();
+  }
+
+  @override
+  void saveMovie(int id, MovieDetailsEntity movieDetailsEntity) {
+    detailsLocalDataSource.historyMovies(id,movieDetailsEntity);
+  }
+
 
 }

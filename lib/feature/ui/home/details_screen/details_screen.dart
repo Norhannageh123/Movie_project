@@ -181,6 +181,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               child: CustomElevatedButton(
                 onClickedButton: () async {
                   if (movie.url?.isNotEmpty ?? false) {
+                    detailsViewModel.saveHistoryMovie(movie.id!, movie);
+                    print('sAAAAaaAAAaAAAAAved');
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
