@@ -6,4 +6,6 @@ class ApiEndpoints {
   static const String resetEndPoint="auth/reset-password";
   static const String updateProfileEndPoint="profile";
   static const String detailsEndPoint="movie_details.json";
+  static const String addFavEndPoint="favorites/add";
+
 }

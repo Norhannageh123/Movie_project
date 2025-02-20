@@ -41,7 +41,7 @@ class ApiManager {
           response = await http.post(
             url,
             body: jsonEncode(body),
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json','Authorization': 'Bearer $token'},
           );
           break;
         case 'PATCH':

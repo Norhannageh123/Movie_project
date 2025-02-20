@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:lottie/lottie.dart';
 import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
@@ -12,12 +13,13 @@ import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/feature/custom_widgets/custom_container_rate.dart';
 import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/movie_cast.dart';
-import 'package:movie_app/feature/custom_widgets/reusable_cast_widget.dart';
 import 'package:movie_app/feature/custom_widgets/summary.dart';
 import 'package:movie_app/feature/custom_widgets/toast.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_state.dart';
 import 'package:movie_app/feature/ui/home/details_screen/cubit/details_view_model.dart';
 import 'package:movie_app/feature/ui/home/details_screen/web_view_screen.dart';
+
+import '../../auth/login/cubit/token_manager.dart';
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({super.key});
@@ -28,6 +30,8 @@ class DetailsScreen extends StatefulWidget {
 
 class _DetailsScreenState extends State<DetailsScreen> {
   DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
+  final TokenManager tokenManager = GetIt.instance<TokenManager>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,7 +123,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       onPressed: () {
                         if (detailsViewModel.toggleSavedIcon.getToggleIcon() ==
                             0) {
-                          detailsViewModel.savedMovie(movie.id!, movie);
+                          //detailsViewModel.savedMovie(movie.id!, movie);
+
+                          print("Token=>>>>>>>>>${tokenManager.getToken()!}");
+                          detailsViewModel.addFavMovieDetails(movie.id!,
+                              movie.title!, movie.rating!, movie.medium_cover_image!, movie.year!.toString(),
+                            tokenManager.getToken()!
+                              );
                           ToastHelper.showSuccessToast("Saved Successfully");
                         } else {
                           detailsViewModel.deleteMovie(movie.id!);
