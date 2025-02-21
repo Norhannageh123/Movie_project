@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/entities/get_fav_movie_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
+import 'package:movie_app/domain/edite_profile/entities/profile_info_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/use_cases/edite_profile_use_case.dart';
 import 'package:movie_app/feature/ui/auth/login/cubit/token_manager.dart';
 import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_state.dart';
@@ -18,6 +19,7 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
   List<MovieDetailsEntity>listCachedMovie=[];
   List<DataFavMovieResponseEntity>listOfFavMovie=[];
   final TokenManager tokenManager;
+  ProfileInfoResponseEntity profileInfoResponseEntity=ProfileInfoResponseEntity();
 
   EditeProfileViewModel({required this.editeProfileUseCase, required this.tokenManager,required this.detailsUseCase})
       : super(EditProfileInitial());
@@ -74,12 +76,29 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
     result.fold(
           (error) {
         print("Error occurred: ${error}");
+        emit(ProfileGetFavMoviesFailure(error.errorMessage));
       },
           (getFavMovie) {
         print("Get Favorite Movies: ${getFavMovie.length}");
         listOfFavMovie= getFavMovie;
 
         emit(ProfileGetFavMoviesSuccess(listOfFavMovie));
+
+      },
+    );
+  }
+  void getProfileInfo(String token)async{
+    emit(ProfileGetInfoLoading());
+    var result = await editeProfileUseCase.getProfileInfo(token);
+    result.fold(
+          (error) {
+        print("Error occurred: ${error}");
+      },
+          (profileInfo) {
+        print("Get Favorite Movies: ${profileInfo.data!.name}");
+        profileInfoResponseEntity=profileInfo;
+
+        emit(ProfileGetInfoSuccess(profileInfo));
 
       },
     );

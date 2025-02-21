@@ -2,6 +2,8 @@ import 'package:movie_app/domain/details/entities/add_fav_movie_response_entity.
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
 
+import '../../../../../../domain/edite_profile/entities/profile_info_response_entity.dart';
+
 class EditProfileState {}
 
 class EditProfileInitial extends EditProfileState {}
@@ -13,6 +15,7 @@ class EditProfileSuccess extends EditProfileState {
 
   EditProfileSuccess(this.successMessage);
 }
+/////////////////////////////////////////////////
 class ProfileWishListCachedSuccess extends EditProfileState {
   final List<MovieDetailsEntity> movieDetailsEntity;
 
@@ -24,7 +27,19 @@ class ProfileGetFavMoviesSuccess extends EditProfileState {
 
   ProfileGetFavMoviesSuccess(this.listOfFavMovie);
 }
+class ProfileGetFavMoviesFailure extends EditProfileState {
+  final String errorMessage;
 
+  ProfileGetFavMoviesFailure(this.errorMessage);
+}
+/////////////////////////////////////////////////////////////////////
+class ProfileGetInfoLoading extends EditProfileState {}
+class ProfileGetInfoSuccess extends EditProfileState {
+  final ProfileInfoResponseEntity profileInfoResponseEntity;
+
+  ProfileGetInfoSuccess(this.profileInfoResponseEntity);
+}
+///////////////////////////////////////////
 class EditProfileError extends EditProfileState {
   final String errorMessage;
 

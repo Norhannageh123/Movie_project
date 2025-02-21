@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
+import 'package:movie_app/domain/edite_profile/entities/profile_info_response_entity.dart';
 
 import '../entities/add_fav_movie_response_entity.dart';
 import '../entities/delete_fav_movie_response_entity.dart';
@@ -48,6 +49,9 @@ class DetailsUseCase{
   Future<Either<Failures,List<DataFavMovieResponseEntity>>>getFavMovie(String token){
     return detailsRepo.getFavMovie(token);
   }
+  // Future<Either<Failures,ProfileInfoResponseEntity>>getProfile(String token){
+  //   return detailsRepo.ge(token);
+  // }
 
 }
 

@@ -13,6 +13,7 @@ import 'package:movie_app/feature/custom_widgets/custom_elevated_button.dart';
 import 'package:movie_app/feature/custom_widgets/stacked_image_and_rating.dart';
 import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_state.dart';
 import 'package:movie_app/feature/ui/home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
+import 'package:movie_app/feature/ui/update_profile_screen.dart';
 
 import '../../../auth/login/cubit/token_manager.dart';
 
@@ -34,6 +35,7 @@ class _ProfiletabState extends State<Profiletab> {
     super.initState();
     //editeProfileViewModel.getCachedMovie();
     editeProfileViewModel.getFavMovieDetails(tokenManager.getToken()!);
+    editeProfileViewModel.getProfileInfo(tokenManager.getToken()!);
     // print(editeProfileViewModel.movieDetailsEntity.rating);
 
     print("Wishhhhhhhhhhh${editeProfileViewModel.listCachedMovie.length}");
@@ -47,7 +49,8 @@ class _ProfiletabState extends State<Profiletab> {
     return BlocBuilder<EditeProfileViewModel, EditProfileState>(
         bloc: editeProfileViewModel,
         builder: (context, state) {
-          if(state is ProfileGetFavMoviesSuccess){
+          if(state is ProfileGetFavMoviesSuccess || state is ProfileGetInfoSuccess){
+
           return Scaffold(
             appBar: AppBar(
               backgroundColor: AppColors.transparentColor,
@@ -76,7 +79,7 @@ class _ProfiletabState extends State<Profiletab> {
                                 backgroundColor: AppColors.transparentColor,
                                 radius: width * .15,
                                 child: Image.asset(
-                                  AppImages.avatar1,
+                                  UpdateProfileScreen.imagePath[ (editeProfileViewModel.profileInfoResponseEntity.data?.avaterId)??0],
                                   height: height * 0.5,
                                   fit: BoxFit.fill,
                                 ),
@@ -85,7 +88,7 @@ class _ProfiletabState extends State<Profiletab> {
                                 height: height * 0.02,
                               ),
                               Text(
-                                'Mustafa Musa',
+                                editeProfileViewModel.profileInfoResponseEntity.data?.name??"",
                                 style: AppStyle.white20Bold,
                               ),
                             ],
@@ -340,10 +343,12 @@ class _ProfiletabState extends State<Profiletab> {
               ),
             ),
           );
-        }else if(state is ProfileGetFavMoviesLoading){
+        }else if(state is ProfileGetFavMoviesLoading || state is ProfileGetInfoLoading){
             return Center(child: LottieBuilder.asset("assets/lottie/loading.json"));
+          }else if(state is ProfileGetFavMoviesFailure){
+            return Center(child: Text(state.errorMessage,style: AppStyle.white24BoldInter,),);
           }else{
-            return SizedBox();
+            return Center(child: LottieBuilder.asset("assets/lottie/loading.json"));
           }
         });
   }
