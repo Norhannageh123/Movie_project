@@ -7,13 +7,19 @@ import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_style.dart';
 import 'package:movie_app/domain/home/entities/MoviesListEntity.dart';
 import 'package:movie_app/feature/custom_widgets/stacked_image_and_rating.dart';
+
+import '../../../../../core/di/inject.dart';
+import '../../../../custom_widgets/toast.dart';
+import '../../details_screen/cubit/details_view_model.dart';
 // ignore: must_be_immutable
 class AvailableSlider extends StatelessWidget {
   MoviesEntity moviesList;
    AvailableSlider({required this.moviesList});
+  DetailsViewModel detailsViewModel = getIt<DetailsViewModel>();
 
   @override
   Widget build(BuildContext context) {
+
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -69,7 +75,14 @@ class AvailableSlider extends StatelessWidget {
     );
 
   }
+
+
   void onItemClicked(BuildContext context){
     Navigator.pushNamed(context, AppRoutes.detailsScreenRoute,arguments: moviesList.id);
+  /*  final movie = detailsViewModel.detailsResponseEntity.data?.movie;
+    if (movie == null) return ;
+    detailsViewModel.saveHistoryMovie(movie.id!, movie);
+    print('sAAAAaaAAAaAAAAAved');*/
+
   }
 }

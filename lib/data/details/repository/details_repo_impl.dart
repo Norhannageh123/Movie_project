@@ -83,6 +83,15 @@ class DetailsRepoImpl implements DetailsRepo{
 
   }
 
+  Future<List<MovieDetailsEntity>> getHistoryMovie() {
+    return detailsLocalDataSource.getHistoryMovies();
+  }
+
+  @override
+  void saveMovie(int id, MovieDetailsEntity movieDetailsEntity) {
+    detailsLocalDataSource.historyMovies(id,movieDetailsEntity);
+  }
+
 
 
 }

@@ -10,14 +10,12 @@ import 'package:movie_app/core/di/inject.dart';
 import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/core/utils/app_theme.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
-import 'package:movie_app/domain/details/repositories/data_source/details_remote_data_source.dart';
 import 'package:movie_app/feature/ui/auth/login/login_screen.dart';
 import 'package:movie_app/feature/ui/auth/register/register.dart';
 import 'package:movie_app/feature/ui/home/details_screen/details_screen.dart';
 import 'package:movie_app/feature/ui/home/home_screen.dart';
 import 'package:movie_app/feature/ui/home/tabs/browse_tab/browseTabUi.dart';
 import 'package:movie_app/feature/ui/home/tabs/search_tab/searchTabUi.dart';
-import 'package:movie_app/feature/ui/home/tabs/profile_tab/profile_tab_ui.dart';
 import 'package:movie_app/feature/ui/onboarding_screen.dart';
 import 'package:movie_app/feature/ui/update_profile_screen.dart';
 import 'package:path_provider/path_provider.dart';
@@ -52,6 +50,7 @@ class MovieApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: AppRoutes.homeRoute,            
+
             routes: {
               AppRoutes.onBoarding: (context) => const OnboardingScreen(),
               AppRoutes.loginRoute: (context) => const LoginScreen(),

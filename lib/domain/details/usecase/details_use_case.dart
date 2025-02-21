@@ -17,9 +17,11 @@ class DetailsUseCase{
   void invokeCachingMovie(int id,MovieDetailsEntity movieDetailsEntity){
     detailsRepo.cachingMovie(id,movieDetailsEntity);
   }
+
   Future<List<MovieDetailsEntity>>invokeGetCachingMovie(){
     return detailsRepo.getCachingMovie();
   }
+
   Future<Either<Failures, DetailsResponseEntity>> invoke({
   required int movieId,
   bool withImage = true,
@@ -47,6 +49,13 @@ class DetailsUseCase{
   }
   Future<Either<Failures,List<DataFavMovieResponseEntity>>>getFavMovie(String token){
     return detailsRepo.getFavMovie(token);
+  }
+  void invokeHistoryMovie(int id,MovieDetailsEntity movieDetailsEntity){
+    detailsRepo.saveMovie(id, movieDetailsEntity);
+  }
+
+  Future<List<MovieDetailsEntity>>invokeGetHistoryMovie(){
+    return detailsRepo.getHistoryMovie();
   }
 
 }

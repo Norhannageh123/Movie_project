@@ -9,8 +9,10 @@ import '../../entities/get_fav_movie_response_entity.dart';
 
 abstract class DetailsRepo{
   void cachingMovie(int id,MovieDetailsEntity movieDetailsEntity);
+  void saveMovie(int id,MovieDetailsEntity movieDetailsEntity);
   ///return Movie Response
   Future<List<MovieDetailsEntity>> getCachingMovie();
+  Future<List<MovieDetailsEntity>> getHistoryMovie();
   Future<Either<Failures, DetailsResponseEntity>> getMovieDetails({
     required int movieId,
     bool withImage = true,

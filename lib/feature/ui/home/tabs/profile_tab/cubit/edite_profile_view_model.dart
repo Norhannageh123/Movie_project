@@ -17,6 +17,8 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
   MovieDetailsEntity movieDetailsEntity=MovieDetailsEntity();
   List<MovieDetailsEntity>listCachedMovie=[];
   List<DataFavMovieResponseEntity>listOfFavMovie=[];
+
+  List<MovieDetailsEntity>movieHistoryList=[];
   final TokenManager tokenManager;
 
   EditeProfileViewModel({required this.editeProfileUseCase, required this.tokenManager,required this.detailsUseCase})
@@ -63,6 +65,7 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
       emit(DeleteAccountError("Token is not available"));
     }
   }
+
   void getCachedMovie()async{
     listCachedMovie=await detailsUseCase.invokeGetCachingMovie();
     print("ViewModellllllllllll${listCachedMovie.length}");
@@ -83,5 +86,10 @@ class EditeProfileViewModel extends Cubit<EditProfileState> {
 
       },
     );
+  }
+
+  void getSavedMovieHistory()async{
+    movieHistoryList=await detailsUseCase.invokeGetHistoryMovie();
+    emit(EditProfileHistorySuccess(movieHistoryList));
   }
 }

@@ -32,6 +32,7 @@ class DetailsViewModel extends Cubit<DetailsState> {
         });
   }
 
+
   void savedMovie(int movieId, MovieDetailsEntity movie) async {
     detailsUseCase.invokeCachingMovie(movieId, movie);
     toggleSavedIcon.saveToggleIcon(1,movieId);
@@ -70,5 +71,10 @@ class DetailsViewModel extends Cubit<DetailsState> {
       },
     );
   }
+
+  void saveHistoryMovie(int movieId,MovieDetailsEntity movie)async{
+     detailsUseCase.invokeHistoryMovie(movieId,movie);
+     emit(DetailsSuccessState(detailsResponseEntity: detailsResponseEntity));
+   }
 
 }

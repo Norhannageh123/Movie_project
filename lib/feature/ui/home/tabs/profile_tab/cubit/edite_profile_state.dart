@@ -25,6 +25,12 @@ class ProfileGetFavMoviesSuccess extends EditProfileState {
   ProfileGetFavMoviesSuccess(this.listOfFavMovie);
 }
 
+class EditProfileHistorySuccess extends EditProfileState {
+  final List<MovieDetailsEntity> movieDetailsEntity;
+
+  EditProfileHistorySuccess(this.movieDetailsEntity);
+}
+
 class EditProfileError extends EditProfileState {
   final String errorMessage;
 
