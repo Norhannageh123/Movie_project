@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/app_colors.dart';
+import 'package:movie_app/core/utils/app_routes.dart';
 import 'package:movie_app/domain/categories/entites/categories_response_entity.dart';
 
 class MovieCard extends StatelessWidget {
@@ -11,29 +12,40 @@ class MovieCard extends StatelessWidget {
     required this.movie,
   });
 
+  void _onMovieCardTapped(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      AppRoutes.detailsScreenRoute,
+      arguments: movie.id,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 5,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            buildMovieImage(),
-            buildGradientOverlay(),
-            buildRating(),
-            buildMovieTitle(),
+    return GestureDetector(
+      onTap: () => _onMovieCardTapped(context),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 5,
+              offset: const Offset(0, 3),
+            ),
           ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              buildMovieImage(),
+              buildGradientOverlay(),
+              buildRating(),
+              buildMovieTitle(),
+            ],
+          ),
         ),
       ),
     );
