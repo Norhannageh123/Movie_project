@@ -29,14 +29,12 @@ class ProfileGetFavMoviesSuccess extends EditProfileState {
 }
 class ProfileGetFavMoviesFailure extends EditProfileState {
   final String errorMessage;
-
+  ProfileGetFavMoviesFailure(this.errorMessage);
+}
 class EditProfileHistorySuccess extends EditProfileState {
   final List<MovieDetailsEntity> movieDetailsEntity;
 
   EditProfileHistorySuccess(this.movieDetailsEntity);
-}
-
-  ProfileGetFavMoviesFailure(this.errorMessage);
 }
 /////////////////////////////////////////////////////////////////////
 class ProfileGetInfoLoading extends EditProfileState {}

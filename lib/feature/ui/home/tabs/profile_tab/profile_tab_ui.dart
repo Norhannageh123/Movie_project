@@ -50,7 +50,7 @@ class _ProfiletabState extends State<Profiletab> {
     return BlocBuilder<EditeProfileViewModel, EditProfileState>(
         bloc: editeProfileViewModel,
         builder: (context, state) {
-          if(state is ProfileGetFavMoviesSuccess){
+          if(state is ProfileGetFavMoviesSuccess || state is ProfileGetInfoSuccess){
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: AppColors.transparentColor,
@@ -76,7 +76,7 @@ class _ProfiletabState extends State<Profiletab> {
                                   backgroundColor: AppColors.transparentColor,
                                   radius: width * .15,
                                   child: Image.asset(
-                                    AppImages.avatar1,
+                                    UpdateProfileScreen.imagePath[editeProfileViewModel.profileInfoResponseEntity.data?.avaterId??0],
                                     height: height * 0.5,
                                     fit: BoxFit.fill,
                                   ),
@@ -85,7 +85,7 @@ class _ProfiletabState extends State<Profiletab> {
                                   height: height * 0.02,
                                 ),
                                 Text(
-                                  'Mustafa Musa',
+                                  editeProfileViewModel.profileInfoResponseEntity.data?.name??"",
                                   style: AppStyle.white20Bold,
                                 ),
                               ],
@@ -596,8 +596,11 @@ class _ProfiletabState extends State<Profiletab> {
           }else{
             return SizedBox();
           }
-        });
+        }else{
+            return SizedBox();;
+          }
+          });}
   }
 
   onItemClicked() {}
-}
+
