@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/repositories/repository/edite_profile_repository.dart';
 import '../../../core/errors/failures.dart';
+import '../entities/profile_info_response_entity.dart';
 @injectable
 class EditeProfileUseCase {
   final EditeProfileRepository editeProfileRepository;
@@ -16,4 +17,8 @@ class EditeProfileUseCase {
   Future<Either<Failures, EditeProfileResponseEntity>> deleteProfile(String token) {
     return editeProfileRepository.deleteProfile(token);
   }
+  Future<Either<Failures, ProfileInfoResponseEntity>> getProfileInfo(String token){
+    return editeProfileRepository.getProfileInfo(token);
+  }
+
 }

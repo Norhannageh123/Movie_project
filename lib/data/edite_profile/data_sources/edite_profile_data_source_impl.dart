@@ -4,7 +4,9 @@ import 'package:movie_app/core/api/api_constants.dart';
 import 'package:movie_app/core/api/api_endpoints.dart';
 import 'package:movie_app/core/api/api_manager.dart';
 import 'package:movie_app/core/errors/failures.dart';
+import 'package:movie_app/data/edite_profile/model/profile_info_response_dm.dart';
 import 'package:movie_app/domain/edite_profile/entities/edite_profile_response_entity.dart';
+import 'package:movie_app/domain/edite_profile/entities/profile_info_response_entity.dart';
 import 'package:movie_app/domain/edite_profile/repositories/data_source/edite_profile_data_source.dart';
 @Injectable(as: EditeProfileDataSource)
 class EditeProfileDataSourceImpl implements EditeProfileDataSource{
@@ -41,5 +43,15 @@ class EditeProfileDataSourceImpl implements EditeProfileDataSource{
         token: token,
         method: 'DELETE');
     return result.fold((failure) => Left(failure), (response) => Right(response));
+  }
+
+  @override
+  Future<Either<Failures, ProfileInfoResponseEntity>> getProfileInfo(String token) async{
+    var result = await ApiManager.instance.request(
+        baseUrl: ApiConstants.baseUrl,
+        endpoint: ApiEndpoints.getProfileInfoEndPoint,
+        token: token,
+        method: 'GET');
+    return result.fold((failure) => Left(failure), (response) => Right(ProfileInfoResponseDm.fromJson(response)));
   }
 }

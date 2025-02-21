@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:movie_app/core/errors/failures.dart';
 import 'package:movie_app/domain/details/entities/details_response_entity.dart';
 import 'package:movie_app/domain/details/repositories/repo/details_repo.dart';
+import 'package:movie_app/domain/edite_profile/entities/profile_info_response_entity.dart';
 
 import '../entities/add_fav_movie_response_entity.dart';
 import '../entities/delete_fav_movie_response_entity.dart';
@@ -17,11 +18,9 @@ class DetailsUseCase{
   void invokeCachingMovie(int id,MovieDetailsEntity movieDetailsEntity){
     detailsRepo.cachingMovie(id,movieDetailsEntity);
   }
-
   Future<List<MovieDetailsEntity>>invokeGetCachingMovie(){
     return detailsRepo.getCachingMovie();
   }
-
   Future<Either<Failures, DetailsResponseEntity>> invoke({
   required int movieId,
   bool withImage = true,
@@ -57,6 +56,9 @@ class DetailsUseCase{
   Future<List<MovieDetailsEntity>>invokeGetHistoryMovie(){
     return detailsRepo.getHistoryMovie();
   }
+  // Future<Either<Failures,ProfileInfoResponseEntity>>getProfile(String token){
+  //   return detailsRepo.ge(token);
+  // }
 
 }
 

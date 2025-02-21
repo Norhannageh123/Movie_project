@@ -10,6 +10,7 @@ class ApiEndpoints {
   static const String addFavEndPoint="favorites/add";
   static const String deleteFavEndPoint="favorites/remove/";
   static const String getFavEndPoint="favorites/all";
+  static const String getProfileInfoEndPoint="profile";
 
 
 }

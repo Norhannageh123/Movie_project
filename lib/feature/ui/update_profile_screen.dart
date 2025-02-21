@@ -13,15 +13,7 @@ import '../../core/di/inject.dart';
 import 'home/tabs/profile_tab/cubit/edite_profile_view_model.dart';
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
-
-  @override
-  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
-}
-
-class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-  EditeProfileViewModel editeProfileViewModel = getIt<EditeProfileViewModel>();
-  int selectedIndex = 0;
-  List<String> imagePath = [
+  static List<String> imagePath = [
     AppImages.avatar1,
     AppImages.avatar2,
     AppImages.avatar3,
@@ -32,6 +24,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     AppImages.avatar8,
     AppImages.avatar9,
   ];
+  @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
+
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  EditeProfileViewModel editeProfileViewModel = getIt<EditeProfileViewModel>();
+  int selectedIndex = 0;
+
   var nameController = TextEditingController();
   var phoneNumberController = TextEditingController();
 
@@ -98,7 +98,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   child: CircleAvatar(
                     radius: 40,
                     child: Image.asset(
-                      imagePath[selectedIndex],
+                      UpdateProfileScreen.imagePath[selectedIndex],
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -190,7 +190,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0,
             ),
-            itemCount: imagePath.length,
+            itemCount: UpdateProfileScreen.imagePath.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
@@ -203,7 +203,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   margin: EdgeInsets.only(left: 2, right: 3),
                   height: 105,
                   width: 108,
-                  child: Image.asset(imagePath[index]),
+                  child: Image.asset(UpdateProfileScreen.imagePath[index]),
                   decoration: BoxDecoration(
                     color: selectedIndex == index ? AppColors.yellowColor : AppColors.transparentColor,
                     borderRadius: BorderRadius.circular(16),
